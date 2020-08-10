@@ -1,29 +1,26 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
-import Test from './test';
+import React, { useState } from 'react';
+import Buttons from './components/Buttons';
 
 function App() {
-  let handleClick = (e) => {
-    console.log('logo trigg');
+  const [moveStyle, setMoveStyle] = useState({
+    animationPlayState: 'paused',
+  });
+  let handleMove = (e) => {
+    moveStyle.animationPlayState === 'paused'
+      ? setMoveStyle({ animationPlayState: 'running' })
+      : setMoveStyle({
+          animationPlayState: 'paused',
+        });
   };
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" onClick={handleClick} />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-      <Test />
+      <div className="screen">
+        <div className="top-btn" style={moveStyle}>
+          0
+        </div>
+        <Buttons />
+        <button onClick={handleMove}>Start</button>
+      </div>
     </div>
   );
 }

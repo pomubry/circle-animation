@@ -1,6 +1,6 @@
 {
   "homepage": "https://pomubry.github.io/circle-animation",
-  "name": "sample",
+  "name": "circle-animation",
   "version": "0.1.0",
   "private": true,
   "dependencies": {

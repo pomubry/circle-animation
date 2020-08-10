@@ -1,23 +1,22 @@
 {
   "files": {
-    "main.css": "/circle-animation/static/css/main.de32c0ba.chunk.css",
-    "main.js": "/circle-animation/static/js/main.fec041e0.chunk.js",
-    "main.js.map": "/circle-animation/static/js/main.fec041e0.chunk.js.map",
-    "runtime-main.js": "/circle-animation/static/js/runtime-main.56cdb1c9.js",
-    "runtime-main.js.map": "/circle-animation/static/js/runtime-main.56cdb1c9.js.map",
-    "static/js/2.92489459.chunk.js": "/circle-animation/static/js/2.92489459.chunk.js",
-    "static/js/2.92489459.chunk.js.map": "/circle-animation/static/js/2.92489459.chunk.js.map",
+    "main.css": "/circle-animation/static/css/main.41bf7b17.chunk.css",
+    "main.js": "/circle-animation/static/js/main.3fcbc47c.chunk.js",
+    "main.js.map": "/circle-animation/static/js/main.3fcbc47c.chunk.js.map",
+    "runtime-main.js": "/circle-animation/static/js/runtime-main.58dc4440.js",
+    "runtime-main.js.map": "/circle-animation/static/js/runtime-main.58dc4440.js.map",
+    "static/js/2.af52b83c.chunk.js": "/circle-animation/static/js/2.af52b83c.chunk.js",
+    "static/js/2.af52b83c.chunk.js.map": "/circle-animation/static/js/2.af52b83c.chunk.js.map",
     "index.html": "/circle-animation/index.html",
-    "precache-manifest.68f9895c33cac6dee6b6a32de4b41194.js": "/circle-animation/precache-manifest.68f9895c33cac6dee6b6a32de4b41194.js",
+    "precache-manifest.15210c0bf42651a26e9632947a9b0b6d.js": "/circle-animation/precache-manifest.15210c0bf42651a26e9632947a9b0b6d.js",
     "service-worker.js": "/circle-animation/service-worker.js",
-    "static/css/main.de32c0ba.chunk.css.map": "/circle-animation/static/css/main.de32c0ba.chunk.css.map",
-    "static/js/2.92489459.chunk.js.LICENSE.txt": "/circle-animation/static/js/2.92489459.chunk.js.LICENSE.txt",
-    "static/media/logo.svg": "/circle-animation/static/media/logo.5d5d9eef.svg"
+    "static/css/main.41bf7b17.chunk.css.map": "/circle-animation/static/css/main.41bf7b17.chunk.css.map",
+    "static/js/2.af52b83c.chunk.js.LICENSE.txt": "/circle-animation/static/js/2.af52b83c.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
-    "static/js/runtime-main.56cdb1c9.js",
-    "static/js/2.92489459.chunk.js",
-    "static/css/main.de32c0ba.chunk.css",
-    "static/js/main.fec041e0.chunk.js"
+    "static/js/runtime-main.58dc4440.js",
+    "static/js/2.af52b83c.chunk.js",
+    "static/css/main.41bf7b17.chunk.css",
+    "static/js/main.3fcbc47c.chunk.js"
   ]
 }

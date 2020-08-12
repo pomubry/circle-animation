@@ -33,17 +33,130 @@ code {
   height: 50px;
   border-radius: 50%;
   background-color: #1ab486;
-  border: 2px solid black;
+  border: 4px solid black;
   display: flex;
   justify-content: center;
   align-items: center;
   position: absolute;
-  top: 72vh;
+  top: 10vh;
   right: calc((((100% - (9 * 50px)) / 10) * 5 + ((5 - 1) * 50px)));
-  animation: moving 1s infinite linear;
+  animation: moving-9 1s linear;
+}
+/* 
+.btn-1 {
+  animation: moving-1 0.7s linear;
 }
 
-@keyframes moving {
+.btn-2 {
+  animation: moving-2 0.7s linear;
+}
+
+.btn-3 {
+  animation: moving-3 0.7s linear;
+}
+
+.btn-4 {
+  animation: moving-4 0.7s linear;
+}
+
+.btn-5 {
+  animation: moving-5 0.7s linear;
+}
+
+.btn-6 {
+  animation: moving-6 0.7s linear;
+}
+
+.btn-7 {
+  animation: moving-7 0.7s linear;
+}
+
+.btn-8 {
+  animation: moving-8 0.7s linear;
+}
+
+.btn-9 {
+  animation: moving-9 0.7s linear;
+} */
+
+@keyframes moving-1 {
+  0% {
+    top: 10vh;
+    right: calc((((100% - (9 * 50px)) / 10) * 5 + ((5 - 1) * 50px)));
+  }
+  100% {
+    top: 80vh;
+    right: calc((((100% - (9 * 50px)) / 10) * 1 + ((1 - 1) * 50px)));
+  }
+}
+
+@keyframes moving-2 {
+  0% {
+    top: 10vh;
+    right: calc((((100% - (9 * 50px)) / 10) * 5 + ((5 - 1) * 50px)));
+  }
+  100% {
+    top: 80vh;
+    right: calc((((100% - (9 * 50px)) / 10) * 6 + ((6 - 1) * 50px)));
+  }
+}
+
+@keyframes moving-3 {
+  0% {
+    top: 10vh;
+    right: calc((((100% - (9 * 50px)) / 10) * 5 + ((5 - 1) * 50px)));
+  }
+  100% {
+    top: 80vh;
+    right: calc((((100% - (9 * 50px)) / 10) * 4 + ((4 - 1) * 50px)));
+  }
+}
+
+@keyframes moving-4 {
+  0% {
+    top: 10vh;
+    right: calc((((100% - (9 * 50px)) / 10) * 5 + ((5 - 1) * 50px)));
+  }
+  100% {
+    top: 80vh;
+    right: calc((((100% - (9 * 50px)) / 10) * 7 + ((7 - 1) * 50px)));
+  }
+}
+
+@keyframes moving-5 {
+  0% {
+    top: 10vh;
+    right: calc((((100% - (9 * 50px)) / 10) * 5 + ((5 - 1) * 50px)));
+  }
+  100% {
+    top: 80vh;
+    right: calc((((100% - (9 * 50px)) / 10) * 3 + ((3 - 1) * 50px)));
+  }
+}
+
+@keyframes moving-6 {
+  0% {
+    top: 10vh;
+    right: calc((((100% - (9 * 50px)) / 10) * 5 + ((5 - 1) * 50px)));
+  }
+  100% {
+    top: 80vh;
+    right: calc((((100% - (9 * 50px)) / 10) * 8 + ((8 - 1) * 50px)));
+  }
+}
+
+@keyframes moving-7 {
+  0% {
+    top: 10vh;
+    right: calc((((100% - (9 * 50px)) / 10) * 5 + ((5 - 1) * 50px)));
+  }
+  100% {
+    top: 80vh;
+    right: calc((((100% - (9 * 50px)) / 10) * 2 + ((2 - 1) * 50px)));
+  }
+}
+
+@keyframes moving-8 {
   0% {
     top: 10vh;
     right: calc((((100% - (9 * 50px)) / 10) * 5 + ((5 - 1) * 50px)));
@@ -51,6 +164,17 @@ code {
   100% {
     top: 80vh;
     right: calc((((100% - (9 * 50px)) / 10) * 9 + ((9 - 1) * 50px)));
+  }
+}
+
+@keyframes moving-9 {
+  0% {
+    top: 10vh;
+    right: calc((((100% - (9 * 50px)) / 10) * 5 + ((5 - 1) * 50px)));
+  }
+  100% {
+    top: 80vh;
+    right: calc((((100% - (9 * 50px)) / 10) * 1 + ((1 - 1) * 50px)));
   }
 }
 
@@ -72,4 +196,10 @@ code {
   justify-content: center;
   align-items: center;
   /* position: relative; */
+}
+
+.play,
+audio,
+p {
+  align-self: flex-start;
 }

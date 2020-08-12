@@ -6,7 +6,7 @@ import beatmap from './beatmap/m_191_expert.js';
 
 class App extends Component {
   state = {
-    moveStyle: { animationPlayState: 'paused' },
+    moveStyle: 'paused',
     currentTime: 0,
     time: 0,
     interval: null,
@@ -36,31 +36,31 @@ class App extends Component {
     audio.volume = 0.08;
     if (playing) {
       audio.pause();
-      clearInterval(interval);
+      // clearInterval(interval);
       this.setState({
         playing: false,
-        moveStyle: { animationPlayState: 'paused' },
+        moveStyle: 'paused',
         // interval: null,
       });
     } else {
       audio.play();
       this.setState({
         playing: true,
-        moveStyle: { animationPlayState: 'running' },
+        moveStyle: 'running',
         // interval: this.intervalFunc(),
         duration: this.audioRef.current.duration,
       });
     }
   };
 
-  intervalFunc = () => {
-    let interval = setInterval(() => {
-      this.setState((prevState) => ({
-        time: prevState.time + 0.01,
-      }));
-    }, 10);
-    return interval;
-  };
+  // intervalFunc = () => {
+  //   let interval = setInterval(() => {
+  //     this.setState((prevState) => ({
+  //       time: prevState.time + 0.01,
+  //     }));
+  //   }, 10);
+  //   return interval;
+  // };
 
   timeUpdate = (e) => {
     let currentTime = this.audioRef.current.currentTime;
@@ -119,7 +119,7 @@ class App extends Component {
         break;
     }
 
-    console.log(e.target.style.animation);
+    console.log(e.target.style);
     e.target.remove();
   };
 
@@ -242,18 +242,26 @@ class App extends Component {
           >
             Audio format is not supported
           </audio>
-          <div className="top-btn" style={moveStyle}>
+          <div
+            className="top-btn"
+            style={{ animationPlayState: `${moveStyle}` }}
+          >
             01
           </div>
           {notesArray.length > 0 ? (
             notesArray.map((obj) => (
               <div
                 className={`top-btn btn-${obj.position}`}
-                style={moveStyle}
                 style={{
-                  animation: `moving-${obj.position} ${
-                    obj.timing_sec - this.audioRef.current.currentTime
-                  } linear`,
+                  animationName: `moving-${obj.position}`,
+                  animationDuration:
+                    // `${
+                    //   obj.timing_sec - this.audioRef.current.currentTime
+                    // }s`
+                    '.7s',
+                  animationPlayState: `${moveStyle}`,
+                  animationTimingFunction: 'linear',
+                  animationDelay: '0s',
                 }}
                 onAnimationEnd={this.animationEnd}
               >

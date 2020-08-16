@@ -44,19 +44,23 @@ code {
 }
 /* 
 .btn-1 {
-  animation: moving-1 0.7s linear;
+  position: relative;
+  bottom: 40vh;
 }
 
 .btn-2 {
-  animation: moving-2 0.7s linear;
+  position: relative;
+  bottom: 30vh;
 }
 
 .btn-3 {
-  animation: moving-3 0.7s linear;
+  position: relative;
+  bottom: 20vh;
 }
 
 .btn-4 {
-  animation: moving-4 0.7s linear;
+  position: relative;
+  bottom: 10vh;
 }
 
 .btn-5 {
@@ -64,19 +68,23 @@ code {
 }
 
 .btn-6 {
-  animation: moving-6 0.7s linear;
+  position: relative;
+  bottom: 10vh;
 }
 
 .btn-7 {
-  animation: moving-7 0.7s linear;
+  position: relative;
+  bottom: 20vh;
 }
 
 .btn-8 {
-  animation: moving-8 0.7s linear;
+  position: relative;
+  bottom: 30vh;
 }
 
 .btn-9 {
-  animation: moving-9 0.7s linear;
+  position: relative;
+  bottom: 40vh;
 } */
 
 @keyframes moving-1 {
@@ -97,7 +105,7 @@ code {
   }
   100% {
     top: 80vh;
-    right: calc((((100% - (9 * 50px)) / 10) * 6 + ((6 - 1) * 50px)));
+    right: calc((((100% - (9 * 50px)) / 10) * 2 + ((2 - 1) * 50px)));
   }
 }
 
@@ -108,7 +116,7 @@ code {
   }
   100% {
     top: 80vh;
-    right: calc((((100% - (9 * 50px)) / 10) * 4 + ((4 - 1) * 50px)));
+    right: calc((((100% - (9 * 50px)) / 10) * 3 + ((3 - 1) * 50px)));
   }
 }
 
@@ -119,7 +127,7 @@ code {
   }
   100% {
     top: 80vh;
-    right: calc((((100% - (9 * 50px)) / 10) * 7 + ((7 - 1) * 50px)));
+    right: calc((((100% - (9 * 50px)) / 10) * 4 + ((4 - 1) * 50px)));
   }
 }
 
@@ -130,7 +138,7 @@ code {
   }
   100% {
     top: 80vh;
-    right: calc((((100% - (9 * 50px)) / 10) * 3 + ((3 - 1) * 50px)));
+    right: calc((((100% - (9 * 50px)) / 10) * 5 + ((5 - 1) * 50px)));
   }
 }
 
@@ -141,7 +149,7 @@ code {
   }
   100% {
     top: 80vh;
-    right: calc((((100% - (9 * 50px)) / 10) * 8 + ((8 - 1) * 50px)));
+    right: calc((((100% - (9 * 50px)) / 10) * 6 + ((6 - 1) * 50px)));
   }
 }
 
@@ -152,7 +160,7 @@ code {
   }
   100% {
     top: 80vh;
-    right: calc((((100% - (9 * 50px)) / 10) * 2 + ((2 - 1) * 50px)));
+    right: calc((((100% - (9 * 50px)) / 10) * 7 + ((7 - 1) * 50px)));
   }
 }
 
@@ -163,7 +171,7 @@ code {
   }
   100% {
     top: 80vh;
-    right: calc((((100% - (9 * 50px)) / 10) * 9 + ((9 - 1) * 50px)));
+    right: calc((((100% - (9 * 50px)) / 10) * 8 + ((8 - 1) * 50px)));
   }
 }
 
@@ -174,7 +182,7 @@ code {
   }
   100% {
     top: 80vh;
-    right: calc((((100% - (9 * 50px)) / 10) * 1 + ((1 - 1) * 50px)));
+    right: calc((((100% - (9 * 50px)) / 10) * 9 + ((9 - 1) * 50px)));
   }
 }
 

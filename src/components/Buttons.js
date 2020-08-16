@@ -17,7 +17,7 @@ function Buttons() {
   for (let i = 1; i <= 9; i++) {
     let element = (
       <div
-        className="indiv-button"
+        className={`indiv-button btn-${i}`}
         style={{ backgroundColor: color[i - 1] }}
         key={index[i - 1]}
       >

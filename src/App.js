@@ -160,7 +160,14 @@ class App extends Component {
     console.log('Song ended');
   };
 
-  setSong = (e) => {};
+  fullScreen = (e) => {
+    let app = document.querySelector('.App');
+    if (document.fullscreenElement) {
+      document.exitFullscreen();
+    } else {
+      app.requestFullscreen();
+    }
+  };
 
   audioRef = React.createRef();
   tapsfxRef1 = React.createRef();
@@ -199,11 +206,7 @@ class App extends Component {
           className="top-btn"
           data-timing-sec={obj.timing_sec}
           style={{
-            animationName: `moving-${obj.position}`,
-            animationDuration: `${speed}s`,
-            animationTimingFunction: 'linear',
-            animationDelay: '0s',
-            animationPlayState,
+            animation: `moving-${obj.position} ${speed}s linear ${animationPlayState}`,
           }}
           onAnimationEnd={this.animationEnd}
         >
@@ -225,12 +228,16 @@ class App extends Component {
             Audio format is not supported
           </audio>
           <TapSFX src={tapsfx} refArr={refArr} />
-          <div className="top-btn" style={{ animationPlayState }}>
+          <div
+            className="top-btn"
+            style={{ animationPlayState }}
+            onAnimationEnd={this.animationEnd}
+          >
             01
           </div>
           <div className="notesContainer">{notes}</div>
           <Buttons />
-          <button onClick={this.setSong}>Set song</button>
+          <button onClick={this.fullScreen}>Set Fullscreen</button>
           <button className="play" onClick={this.handlePlayAudio}>
             Play Audio
           </button>

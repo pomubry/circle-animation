@@ -1,7 +1,6 @@
 import React from 'react';
 
 function Buttons() {
-  let btns = [];
   let color = [
     '#8ec225',
     '#b44e8f',
@@ -13,20 +12,20 @@ function Buttons() {
     '#e94c53',
     '#9aa3aa',
   ];
-  let index = [8, 6, 4, 2, 1, 3, 5, 7, 9];
-  for (let i = 1; i <= 9; i++) {
-    let element = (
+
+  let arr = color.map((color, index) => {
+    return (
       <div
-        className={`indiv-button btn-${i}`}
-        style={{ backgroundColor: color[i - 1] }}
-        key={index[i - 1]}
+        className={`indiv-button btn-${index}`}
+        style={{ backgroundColor: color }}
+        key={9 - index}
       >
-        {index[i - 1]}
+        {9 - index}
       </div>
     );
-    btns.push(element);
-  }
-  return <div className="Buttons">{btns}</div>;
+  });
+
+  return <div className="Buttons">{arr}</div>;
 }
 
 export default Buttons;

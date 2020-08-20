@@ -1,6 +1,6 @@
 import React from 'react';
 
-function Buttons() {
+function Buttons({ handleTap }) {
   let color = [
     '#8ec225',
     '#b44e8f',
@@ -12,15 +12,17 @@ function Buttons() {
     '#e94c53',
     '#9aa3aa',
   ];
-
+  let letters = 'POPODROME'.split('');
   let arr = color.map((color, index) => {
     return (
       <div
         className={`indiv-button btn-${index}`}
         style={{ backgroundColor: color }}
         key={9 - index}
+        data-position={9 - index}
+        onMouseDown={handleTap}
       >
-        {9 - index}
+        {letters[index]}
       </div>
     );
   });

@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.css": "/circle-animation/static/css/main.535a3af1.chunk.css",
-    "main.js": "/circle-animation/static/js/main.e23ddfb8.chunk.js",
-    "main.js.map": "/circle-animation/static/js/main.e23ddfb8.chunk.js.map",
+    "main.css": "/circle-animation/static/css/main.90936c18.chunk.css",
+    "main.js": "/circle-animation/static/js/main.7d7a8ba4.chunk.js",
+    "main.js.map": "/circle-animation/static/js/main.7d7a8ba4.chunk.js.map",
     "runtime-main.js": "/circle-animation/static/js/runtime-main.58dc4440.js",
     "runtime-main.js.map": "/circle-animation/static/js/runtime-main.58dc4440.js.map",
     "static/js/2.45be7102.chunk.js": "/circle-animation/static/js/2.45be7102.chunk.js",
     "static/js/2.45be7102.chunk.js.map": "/circle-animation/static/js/2.45be7102.chunk.js.map",
     "index.html": "/circle-animation/index.html",
-    "precache-manifest.0c650a4d56e38a59c0086428bf1e3606.js": "/circle-animation/precache-manifest.0c650a4d56e38a59c0086428bf1e3606.js",
+    "precache-manifest.13179fce71be0277c62776336998c319.js": "/circle-animation/precache-manifest.13179fce71be0277c62776336998c319.js",
     "service-worker.js": "/circle-animation/service-worker.js",
-    "static/css/main.535a3af1.chunk.css.map": "/circle-animation/static/css/main.535a3af1.chunk.css.map",
+    "static/css/main.90936c18.chunk.css.map": "/circle-animation/static/css/main.90936c18.chunk.css.map",
     "static/js/2.45be7102.chunk.js.LICENSE.txt": "/circle-animation/static/js/2.45be7102.chunk.js.LICENSE.txt",
     "static/media/SE_306.ogg": "/circle-animation/static/media/SE_306.4275ae3e.ogg",
     "static/media/m_191.ogg": "/circle-animation/static/media/m_191.bdd8edae.ogg"
@@ -18,7 +18,7 @@
   "entrypoints": [
     "static/js/runtime-main.58dc4440.js",
     "static/js/2.45be7102.chunk.js",
-    "static/css/main.535a3af1.chunk.css",
-    "static/js/main.e23ddfb8.chunk.js"
+    "static/css/main.90936c18.chunk.css",
+    "static/js/main.7d7a8ba4.chunk.js"
   ]
 }

@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import Buttons from './components/Buttons';
-import TapSFX from './components/TapSFX';
 import music from './beatmap/m_191.ogg';
 import beatmap from './beatmap/m_191_expert.js';
 import tapsfx from './tap-sfx/SE_306.ogg';
@@ -22,6 +21,7 @@ class App extends Component {
 
   componentDidUpdate() {
     const {
+      currentTime,
       time,
       index,
       notesArray,
@@ -40,6 +40,11 @@ class App extends Component {
         currentNotes: [...currentNotes, currentNote],
         index: index + 1,
       });
+    }
+
+    if (time - currentTime > 0.3) {
+      this.audioRef.current.currentTime = time;
+      console.log('Catchup!');
     }
   }
 
@@ -86,69 +91,12 @@ class App extends Component {
   };
 
   animationEnd = (e) => {
-    switch (e.target.innerHTML) {
-      case '1':
-        this.tapsfxRef1.current.currentTime = 0;
-        this.tapsfxRef1.current.volume = 0.04;
-        this.tapsfxRef1.current.play();
-        break;
-
-      case '2':
-        this.tapsfxRef2.current.currentTime = 0;
-        this.tapsfxRef2.current.volume = 0.04;
-        this.tapsfxRef2.current.play();
-        break;
-
-      case '3':
-        this.tapsfxRef3.current.currentTime = 0;
-        this.tapsfxRef3.current.volume = 0.04;
-        this.tapsfxRef3.current.play();
-        break;
-
-      case '4':
-        this.tapsfxRef4.current.currentTime = 0;
-        this.tapsfxRef4.current.volume = 0.04;
-        this.tapsfxRef4.current.play();
-        break;
-
-      case '5':
-        this.tapsfxRef5.current.currentTime = 0;
-        this.tapsfxRef5.current.volume = 0.04;
-        this.tapsfxRef5.current.play();
-        break;
-
-      case '6':
-        this.tapsfxRef6.current.currentTime = 0;
-        this.tapsfxRef6.current.volume = 0.04;
-        this.tapsfxRef6.current.play();
-        break;
-
-      case '7':
-        this.tapsfxRef7.current.currentTime = 0;
-        this.tapsfxRef7.current.volume = 0.04;
-        this.tapsfxRef7.current.play();
-        break;
-
-      case '8':
-        this.tapsfxRef8.current.currentTime = 0;
-        this.tapsfxRef8.current.volume = 0.04;
-        this.tapsfxRef8.current.play();
-        break;
-
-      case '9':
-        this.tapsfxRef9.current.currentTime = 0;
-        this.tapsfxRef9.current.volume = 0.04;
-        this.tapsfxRef9.current.play();
-        break;
-      default:
-        this.tapsfxRef1.current.currentTime = 0;
-        this.tapsfxRef1.current.play();
-        break;
-    }
-
-    // console.log(
-    //   Number(e.target.getAttribute('data-timing-sec') - this.state.time - 0.25)
-    // );
+    let clone = this.tapsfxRef1.current.cloneNode(true);
+    clone.volume = 0.3;
+    clone.play();
+    console.log(
+      Number(e.target.getAttribute('data-timing-sec') - this.state.time - 0.25)
+    );
     const { currentNotes } = this.state;
     this.setState({
       combo: this.state.combo + 1,
@@ -161,14 +109,14 @@ class App extends Component {
   handleTap = (e) => {
     const { combo, time, currentNotes } = this.state;
     let btnPosition = Number(e.target.getAttribute('data-position'));
-    let isDoubleNote =
+    let isSecondNote =
       currentNotes.length > 1 &&
       currentNotes[1].position === btnPosition &&
       currentNotes[0].timing_sec === currentNotes[1].timing_sec;
 
     if (
       currentNotes.length > 0 &&
-      (currentNotes[0].position === btnPosition || isDoubleNote)
+      (currentNotes[0].position === btnPosition || isSecondNote)
     ) {
       let accuracy = 0;
       let notesArray = [...this.notesContainer.current.children];
@@ -180,25 +128,25 @@ class App extends Component {
         let singledNote = note.filter(
           (note) => Number(note.dataset.position) === btnPosition
         );
-        accuracy = singledNote[0].dataset.timingSec - time;
+        accuracy = singledNote[0].dataset.timingSec - time - 0.25;
         singledNote[0].style.display = 'none';
       } else {
-        accuracy = note[0].dataset.timingSec - time;
+        accuracy = note[0].dataset.timingSec - time - 0.25;
         note[0].style.display = 'none';
       }
-
+      console.log(accuracy);
       let currentNotesCopy = [...currentNotes];
-      isDoubleNote
+      isSecondNote
         ? currentNotesCopy.splice(1, 1)
         : (currentNotesCopy = currentNotesCopy.slice(1));
 
-      if (accuracy < 0.25) {
+      if (accuracy < 0.03) {
         // console.log(accuracy);
         this.setState({
           combo: combo + 1,
           currentNotes: currentNotesCopy,
         });
-      } else if (accuracy < 0.5) {
+      } else if (accuracy < 0.06) {
         // console.log(accuracy);
         this.setState({
           combo: combo + 1,
@@ -241,14 +189,6 @@ class App extends Component {
 
   audioRef = React.createRef();
   tapsfxRef1 = React.createRef();
-  tapsfxRef2 = React.createRef();
-  tapsfxRef3 = React.createRef();
-  tapsfxRef4 = React.createRef();
-  tapsfxRef5 = React.createRef();
-  tapsfxRef6 = React.createRef();
-  tapsfxRef7 = React.createRef();
-  tapsfxRef8 = React.createRef();
-  tapsfxRef9 = React.createRef();
   notesContainer = React.createRef();
 
   render() {
@@ -260,17 +200,7 @@ class App extends Component {
       time,
       combo,
     } = this.state;
-    const refArr = [
-      this.tapsfxRef1,
-      this.tapsfxRef2,
-      this.tapsfxRef3,
-      this.tapsfxRef4,
-      this.tapsfxRef5,
-      this.tapsfxRef6,
-      this.tapsfxRef7,
-      this.tapsfxRef8,
-      this.tapsfxRef9,
-    ];
+
     let notes = [];
 
     if (notesArray.length > 0) {
@@ -303,9 +233,11 @@ class App extends Component {
           >
             Audio format is not supported
           </audio>
-          <TapSFX src={tapsfx} refArr={refArr} />
+          <audio src={tapsfx} preload="auto" ref={this.tapsfxRef1}>
+            Audio format is not supported
+          </audio>
           <div className="top-btn" style={{ animationPlayState }}>
-            01
+            D
           </div>
           <div className="notesContainer" ref={this.notesContainer}>
             {notes}

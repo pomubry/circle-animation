@@ -39,150 +39,106 @@ code {
   align-items: center;
   position: absolute;
   top: 10vh;
-  right: calc((((100% - (9 * 50px)) / 10) * 5 + ((5 - 1) * 50px)));
+  right: calc((((100% - (9 * 65px)) / 10) * 5 + ((5 - 1) * 65px)));
   animation: moving-9 1s linear;
 }
-/* 
-.btn-1 {
-  position: relative;
-  bottom: 40vh;
-}
-
-.btn-2 {
-  position: relative;
-  bottom: 30vh;
-}
-
-.btn-3 {
-  position: relative;
-  bottom: 20vh;
-}
-
-.btn-4 {
-  position: relative;
-  bottom: 10vh;
-}
-
-.btn-5 {
-  animation: moving-5 0.7s linear;
-}
-
-.btn-6 {
-  position: relative;
-  bottom: 10vh;
-}
-
-.btn-7 {
-  position: relative;
-  bottom: 20vh;
-}
-
-.btn-8 {
-  position: relative;
-  bottom: 30vh;
-}
-
-.btn-9 {
-  position: relative;
-  bottom: 40vh;
-} */
 
 @keyframes moving-1 {
   0% {
     top: 10vh;
-    right: calc((((100% - (9 * 50px)) / 10) * 5 + ((5 - 1) * 50px)));
+    right: calc((((100% - (9 * 65px)) / 10) * 5 + ((5 - 1) * 65px)));
   }
   100% {
     top: 80vh;
-    right: calc((((100% - (9 * 50px)) / 10) * 1 + ((1 - 1) * 50px)));
+    right: calc((((100% - (9 * 65px)) / 10) * 1 + ((1 - 1) * 65px)));
   }
 }
 
 @keyframes moving-2 {
   0% {
     top: 10vh;
-    right: calc((((100% - (9 * 50px)) / 10) * 5 + ((5 - 1) * 50px)));
+    right: calc((((100% - (9 * 65px)) / 10) * 5 + ((5 - 1) * 65px)));
   }
   100% {
     top: 80vh;
-    right: calc((((100% - (9 * 50px)) / 10) * 2 + ((2 - 1) * 50px)));
+    right: calc((((100% - (9 * 65px)) / 10) * 2 + ((2 - 1) * 65px)));
   }
 }
 
 @keyframes moving-3 {
   0% {
     top: 10vh;
-    right: calc((((100% - (9 * 50px)) / 10) * 5 + ((5 - 1) * 50px)));
+    right: calc((((100% - (9 * 65px)) / 10) * 5 + ((5 - 1) * 65px)));
   }
   100% {
     top: 80vh;
-    right: calc((((100% - (9 * 50px)) / 10) * 3 + ((3 - 1) * 50px)));
+    right: calc((((100% - (9 * 65px)) / 10) * 3 + ((3 - 1) * 65px)));
   }
 }
 
 @keyframes moving-4 {
   0% {
     top: 10vh;
-    right: calc((((100% - (9 * 50px)) / 10) * 5 + ((5 - 1) * 50px)));
+    right: calc((((100% - (9 * 65px)) / 10) * 5 + ((5 - 1) * 65px)));
   }
   100% {
     top: 80vh;
-    right: calc((((100% - (9 * 50px)) / 10) * 4 + ((4 - 1) * 50px)));
+    right: calc((((100% - (9 * 65px)) / 10) * 4 + ((4 - 1) * 65px)));
   }
 }
 
 @keyframes moving-5 {
   0% {
     top: 10vh;
-    right: calc((((100% - (9 * 50px)) / 10) * 5 + ((5 - 1) * 50px)));
+    right: calc((((100% - (9 * 65px)) / 10) * 5 + ((5 - 1) * 65px)));
   }
   100% {
     top: 80vh;
-    right: calc((((100% - (9 * 50px)) / 10) * 5 + ((5 - 1) * 50px)));
+    right: calc((((100% - (9 * 65px)) / 10) * 5 + ((5 - 1) * 65px)));
   }
 }
 
 @keyframes moving-6 {
   0% {
     top: 10vh;
-    right: calc((((100% - (9 * 50px)) / 10) * 5 + ((5 - 1) * 50px)));
+    right: calc((((100% - (9 * 65px)) / 10) * 5 + ((5 - 1) * 65px)));
   }
   100% {
     top: 80vh;
-    right: calc((((100% - (9 * 50px)) / 10) * 6 + ((6 - 1) * 50px)));
+    right: calc((((100% - (9 * 65px)) / 10) * 6 + ((6 - 1) * 65px)));
   }
 }
 
 @keyframes moving-7 {
   0% {
     top: 10vh;
-    right: calc((((100% - (9 * 50px)) / 10) * 5 + ((5 - 1) * 50px)));
+    right: calc((((100% - (9 * 65px)) / 10) * 5 + ((5 - 1) * 65px)));
   }
   100% {
     top: 80vh;
-    right: calc((((100% - (9 * 50px)) / 10) * 7 + ((7 - 1) * 50px)));
+    right: calc((((100% - (9 * 65px)) / 10) * 7 + ((7 - 1) * 65px)));
   }
 }
 
 @keyframes moving-8 {
   0% {
     top: 10vh;
-    right: calc((((100% - (9 * 50px)) / 10) * 5 + ((5 - 1) * 50px)));
+    right: calc((((100% - (9 * 65px)) / 10) * 5 + ((5 - 1) * 65px)));
   }
   100% {
     top: 80vh;
-    right: calc((((100% - (9 * 50px)) / 10) * 8 + ((8 - 1) * 50px)));
+    right: calc((((100% - (9 * 65px)) / 10) * 8 + ((8 - 1) * 65px)));
   }
 }
 
 @keyframes moving-9 {
   0% {
     top: 10vh;
-    right: calc((((100% - (9 * 50px)) / 10) * 5 + ((5 - 1) * 50px)));
+    right: calc((((100% - (9 * 65px)) / 10) * 5 + ((5 - 1) * 65px)));
   }
   100% {
     top: 80vh;
-    right: calc((((100% - (9 * 50px)) / 10) * 9 + ((9 - 1) * 50px)));
+    right: calc((((100% - (9 * 65px)) / 10) * 9 + ((9 - 1) * 65px)));
   }
 }
 

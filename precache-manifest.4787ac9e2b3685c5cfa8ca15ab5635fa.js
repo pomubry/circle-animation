@@ -1,23 +1,23 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "f7326d02238e5041d4cf897432f39750",
+    "revision": "5df6f0f21d9f0fceeb81b11378f5e31f",
     "url": "/circle-animation/index.html"
   },
   {
-    "revision": "84bbadf5ce8da6f46814",
-    "url": "/circle-animation/static/css/main.9d3f3b0f.chunk.css"
+    "revision": "4ef3665c556bafa9560b",
+    "url": "/circle-animation/static/css/main.ddaa0b77.chunk.css"
   },
   {
-    "revision": "8a4f732f6f27f486c596",
-    "url": "/circle-animation/static/js/2.74e645e3.chunk.js"
+    "revision": "0c837b4d5cee97a40044",
+    "url": "/circle-animation/static/js/2.6282f14d.chunk.js"
   },
   {
     "revision": "e88a3e95b5364d46e95b35ae8c0dc27d",
-    "url": "/circle-animation/static/js/2.74e645e3.chunk.js.LICENSE.txt"
+    "url": "/circle-animation/static/js/2.6282f14d.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "84bbadf5ce8da6f46814",
-    "url": "/circle-animation/static/js/main.b46884d9.chunk.js"
+    "revision": "4ef3665c556bafa9560b",
+    "url": "/circle-animation/static/js/main.e593b7bd.chunk.js"
   },
   {
     "revision": "9ce31c75d1bb1232fa1e",

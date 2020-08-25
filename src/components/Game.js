@@ -16,6 +16,7 @@ export default class Game extends Component {
       currentTime: 0,
       time: 0,
       interval: null,
+      fontSize: '0rem',
     };
   }
 
@@ -103,10 +104,16 @@ export default class Game extends Component {
       clone.play();
     }
 
-    this.setState({
-      combo: isAutoPlay ? combo + 1 : 0,
-      currentNotes: currentNotes.slice(1),
-    });
+    this.setState(
+      {
+        combo: isAutoPlay ? combo + 1 : 0,
+        currentNotes: currentNotes.slice(1),
+        fontSize: '1.3rem',
+      },
+      () => {
+        setTimeout(() => this.setState({ fontSize: '0rem' }), 2000);
+      }
+    );
   };
 
   handleTap = (e) => {
@@ -155,7 +162,7 @@ export default class Game extends Component {
         : (currentNotesCopy = currentNotesCopy.slice(1));
 
       const { tapVolume } = this.props.state;
-      if (accuracy < 0.03) {
+      if (accuracy < 0.1) {
         let clone = this.perfectTapSFX.current.cloneNode(true);
         clone.volume = tapVolume;
         clone.play();
@@ -163,7 +170,7 @@ export default class Game extends Component {
           combo: combo + 1,
           currentNotes: currentNotesCopy,
         });
-      } else if (accuracy < 0.06) {
+      } else if (accuracy < 0.15) {
         let clone = this.goodTapSFX.current.cloneNode(true);
         clone.volume = tapVolume;
         clone.play();
@@ -209,6 +216,7 @@ export default class Game extends Component {
       currentTime,
       time,
       combo,
+      fontSize,
     } = this.state;
 
     const { speed, isAutoPlay, musicSrc } = this.props.state;
@@ -280,12 +288,16 @@ export default class Game extends Component {
         <p className="combo" style={color}>
           {combo > 0 ? `${combo} COMBO` : ''}
         </p>
+        <p className="lateNote" style={{ fontSize }}>
+          Late!
+        </p>
         <div className="testers">
           <button className="play" onClick={this.handlePlayAudio}>
             Play Audio
           </button>
           <p>{currentTime}</p>
           <p>{time}</p>
+          <p>{speed}</p>
         </div>
       </div>
     );

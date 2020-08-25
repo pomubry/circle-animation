@@ -40,7 +40,7 @@ code {
   align-items: center;
   position: absolute;
   top: 10vh;
-  right: calc((((100% - (9 * 65px)) / 10) * 5 + ((5 - 1) * 65px)));
+  left: calc((((100% - (9 * 65px)) / 10) * 5 + ((5 - 1) * 65px)));
   animation: moving-9 1s linear;
   z-index: 1;
   pointer-events: none;
@@ -49,99 +49,99 @@ code {
 @keyframes moving-1 {
   0% {
     top: 10vh;
-    right: calc((((100% - (9 * 65px)) / 10) * 5 + ((5 - 1) * 65px)));
+    left: calc((((100% - (9 * 65px)) / 10) * 5 + ((5 - 1) * 65px)));
   }
   100% {
     top: 80vh;
-    right: calc((((100% - (9 * 65px)) / 10) * 1 + ((1 - 1) * 65px)));
+    left: calc((((100% - (9 * 65px)) / 10) * 1 + ((1 - 1) * 65px)));
   }
 }
 
 @keyframes moving-2 {
   0% {
     top: 10vh;
-    right: calc((((100% - (9 * 65px)) / 10) * 5 + ((5 - 1) * 65px)));
+    left: calc((((100% - (9 * 65px)) / 10) * 5 + ((5 - 1) * 65px)));
   }
   100% {
     top: 80vh;
-    right: calc((((100% - (9 * 65px)) / 10) * 2 + ((2 - 1) * 65px)));
+    left: calc((((100% - (9 * 65px)) / 10) * 2 + ((2 - 1) * 65px)));
   }
 }
 
 @keyframes moving-3 {
   0% {
     top: 10vh;
-    right: calc((((100% - (9 * 65px)) / 10) * 5 + ((5 - 1) * 65px)));
+    left: calc((((100% - (9 * 65px)) / 10) * 5 + ((5 - 1) * 65px)));
   }
   100% {
     top: 80vh;
-    right: calc((((100% - (9 * 65px)) / 10) * 3 + ((3 - 1) * 65px)));
+    left: calc((((100% - (9 * 65px)) / 10) * 3 + ((3 - 1) * 65px)));
   }
 }
 
 @keyframes moving-4 {
   0% {
     top: 10vh;
-    right: calc((((100% - (9 * 65px)) / 10) * 5 + ((5 - 1) * 65px)));
+    left: calc((((100% - (9 * 65px)) / 10) * 5 + ((5 - 1) * 65px)));
   }
   100% {
     top: 80vh;
-    right: calc((((100% - (9 * 65px)) / 10) * 4 + ((4 - 1) * 65px)));
+    left: calc((((100% - (9 * 65px)) / 10) * 4 + ((4 - 1) * 65px)));
   }
 }
 
 @keyframes moving-5 {
   0% {
     top: 10vh;
-    right: calc((((100% - (9 * 65px)) / 10) * 5 + ((5 - 1) * 65px)));
+    left: calc((((100% - (9 * 65px)) / 10) * 5 + ((5 - 1) * 65px)));
   }
   100% {
     top: 80vh;
-    right: calc((((100% - (9 * 65px)) / 10) * 5 + ((5 - 1) * 65px)));
+    left: calc((((100% - (9 * 65px)) / 10) * 5 + ((5 - 1) * 65px)));
   }
 }
 
 @keyframes moving-6 {
   0% {
     top: 10vh;
-    right: calc((((100% - (9 * 65px)) / 10) * 5 + ((5 - 1) * 65px)));
+    left: calc((((100% - (9 * 65px)) / 10) * 5 + ((5 - 1) * 65px)));
   }
   100% {
     top: 80vh;
-    right: calc((((100% - (9 * 65px)) / 10) * 6 + ((6 - 1) * 65px)));
+    left: calc((((100% - (9 * 65px)) / 10) * 6 + ((6 - 1) * 65px)));
   }
 }
 
 @keyframes moving-7 {
   0% {
     top: 10vh;
-    right: calc((((100% - (9 * 65px)) / 10) * 5 + ((5 - 1) * 65px)));
+    left: calc((((100% - (9 * 65px)) / 10) * 5 + ((5 - 1) * 65px)));
   }
   100% {
     top: 80vh;
-    right: calc((((100% - (9 * 65px)) / 10) * 7 + ((7 - 1) * 65px)));
+    left: calc((((100% - (9 * 65px)) / 10) * 7 + ((7 - 1) * 65px)));
   }
 }
 
 @keyframes moving-8 {
   0% {
     top: 10vh;
-    right: calc((((100% - (9 * 65px)) / 10) * 5 + ((5 - 1) * 65px)));
+    left: calc((((100% - (9 * 65px)) / 10) * 5 + ((5 - 1) * 65px)));
   }
   100% {
     top: 80vh;
-    right: calc((((100% - (9 * 65px)) / 10) * 8 + ((8 - 1) * 65px)));
+    left: calc((((100% - (9 * 65px)) / 10) * 8 + ((8 - 1) * 65px)));
   }
 }
 
 @keyframes moving-9 {
   0% {
     top: 10vh;
-    right: calc((((100% - (9 * 65px)) / 10) * 5 + ((5 - 1) * 65px)));
+    left: calc((((100% - (9 * 65px)) / 10) * 5 + ((5 - 1) * 65px)));
   }
   100% {
     top: 80vh;
-    right: calc((((100% - (9 * 65px)) / 10) * 9 + ((9 - 1) * 65px)));
+    left: calc((((100% - (9 * 65px)) / 10) * 9 + ((9 - 1) * 65px)));
   }
 }
 
@@ -173,7 +173,7 @@ p {
 
 .testers {
   position: absolute;
-  top: 50px;
+  top: 90px;
   left: 10px;
 }
 
@@ -191,4 +191,15 @@ p {
   align-self: center;
   position: absolute;
   top: 30vh;
+}
+
+.lateNote {
+  font-family: 'Orbitron', sans-serif;
+  font-weight: bold;
+  letter-spacing: 3px;
+  align-self: center;
+  position: absolute;
+  top: 35vh;
+  color: rgb(245, 79, 79);
+  transition: all 0.25s ease;
 }

@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
-import music from './music/m_191.ogg';
-import beatmap from './beatmap/m_191_expert.js';
+import musicYumeENoIppo from './music/m_191.ogg';
 import musicParasol from './music/m_201.ogg';
-import beatmapParasol from './beatmap/m_201_expert.js';
+import easyYumeENoIppo from './beatmap/m_191_easy';
+import expertYumeENoIppo from './beatmap/m_191_expert.js';
+import easyParasol from './beatmap/m_201_easy';
+import expertParasol from './beatmap/m_201_expert.js';
 
 import Game from './components/Game';
 // import Buttons from './components/Buttons';
@@ -19,10 +21,10 @@ class App extends Component {
     // currentTime: 0,
     // time: 0,
     // interval: null,
-    speed: 0.7,
-    isAutoPlay: true,
-    musicSrc: music,
-    beatmapSrc: beatmap,
+    speed: 2,
+    isAutoPlay: false,
+    musicSrc: musicYumeENoIppo,
+    beatmapSrc: easyYumeENoIppo,
     musicVolume: 0.1,
     tapVolume: 0.1,
   };
@@ -207,12 +209,27 @@ class App extends Component {
     this.setState({ isAutoPlay: !this.state.isAutoPlay });
   };
 
-  parasol = (e) => {
-    this.setState({ musicSrc: musicParasol, beatmapSrc: beatmapParasol });
+  setSpeed = (e) => {
+    this.setState({ speed: this.state.speed === 0.7 ? 2 : 0.7 });
   };
 
-  yume = (e) => {
-    this.setState({ musicSrc: music, beatmapSrc: beatmap });
+  easyParasol = (e) => {
+    this.setState({ musicSrc: musicParasol, beatmapSrc: easyParasol });
+  };
+
+  easyYume = (e) => {
+    this.setState({ musicSrc: musicYumeENoIppo, beatmapSrc: easyYumeENoIppo });
+  };
+
+  expertParasol = (e) => {
+    this.setState({ musicSrc: musicParasol, beatmapSrc: expertParasol });
+  };
+
+  expertYume = (e) => {
+    this.setState({
+      musicSrc: musicYumeENoIppo,
+      beatmapSrc: expertYumeENoIppo,
+    });
   };
 
   // audioRef = React.createRef();
@@ -268,8 +285,13 @@ class App extends Component {
         <div className="testers2">
           <button onClick={this.fullScreen}>Set Fullscreen</button>
           <button onClick={this.toggleAutoPlay}>Autoplay</button>
-          <button onClick={this.parasol}>Marine Border Parasol</button>
-          <button onClick={this.yume}>Yume e no Ippo</button>
+          <button onClick={this.setSpeed}>Set Speed</button>
+          <br />
+          <button onClick={this.easyParasol}>easyParasol</button>
+          <button onClick={this.easyYume}>easyYume</button>
+          <br />
+          <button onClick={this.expertParasol}>expertParasol</button>
+          <button onClick={this.expertYume}>expertYume</button>
         </div>
         {/* <Game
           state={this.state}

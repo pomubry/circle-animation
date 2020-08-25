@@ -12,7 +12,6 @@ function Buttons({ handleTap, handleKeyPress, isAutoPlay }) {
     '#e94c53',
     '#9aa3aa',
   ];
-  let letters = 'POPODROME'.split('');
   let arr = color.map((color, index) => {
     return (
       <button
@@ -24,10 +23,11 @@ function Buttons({ handleTap, handleKeyPress, isAutoPlay }) {
         onKeyDown={handleKeyPress}
         disabled={isAutoPlay}
       >
-        {letters[index]}
+        {9 - index}
       </button>
     );
   });
+  arr.reverse();
 
   return <div className="Buttons">{arr}</div>;
 }

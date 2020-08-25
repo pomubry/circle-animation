@@ -18,7 +18,8 @@ code {
     monospace;
 }
 
-.screen {
+.screen,
+.Game {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -41,6 +42,8 @@ code {
   top: 10vh;
   right: calc((((100% - (9 * 65px)) / 10) * 5 + ((5 - 1) * 65px)));
   animation: moving-9 1s linear;
+  z-index: 1;
+  pointer-events: none;
 }
 
 @keyframes moving-1 {
@@ -159,11 +162,33 @@ code {
   display: flex;
   justify-content: center;
   align-items: center;
-  /* position: relative; */
+  outline: none;
 }
 
 .play,
 audio,
 p {
   align-self: flex-start;
+}
+
+.testers {
+  position: absolute;
+  top: 50px;
+  left: 10px;
+}
+
+.testers2 {
+  position: absolute;
+  top: 20px;
+  left: 10px;
+}
+
+.combo {
+  font-family: 'Orbitron', sans-serif;
+  font-weight: bold;
+  letter-spacing: 3px;
+  font-size: 1.3rem;
+  align-self: center;
+  position: absolute;
+  top: 30vh;
 }

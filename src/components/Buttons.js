@@ -1,6 +1,6 @@
 import React from 'react';
 
-function Buttons({ handleTap }) {
+function Buttons({ handleTap, handleKeyPress, isAutoPlay }) {
   let color = [
     '#8ec225',
     '#b44e8f',
@@ -15,15 +15,17 @@ function Buttons({ handleTap }) {
   let letters = 'POPODROME'.split('');
   let arr = color.map((color, index) => {
     return (
-      <div
+      <button
         className={`indiv-button btn-${index}`}
         style={{ backgroundColor: color }}
         key={9 - index}
         data-position={9 - index}
         onMouseDown={handleTap}
+        onKeyDown={handleKeyPress}
+        disabled={isAutoPlay}
       >
         {letters[index]}
-      </div>
+      </button>
     );
   });
 

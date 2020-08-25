@@ -1,182 +1,198 @@
 import React, { Component } from 'react';
-import Buttons from './components/Buttons';
-import music from './beatmap/m_191.ogg';
+import music from './music/m_191.ogg';
 import beatmap from './beatmap/m_191_expert.js';
-import tapsfx from './tap-sfx/SE_306.ogg';
+import musicParasol from './music/m_201.ogg';
+import beatmapParasol from './beatmap/m_201_expert.js';
+
+import Game from './components/Game';
+// import Buttons from './components/Buttons';
+// import TapSFX from './components/TapSFX';
 
 class App extends Component {
   state = {
-    animationPlayState: 'paused',
-    notesArray: [],
-    currentNotes: [],
-    index: 0,
+    // animationPlayState: 'paused',
+    // notesArray: [],
+    // currentNotes: [],
+    // index: 0,
+    // combo: 0,
+    // playing: false,
+    // currentTime: 0,
+    // time: 0,
+    // interval: null,
     speed: 0.7,
-    combo: 0,
-    playing: false,
-    currentTime: 0,
-    time: 0,
-    interval: null,
-    duration: 0,
+    isAutoPlay: true,
+    musicSrc: music,
+    beatmapSrc: beatmap,
+    musicVolume: 0.1,
+    tapVolume: 0.1,
   };
 
-  componentDidUpdate() {
-    const {
-      currentTime,
-      time,
-      index,
-      notesArray,
-      currentNotes,
-      playing,
-      speed,
-    } = this.state;
-    let currentNote = beatmap.song_info[0].notes[index];
-    if (
-      currentNote.timing_sec - (0.25 + speed) < time &&
-      index < beatmap.song_info[0].notes.length - 1 &&
-      playing
-    ) {
-      this.setState({
-        notesArray: [...notesArray, currentNote],
-        currentNotes: [...currentNotes, currentNote],
-        index: index + 1,
-      });
-    }
+  // componentDidUpdate() {
+  //   const {
+  //     currentTime,
+  //     time,
+  //     index,
+  //     notesArray,
+  //     currentNotes,
+  //     playing,
+  //     speed,
+  //     beatmapSrc,
+  //   } = this.state;
+  //   let currentNote = beatmapSrc.song_info[0].notes[index];
+  //   if (
+  //     currentNote.timing_sec - (0.25 + speed) < time &&
+  //     index < beatmapSrc.song_info[0].notes.length - 1 &&
+  //     playing
+  //   ) {
+  //     this.setState({
+  //       notesArray: [...notesArray, currentNote],
+  //       currentNotes: [...currentNotes, currentNote],
+  //       index: index + 1,
+  //     });
+  //   }
 
-    if (time - currentTime > 0.3) {
-      this.audioRef.current.currentTime = time;
-      console.log('Catchup!');
-    }
-  }
+  //   if (time - currentTime > 0.3) {
+  //     this.audioRef.current.currentTime = time;
+  //     console.log('Catchup!');
+  //   }
+  // }
 
-  handlePlayAudio = (e) => {
-    let audio = this.audioRef.current;
-    audio.volume = 0.08;
-    const { playing, interval } = this.state;
-    if (playing) {
-      audio.pause();
-      clearInterval(interval);
-      this.setState({
-        animationPlayState: 'paused',
-        playing: false,
-        interval: null,
-      });
-    } else {
-      audio.play();
-      this.setState({
-        animationPlayState: 'running',
-        playing: true,
-        interval: this.intervalFunc(),
-        duration: this.audioRef.current.duration,
-      });
-    }
-  };
+  // handlePlayAudio = (e) => {
+  //   let audio = this.audioRef.current;
+  //   audio.volume = 0.12;
+  //   const { playing, interval } = this.state;
+  //   if (playing) {
+  //     audio.pause();
+  //     clearInterval(interval);
+  //     this.setState({
+  //       animationPlayState: 'paused',
+  //       playing: false,
+  //       interval: null,
+  //     });
+  //   } else {
+  //     audio.play();
+  //     this.setState({
+  //       animationPlayState: 'running',
+  //       playing: true,
+  //       interval: this.intervalFunc(),
+  //       duration: this.audioRef.current.duration,
+  //     });
+  //   }
+  // };
 
-  intervalFunc = () => {
-    let interval = setInterval(() => {
-      this.setState((prevState) => ({
-        time:
-          prevState.time < this.state.currentTime
-            ? this.state.currentTime
-            : prevState.time + 0.01,
-      }));
-    }, 10);
-    return interval;
-  };
+  // intervalFunc = () => {
+  //   let interval = setInterval(() => {
+  //     this.setState((prevState) => ({
+  //       time:
+  //         this.state.time < this.state.currentTime
+  //           ? this.state.currentTime
+  //           : this.state.time + 0.01,
+  //     }));
+  //   }, 10);
+  //   return interval;
+  // };
 
-  timeUpdate = (e) => {
-    let currentTime = this.audioRef.current.currentTime;
-    this.setState((prevState) => {
-      return { currentTime };
-    });
-  };
+  // timeUpdate = (e) => {
+  //   let currentTime = this.audioRef.current.currentTime;
+  //   this.setState((prevState) => {
+  //     return { currentTime };
+  //   });
+  // };
 
-  animationEnd = (e) => {
-    let clone = this.tapsfxRef1.current.cloneNode(true);
-    clone.volume = 0.3;
-    clone.play();
-    console.log(
-      Number(e.target.getAttribute('data-timing-sec') - this.state.time - 0.25)
-    );
-    const { currentNotes } = this.state;
-    this.setState({
-      combo: this.state.combo + 1,
-      currentNotes: currentNotes.slice(1),
-    });
-    // console.log(currentNotes[0]);
-    e.target.style.display = 'none';
-  };
+  // animationEnd = (e) => {
+  //   const { currentNotes, isAutoPlay, combo } = this.state;
 
-  handleTap = (e) => {
-    const { combo, time, currentNotes } = this.state;
-    let btnPosition = Number(e.target.getAttribute('data-position'));
-    let isSecondNote =
-      currentNotes.length > 1 &&
-      currentNotes[1].position === btnPosition &&
-      currentNotes[0].timing_sec === currentNotes[1].timing_sec;
+  //   if (isAutoPlay) {
+  //     let clone = this.perfectTapSFX.current.cloneNode(true);
+  //     clone.volume = 0.3;
+  //     clone.play();
+  //   } else {
+  //     let clone = this.badTapSFX.current.cloneNode(true);
+  //     clone.volume = 0.3;
+  //     clone.play();
+  //   }
 
-    if (
-      currentNotes.length > 0 &&
-      (currentNotes[0].position === btnPosition || isSecondNote)
-    ) {
-      let accuracy = 0;
-      let notesArray = [...this.notesContainer.current.children];
-      let note = notesArray.filter(
-        (note) => Number(note.dataset.timingSec) === currentNotes[0].timing_sec
-      );
+  //   this.setState({
+  //     combo: isAutoPlay ? combo + 1 : 0,
+  //     currentNotes: currentNotes.slice(1),
+  //   });
+  //   e.target.style.display = 'none';
+  // };
 
-      if (note.length > 1) {
-        let singledNote = note.filter(
-          (note) => Number(note.dataset.position) === btnPosition
-        );
-        accuracy = singledNote[0].dataset.timingSec - time - 0.25;
-        singledNote[0].style.display = 'none';
-      } else {
-        accuracy = note[0].dataset.timingSec - time - 0.25;
-        note[0].style.display = 'none';
-      }
-      console.log(accuracy);
-      let currentNotesCopy = [...currentNotes];
-      isSecondNote
-        ? currentNotesCopy.splice(1, 1)
-        : (currentNotesCopy = currentNotesCopy.slice(1));
+  // handleTap = (e) => {
+  //   const { combo, time, currentNotes } = this.state;
+  //   let btnPosition = Number(e.target.getAttribute('data-position'));
+  //   let isSecondNote =
+  //     currentNotes.length > 1 &&
+  //     currentNotes[1].position === btnPosition &&
+  //     currentNotes[0].timing_sec === currentNotes[1].timing_sec;
 
-      if (accuracy < 0.03) {
-        // console.log(accuracy);
-        this.setState({
-          combo: combo + 1,
-          currentNotes: currentNotesCopy,
-        });
-      } else if (accuracy < 0.06) {
-        // console.log(accuracy);
-        this.setState({
-          combo: combo + 1,
-          currentNotes: currentNotesCopy,
-        });
-      } else {
-        // console.log(accuracy);
-        this.setState({ combo: 0, currentNotes: currentNotesCopy });
-      }
+  //   if (
+  //     currentNotes.length > 0 &&
+  //     (currentNotes[0].position === btnPosition || isSecondNote)
+  //   ) {
+  //     let accuracy = 0;
+  //     let notesArray = [...this.notesContainer.current.children];
+  //     let note = notesArray.filter(
+  //       (note) => Number(note.dataset.timingSec) === currentNotes[0].timing_sec
+  //     );
 
-      // console.log(
-      //   (this.notesContainer.current.childNodes[0].style.display = 'none')
-      // );
-    }
-  };
+  //     if (note.length > 1) {
+  //       let singledNote = note.filter(
+  //         (note) => Number(note.dataset.position) === btnPosition
+  //       );
+  //       accuracy = singledNote[0].dataset.timingSec - time - 0.25;
+  //       singledNote[0].style.display = 'none';
+  //     } else {
+  //       accuracy = note[0].dataset.timingSec - time - 0.25;
+  //       note[0].style.display = 'none';
+  //     }
+  //     console.log(accuracy);
+  //     let currentNotesCopy = [...currentNotes];
+  //     isSecondNote
+  //       ? currentNotesCopy.splice(1, 1)
+  //       : (currentNotesCopy = currentNotesCopy.slice(1));
 
-  handleEnd = (e) => {
-    clearInterval(this.state.interval);
-    this.setState({
-      animationPlayState: 'paused',
-      playing: false,
-      notesArray: [],
-      currentTime: 0,
-      time: 0,
-      interval: null,
-      index: 0,
-      combo: 0,
-    });
-    console.log('Song ended');
-  };
+  //     if (accuracy < 0.03) {
+  //       let clone = this.perfectTapSFX.current.cloneNode(true);
+  //       clone.play();
+  //       this.setState({
+  //         combo: combo + 1,
+  //         currentNotes: currentNotesCopy,
+  //       });
+  //     } else if (accuracy < 0.06) {
+  //       let clone = this.goodTapSFX.current.cloneNode(true);
+  //       clone.play();
+  //       this.setState({
+  //         combo: combo + 1,
+  //         currentNotes: currentNotesCopy,
+  //       });
+  //     } else {
+  //       let clone = this.badTapSFX.current.cloneNode(true);
+  //       clone.play();
+  //       this.setState({ combo: 0, currentNotes: currentNotesCopy });
+  //     }
+
+  //     // console.log(
+  //     //   (this.notesContainer.current.childNodes[0].style.display = 'none')
+  //     // );
+  //   }
+  // };
+
+  // handleEnd = (e) => {
+  //   clearInterval(this.state.interval);
+  //   this.setState({
+  //     animationPlayState: 'paused',
+  //     playing: false,
+  //     notesArray: [],
+  //     currentTime: 0,
+  //     time: 0,
+  //     interval: null,
+  //     index: 0,
+  //     combo: 0,
+  //   });
+  //   console.log('Song ended');
+  // };
 
   fullScreen = (e) => {
     let app = document.querySelector('.App');
@@ -187,45 +203,84 @@ class App extends Component {
     }
   };
 
-  audioRef = React.createRef();
-  tapsfxRef1 = React.createRef();
-  notesContainer = React.createRef();
+  toggleAutoPlay = (e) => {
+    this.setState({ isAutoPlay: !this.state.isAutoPlay });
+  };
+
+  parasol = (e) => {
+    this.setState({ musicSrc: musicParasol, beatmapSrc: beatmapParasol });
+  };
+
+  yume = (e) => {
+    this.setState({ musicSrc: music, beatmapSrc: beatmap });
+  };
+
+  // audioRef = React.createRef();
+  // notesContainer = React.createRef();
+  // perfectTapSFX = React.createRef();
+  // goodTapSFX = React.createRef();
+  // badTapSFX = React.createRef();
 
   render() {
-    const {
-      animationPlayState,
-      notesArray,
-      speed,
-      currentTime,
-      time,
-      combo,
-    } = this.state;
+    // const {
+    //   animationPlayState,
+    //   notesArray,
+    //   speed,
+    //   currentTime,
+    //   time,
+    //   // musicSrc,
+    //   // isAutoPlay,
+    //   // combo,
+    // } = this.state;
 
-    let notes = [];
+    // let tapRefs = [this.perfectTapSFX, this.goodTapSFX, this.badTapSFX];
+    // let mainRefs = [this.audioRef, this.notesContainer];
+    // let methods = [this.timeUpdate, this.handleEnd, this.handleTap];
 
-    if (notesArray.length > 0) {
-      let map = notesArray.map((obj) => {
-        return (
-          <div
-            className="top-btn active-note"
-            data-timing-sec={obj.timing_sec}
-            data-position={obj.position}
-            style={{
-              animation: `moving-${obj.position} ${speed}s linear ${animationPlayState}`,
-            }}
-            onAnimationEnd={this.animationEnd}
-          >
-            {obj.position}
-          </div>
-        );
-      });
-      notes = notes.concat(map);
-    }
+    // let notes = [];
+
+    // if (notesArray.length > 0) {
+    //   let map = notesArray.map((obj) => {
+    //     return (
+    //       <div
+    //         className="top-btn active-note"
+    //         data-timing-sec={obj.timing_sec}
+    //         data-position={obj.position}
+    //         style={{
+    //           animation: `moving-${obj.position} ${speed}s linear ${animationPlayState}`,
+    //         }}
+    //         onAnimationEnd={this.animationEnd}
+    //         key={obj.position * obj.timing_sec}
+    //       >
+    //         {obj.position}
+    //       </div>
+    //     );
+    //   });
+    //   notes = notes.concat(map);
+    //   // console.log(notes.length);
+    //   notes = notes.filter(
+    //     (note) => !(note.props['data-timing-sec'] + 0.7 < time)
+    //   );
+    // }
     return (
-      <div className="App">
-        <div className="screen">
+      <div className="App" tabIndex={-1}>
+        <Game state={this.state} />
+        <div className="testers2">
+          <button onClick={this.fullScreen}>Set Fullscreen</button>
+          <button onClick={this.toggleAutoPlay}>Autoplay</button>
+          <button onClick={this.parasol}>Marine Border Parasol</button>
+          <button onClick={this.yume}>Yume e no Ippo</button>
+        </div>
+        {/* <Game
+          state={this.state}
+          notes={notes}
+          tapRefs={tapRefs}
+          mainRefs={mainRefs}
+          methods={methods}
+        /> */}
+        {/* <div className="screen">
           <audio
-            src={music}
+            src={musicSrc}
             preload="auto"
             ref={this.audioRef}
             onTimeUpdate={this.timeUpdate}
@@ -233,24 +288,28 @@ class App extends Component {
           >
             Audio format is not supported
           </audio>
-          <audio src={tapsfx} preload="auto" ref={this.tapsfxRef1}>
-            Audio format is not supported
-          </audio>
+          <TapSFX tapRefs={tapRefs} />
           <div className="top-btn" style={{ animationPlayState }}>
             D
           </div>
           <div className="notesContainer" ref={this.notesContainer}>
             {notes}
           </div>
-          <Buttons handleTap={this.handleTap} />
+          <Buttons handleTap={this.handleTap} isAutoPlay={isAutoPlay} />
           {combo}
+        </div> */}
+        {/* <div className="testers">
           <button onClick={this.fullScreen}>Set Fullscreen</button>
           <button className="play" onClick={this.handlePlayAudio}>
             Play Audio
           </button>
+          <button onClick={this.toggleAutoPlay}>Autoplay</button>
+          <br />
+          <button onClick={this.parasol}>Marine Border Parasol</button>
+          <button onClick={this.yume}>Yume e no Ippo</button>
           <p>{currentTime}</p>
           <p>{time}</p>
-        </div>
+        </div> */}
       </div>
     );
   }

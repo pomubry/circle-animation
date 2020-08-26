@@ -210,7 +210,15 @@ class App extends Component {
   };
 
   setSpeed = (e) => {
-    this.setState({ speed: this.state.speed === 0.7 ? 2 : 0.7 });
+    if (e.target.innerHTML === '+ Speed') {
+      this.setState((prevState) => ({
+        speed: Number((prevState.speed + 0.1).toFixed(2)),
+      }));
+    } else {
+      this.setState((prevState) => ({
+        speed: Number((prevState.speed - 0.1).toFixed(2)),
+      }));
+    }
   };
 
   easyParasol = (e) => {
@@ -285,7 +293,8 @@ class App extends Component {
         <div className="testers2">
           <button onClick={this.fullScreen}>Set Fullscreen</button>
           <button onClick={this.toggleAutoPlay}>Autoplay</button>
-          <button onClick={this.setSpeed}>Set Speed</button>
+          <button onClick={this.setSpeed}>+ Speed</button>
+          <button onClick={this.setSpeed}>- Speed</button>
           <br />
           <button onClick={this.easyParasol}>easyParasol</button>
           <button onClick={this.easyYume}>easyYume</button>

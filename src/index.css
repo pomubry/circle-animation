@@ -27,11 +27,12 @@ code {
   width: 100%;
   background-color: gray;
   position: relative;
+  transition: all 0.2s ease;
 }
 
 .top-btn {
-  width: 65px;
-  height: 65px;
+  width: 95px;
+  height: 95px;
   border-radius: 50%;
   background-color: #1ab486;
   border: 5px solid black;
@@ -40,7 +41,7 @@ code {
   align-items: center;
   position: absolute;
   top: 10vh;
-  left: calc((((100% - (9 * 65px)) / 10) * 5 + ((5 - 1) * 65px)));
+  left: calc((((100% - (9 * 95px)) / 10) * 5 + ((5 - 1) * 95px)));
   animation: moving-9 1s linear;
   z-index: 1;
   pointer-events: none;
@@ -49,99 +50,99 @@ code {
 @keyframes moving-1 {
   0% {
     top: 10vh;
-    left: calc((((100% - (9 * 65px)) / 10) * 5 + ((5 - 1) * 65px)));
+    left: calc((((100% - (9 * 95px)) / 10) * 5 + ((5 - 1) * 95px)));
   }
   100% {
     top: 80vh;
-    left: calc((((100% - (9 * 65px)) / 10) * 1 + ((1 - 1) * 65px)));
+    left: calc((((100% - (9 * 95px)) / 10) * 1 + ((1 - 1) * 95px)));
   }
 }
 
 @keyframes moving-2 {
   0% {
     top: 10vh;
-    left: calc((((100% - (9 * 65px)) / 10) * 5 + ((5 - 1) * 65px)));
+    left: calc((((100% - (9 * 95px)) / 10) * 5 + ((5 - 1) * 95px)));
   }
   100% {
     top: 80vh;
-    left: calc((((100% - (9 * 65px)) / 10) * 2 + ((2 - 1) * 65px)));
+    left: calc((((100% - (9 * 95px)) / 10) * 2 + ((2 - 1) * 95px)));
   }
 }
 
 @keyframes moving-3 {
   0% {
     top: 10vh;
-    left: calc((((100% - (9 * 65px)) / 10) * 5 + ((5 - 1) * 65px)));
+    left: calc((((100% - (9 * 95px)) / 10) * 5 + ((5 - 1) * 95px)));
   }
   100% {
     top: 80vh;
-    left: calc((((100% - (9 * 65px)) / 10) * 3 + ((3 - 1) * 65px)));
+    left: calc((((100% - (9 * 95px)) / 10) * 3 + ((3 - 1) * 95px)));
   }
 }
 
 @keyframes moving-4 {
   0% {
     top: 10vh;
-    left: calc((((100% - (9 * 65px)) / 10) * 5 + ((5 - 1) * 65px)));
+    left: calc((((100% - (9 * 95px)) / 10) * 5 + ((5 - 1) * 95px)));
   }
   100% {
     top: 80vh;
-    left: calc((((100% - (9 * 65px)) / 10) * 4 + ((4 - 1) * 65px)));
+    left: calc((((100% - (9 * 95px)) / 10) * 4 + ((4 - 1) * 95px)));
   }
 }
 
 @keyframes moving-5 {
   0% {
     top: 10vh;
-    left: calc((((100% - (9 * 65px)) / 10) * 5 + ((5 - 1) * 65px)));
+    left: calc((((100% - (9 * 95px)) / 10) * 5 + ((5 - 1) * 95px)));
   }
   100% {
     top: 80vh;
-    left: calc((((100% - (9 * 65px)) / 10) * 5 + ((5 - 1) * 65px)));
+    left: calc((((100% - (9 * 95px)) / 10) * 5 + ((5 - 1) * 95px)));
   }
 }
 
 @keyframes moving-6 {
   0% {
     top: 10vh;
-    left: calc((((100% - (9 * 65px)) / 10) * 5 + ((5 - 1) * 65px)));
+    left: calc((((100% - (9 * 95px)) / 10) * 5 + ((5 - 1) * 95px)));
   }
   100% {
     top: 80vh;
-    left: calc((((100% - (9 * 65px)) / 10) * 6 + ((6 - 1) * 65px)));
+    left: calc((((100% - (9 * 95px)) / 10) * 6 + ((6 - 1) * 95px)));
   }
 }
 
 @keyframes moving-7 {
   0% {
     top: 10vh;
-    left: calc((((100% - (9 * 65px)) / 10) * 5 + ((5 - 1) * 65px)));
+    left: calc((((100% - (9 * 95px)) / 10) * 5 + ((5 - 1) * 95px)));
   }
   100% {
     top: 80vh;
-    left: calc((((100% - (9 * 65px)) / 10) * 7 + ((7 - 1) * 65px)));
+    left: calc((((100% - (9 * 95px)) / 10) * 7 + ((7 - 1) * 95px)));
   }
 }
 
 @keyframes moving-8 {
   0% {
     top: 10vh;
-    left: calc((((100% - (9 * 65px)) / 10) * 5 + ((5 - 1) * 65px)));
+    left: calc((((100% - (9 * 95px)) / 10) * 5 + ((5 - 1) * 95px)));
   }
   100% {
     top: 80vh;
-    left: calc((((100% - (9 * 65px)) / 10) * 8 + ((8 - 1) * 65px)));
+    left: calc((((100% - (9 * 95px)) / 10) * 8 + ((8 - 1) * 95px)));
   }
 }
 
 @keyframes moving-9 {
   0% {
     top: 10vh;
-    left: calc((((100% - (9 * 65px)) / 10) * 5 + ((5 - 1) * 65px)));
+    left: calc((((100% - (9 * 95px)) / 10) * 5 + ((5 - 1) * 95px)));
   }
   100% {
     top: 80vh;
-    left: calc((((100% - (9 * 65px)) / 10) * 9 + ((9 - 1) * 65px)));
+    left: calc((((100% - (9 * 95px)) / 10) * 9 + ((9 - 1) * 95px)));
   }
 }
 
@@ -155,8 +156,8 @@ code {
 }
 
 .indiv-button {
-  width: 65px;
-  height: 65px;
+  width: 95px;
+  height: 95px;
   border-radius: 50%;
   border: 5px solid black;
   display: flex;
@@ -173,7 +174,7 @@ p {
 
 .testers {
   position: absolute;
-  top: 90px;
+  top: 95px;
   left: 10px;
 }
 

@@ -17,6 +17,7 @@ export default class Game extends Component {
       time: 0,
       interval: null,
       fontSize: '0rem',
+      backgroundColor: 'gray',
     };
   }
 
@@ -108,7 +109,7 @@ export default class Game extends Component {
       {
         combo: isAutoPlay ? combo + 1 : 0,
         currentNotes: currentNotes.slice(1),
-        fontSize: '1.3rem',
+        fontSize: isAutoPlay ? '0rem' : '1.3rem',
       },
       () => {
         setTimeout(() => this.setState({ fontSize: '0rem' }), 2000);
@@ -119,6 +120,17 @@ export default class Game extends Component {
   handleTap = (e) => {
     const { combo, time, currentNotes } = this.state;
     let btnPosition = Number(e.target.getAttribute('data-position'));
+    let colorArr = [
+      '#8ec225',
+      '#b44e8f',
+      '#565ea9',
+      '#ffe41c',
+      '#ee879d',
+      '#73c9f3',
+      '#f18f3d',
+      '#e94c53',
+      '#9aa3aa',
+    ].reverse();
 
     if (
       Number(e.target.getAttribute('data-position')) === 0 &&
@@ -155,14 +167,17 @@ export default class Game extends Component {
         accuracy = note[0].dataset.timingSec - time - 0.25;
         note[0].style.display = 'none';
       }
-      console.log(accuracy);
       let currentNotesCopy = [...currentNotes];
       isSecondNote
         ? currentNotesCopy.splice(1, 1)
         : (currentNotesCopy = currentNotesCopy.slice(1));
 
-      const { tapVolume } = this.props.state;
-      if (accuracy < 0.1) {
+      const { tapVolume, speed } = this.props.state;
+
+      let perfectAccuracy = ((65 - 10) * speed) / ((80 - 10) * 2);
+      let goodAccuracy = ((65 - 10) * speed) / (80 - 10);
+
+      if (accuracy < perfectAccuracy) {
         let clone = this.perfectTapSFX.current.cloneNode(true);
         clone.volume = tapVolume;
         clone.play();
@@ -170,7 +185,7 @@ export default class Game extends Component {
           combo: combo + 1,
           currentNotes: currentNotesCopy,
         });
-      } else if (accuracy < 0.15) {
+      } else if (accuracy < goodAccuracy) {
         let clone = this.goodTapSFX.current.cloneNode(true);
         clone.volume = tapVolume;
         clone.play();
@@ -185,6 +200,8 @@ export default class Game extends Component {
         this.setState({ combo: 0, currentNotes: currentNotesCopy });
       }
     }
+    console.log(btnPosition);
+    this.setState({ backgroundColor: colorArr[btnPosition - 1] });
   };
 
   handleEnd = (e) => {
@@ -217,6 +234,7 @@ export default class Game extends Component {
       time,
       combo,
       fontSize,
+      backgroundColor,
     } = this.state;
 
     const { speed, isAutoPlay, musicSrc } = this.props.state;
@@ -263,7 +281,12 @@ export default class Game extends Component {
     }
 
     return (
-      <div className="Game" onKeyDown={this.handleTap} tabIndex={-1}>
+      <div
+        className="Game"
+        onTouchStart={this.handleTap}
+        style={{ backgroundColor }}
+        tabIndex={-1}
+      >
         <audio
           src={musicSrc}
           preload="auto"

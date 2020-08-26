@@ -15,7 +15,7 @@ function Buttons({ handleTap, handleKeyPress, isAutoPlay }) {
   let arr = color.map((color, index) => {
     return (
       <button
-        className={`indiv-button btn-${index}`}
+        className={`indiv-button btn-${9 - index}`}
         style={{ backgroundColor: color }}
         key={9 - index}
         data-position={9 - index}

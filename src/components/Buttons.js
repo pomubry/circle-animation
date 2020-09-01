@@ -1,6 +1,6 @@
 import React from 'react';
 
-function Buttons({ handleTap, handleKeyPress, isAutoPlay }) {
+function Buttons({ handleTap, isAutoPlay }) {
   let color = [
     '#8ec225',
     '#b44e8f',
@@ -19,8 +19,8 @@ function Buttons({ handleTap, handleKeyPress, isAutoPlay }) {
         style={{ backgroundColor: color }}
         key={9 - index}
         data-position={9 - index}
-        onMouseDown={handleTap}
-        onKeyDown={handleKeyPress}
+        // onMouseDown={handleTap}
+        onTouchStart={handleTap}
         disabled={isAutoPlay}
       >
         {9 - index}

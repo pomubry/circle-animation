@@ -1,0 +1,220 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+$pi: 3.14159265359;
+$_precision: 10;
+
+@function sqrt($r) {
+  $x0: 1;
+  $x1: $x0;
+
+  @for $i from 1 through 10 {
+    $x1: $x0 - ($x0 * $x0 - abs($r)) / (2 * $x0);
+    $x0: $x1;
+  }
+
+  @return $x1;
+}
+
+@function pow($base, $exp) {
+  $value: $base;
+  @if $exp > 1 {
+    @for $i from 2 through $exp {
+      $value: $value * $base;
+    }
+  }
+  @if $exp < 1 {
+    @for $i from 0 through -$exp {
+      $value: $value / $base;
+    }
+  }
+  @return $value;
+}
+
+@function fact($num) {
+  $fact: 1;
+  @if $num > 0 {
+    @for $i from 1 through $num {
+      $fact: $fact * $i;
+    }
+  }
+  @return $fact;
+}
+
+@function _to_unitless_rad($angle) {
+  @if unit($angle) == 'deg' {
+    $angle: $angle / 180deg * $pi;
+  }
+  @if unit($angle) == 'rad' {
+    $angle: $angle / 1rad;
+  }
+  @return $angle;
+}
+
+@function sin($angle) {
+  $a: _to_unitless_rad($angle);
+  $sin: $a;
+  @for $n from 1 through $_precision {
+    $sin: $sin + (pow(-1, $n) / fact(2 * $n + 1)) * pow($a, (2 * $n + 1));
+  }
+  @return $sin;
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+.screen,
+.Game {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100vh;
+  width: 100%;
+  background-color: gray;
+  position: relative;
+  transition: all 0.2s ease;
+}
+
+.top-btn {
+  width: 95px;
+  height: 95px;
+  border-radius: 50%;
+  background-color: #1ab486;
+  border: 5px solid black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 10vh;
+  left: calc(50% - (95px / 2));
+  z-index: 1;
+  animation: top 2s linear;
+  pointer-events: none;
+}
+
+@for $num from 1 through 5 {
+  $c: 75 * 4;
+  $y: sin(22.5deg * ($num - 1)) * $c;
+  $x: sqrt(($c * $c) - ($y * $y));
+
+  @keyframes moving-#{$num} {
+    100% {
+      transform: translate(-$x#{px}, $y#{px});
+    }
+  }
+}
+
+@for $num from 6 through 9 {
+  $c: 75 * 4;
+  $y: sin(22.5deg * ($num - 1)) * $c;
+  $x: sqrt(($c * $c) - ($y * $y));
+
+  @keyframes moving-#{$num} {
+    100% {
+      transform: translate($x#{px}, $y#{px});
+    }
+  }
+}
+
+.Buttons {
+  background-color: rgba(26, 75, 134, 0.5);
+  position: absolute;
+  width: 100%;
+}
+
+@for $num from 1 through 5 {
+  $c: 75 * 4;
+  $y: sin(22.5deg * ($num - 1)) * $c;
+  $x: sqrt(($c * $c) - ($y * $y));
+
+  .btn-#{$num} {
+    transform: translate(-$x#{px}, $y#{px});
+  }
+}
+
+@for $num from 6 through 9 {
+  $c: 75 * 4;
+  $y: sin(22.5deg * ($num - 1)) * $c;
+  $x: sqrt(($c * $c) - ($y * $y));
+
+  .btn-#{$num} {
+    transform: translate($x#{px}, $y#{px});
+  }
+}
+
+@keyframes top {
+  $c: 75 * 4;
+  $y: sin(22.5deg * (7 - 1)) * $c;
+  $x: sqrt(($c * $c) - ($y * $y));
+
+  100% {
+    transform: translate($x#{px}, $y#{px});
+  }
+}
+
+.indiv-button {
+  width: 95px;
+  height: 95px;
+  border-radius: 50%;
+  border: 5px solid black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  outline: none;
+  position: absolute;
+  top: 10vh;
+  left: calc(50% - (95px / 2));
+}
+
+.play,
+audio,
+p {
+  align-self: flex-start;
+}
+
+.testers {
+  position: absolute;
+  top: 80vh;
+  left: 10px;
+}
+
+.testers2 {
+  position: absolute;
+  top: 69vh;
+  left: 10px;
+}
+
+.combo {
+  font-family: 'Orbitron', sans-serif;
+  font-weight: bold;
+  letter-spacing: 3px;
+  font-size: 1.3rem;
+  align-self: center;
+  position: absolute;
+  top: 30vh;
+}
+
+.lateNote {
+  font-family: 'Orbitron', sans-serif;
+  font-weight: bold;
+  letter-spacing: 3px;
+  align-self: center;
+  position: absolute;
+  top: 35vh;
+  color: rgb(245, 79, 79);
+  transition: all 0.25s ease;
+}

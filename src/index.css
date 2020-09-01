@@ -42,7 +42,6 @@ code {
   position: absolute;
   top: 10vh;
   left: calc((((100% - (9 * 95px)) / 10) * 5 + ((5 - 1) * 95px)));
-  animation: moving-9 1s linear;
   z-index: 1;
   pointer-events: none;
 }

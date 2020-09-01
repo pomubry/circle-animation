@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import musicYumeENoIppo from './music/m_191.ogg';
 import musicParasol from './music/m_201.ogg';
-import easyYumeENoIppo from './beatmap/m_191_easy';
-import expertYumeENoIppo from './beatmap/m_191_expert.js';
-import easyParasol from './beatmap/m_201_easy';
-import expertParasol from './beatmap/m_201_expert.js';
+import normalYumeENoIppo from './beatmap/m_191_normal';
+import hardYumeENoIppo from './beatmap/m_191_hard.js';
+import normalParasol from './beatmap/m_201_normal';
+import hardParasol from './beatmap/m_201_hard.js';
 
 import Game from './components/Game';
 // import Buttons from './components/Buttons';
@@ -21,10 +21,10 @@ class App extends Component {
     // currentTime: 0,
     // time: 0,
     // interval: null,
-    speed: 2,
+    speed: 1,
     isAutoPlay: false,
     musicSrc: musicYumeENoIppo,
-    beatmapSrc: easyYumeENoIppo,
+    beatmapSrc: normalYumeENoIppo,
     musicVolume: 0.1,
     tapVolume: 0.1,
   };
@@ -221,22 +221,25 @@ class App extends Component {
     }
   };
 
-  easyParasol = (e) => {
-    this.setState({ musicSrc: musicParasol, beatmapSrc: easyParasol });
+  normalParasol = (e) => {
+    this.setState({ musicSrc: musicParasol, beatmapSrc: normalParasol });
   };
 
-  easyYume = (e) => {
-    this.setState({ musicSrc: musicYumeENoIppo, beatmapSrc: easyYumeENoIppo });
-  };
-
-  expertParasol = (e) => {
-    this.setState({ musicSrc: musicParasol, beatmapSrc: expertParasol });
-  };
-
-  expertYume = (e) => {
+  normalYume = (e) => {
     this.setState({
       musicSrc: musicYumeENoIppo,
-      beatmapSrc: expertYumeENoIppo,
+      beatmapSrc: normalYumeENoIppo,
+    });
+  };
+
+  hardParasol = (e) => {
+    this.setState({ musicSrc: musicParasol, beatmapSrc: hardParasol });
+  };
+
+  hardYume = (e) => {
+    this.setState({
+      musicSrc: musicYumeENoIppo,
+      beatmapSrc: hardYumeENoIppo,
     });
   };
 
@@ -296,11 +299,11 @@ class App extends Component {
           <button onClick={this.setSpeed}>+ Speed</button>
           <button onClick={this.setSpeed}>- Speed</button>
           <br />
-          <button onClick={this.easyParasol}>easyParasol</button>
-          <button onClick={this.easyYume}>easyYume</button>
+          <button onClick={this.normalParasol}>normalParasol</button>
+          <button onClick={this.normalYume}>normalYume</button>
           <br />
-          <button onClick={this.expertParasol}>expertParasol</button>
-          <button onClick={this.expertYume}>expertYume</button>
+          <button onClick={this.hardParasol}>hardParasol</button>
+          <button onClick={this.hardYume}>hardYume</button>
         </div>
         {/* <Game
           state={this.state}

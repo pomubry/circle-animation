@@ -161,10 +161,10 @@ export default class Game extends Component {
         let singledNote = note.filter(
           (note) => Number(note.dataset.position) === btnPosition
         );
-        accuracy = singledNote[0].dataset.timingSec - time - 0.25;
+        accuracy = singledNote[0].dataset.timingSec - time - 0.2;
         singledNote[0].style.display = 'none';
       } else {
-        accuracy = note[0].dataset.timingSec - time - 0.25;
+        accuracy = note[0].dataset.timingSec - time - 0.2;
         note[0].style.display = 'none';
       }
       let currentNotesCopy = [...currentNotes];
@@ -174,10 +174,9 @@ export default class Game extends Component {
 
       const { tapVolume, speed } = this.props.state;
 
-      let perfectAccuracy = ((65 - 10) * speed) / ((80 - 10) * 2);
-      let goodAccuracy = ((65 - 10) * speed) / (80 - 10);
+      let goodAccuracy = ((280 - 95) * speed) / 280;
 
-      if (accuracy < perfectAccuracy) {
+      if (accuracy < (speed - goodAccuracy) / 2) {
         let clone = this.perfectTapSFX.current.cloneNode(true);
         clone.volume = tapVolume;
         clone.play();
@@ -185,7 +184,7 @@ export default class Game extends Component {
           combo: combo + 1,
           currentNotes: currentNotesCopy,
         });
-      } else if (accuracy < goodAccuracy) {
+      } else if (accuracy < speed - goodAccuracy) {
         let clone = this.goodTapSFX.current.cloneNode(true);
         clone.volume = tapVolume;
         clone.play();
@@ -200,7 +199,6 @@ export default class Game extends Component {
         this.setState({ combo: 0, currentNotes: currentNotesCopy });
       }
     }
-    console.log(btnPosition);
     this.setState({ backgroundColor: colorArr[btnPosition - 1] });
   };
 
@@ -284,6 +282,7 @@ export default class Game extends Component {
       <div
         className="Game"
         onTouchStart={this.handleTap}
+        onKeyDown={this.handleTap}
         style={{ backgroundColor }}
         tabIndex={-1}
       >
@@ -297,23 +296,24 @@ export default class Game extends Component {
           Audio format is not supported
         </audio>
         <TapSFX tapRefs={tapRefs} />
+
         <div className="top-btn" style={{}}>
-          D
+          ShioComp
         </div>
+
         <div className="notesContainer" ref={this.notesContainer}>
           {notes}
         </div>
-        <Buttons
-          handleTap={this.handleTap}
-          handlekeyPress={this.handleTap}
-          isAutoPlay={isAutoPlay}
-        />
+
         <p className="combo" style={color}>
           {combo > 0 ? `${combo} COMBO` : ''}
         </p>
         <p className="lateNote" style={{ fontSize }}>
           Late!
         </p>
+
+        <Buttons handleTap={this.handleTap} isAutoPlay={isAutoPlay} />
+
         <div className="testers">
           <button className="play" onClick={this.handlePlayAudio}>
             Play Audio

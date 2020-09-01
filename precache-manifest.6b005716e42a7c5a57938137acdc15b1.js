@@ -1,11 +1,11 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "563f3c90e55f59ef4bbf15d9fcbbd55f",
+    "revision": "38dfcd0f64bfa2e5174da5f657304c64",
     "url": "/circle-animation/index.html"
   },
   {
-    "revision": "eb7e15ae8c778a85839e",
-    "url": "/circle-animation/static/css/main.238408e6.chunk.css"
+    "revision": "b0810818c2bf3f3aea29",
+    "url": "/circle-animation/static/css/main.20a4fe4f.chunk.css"
   },
   {
     "revision": "0c837b4d5cee97a40044",
@@ -16,8 +16,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/circle-animation/static/js/2.6282f14d.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "eb7e15ae8c778a85839e",
-    "url": "/circle-animation/static/js/main.ca03cf74.chunk.js"
+    "revision": "b0810818c2bf3f3aea29",
+    "url": "/circle-animation/static/js/main.99cfb4ac.chunk.js"
   },
   {
     "revision": "9ce31c75d1bb1232fa1e",

@@ -1,0 +1,26 @@
+.indiv-button {
+  width: 95px;
+  height: 95px;
+  border-radius: 50%;
+  border: 5px solid black;
+  outline: none;
+  position: absolute;
+  top: 10vh;
+  left: calc(50% - (95px / 2));
+}
+
+@for $num from 1 through 9 {
+  $c: 60;
+  $y: sin(22.5deg * ($num - 1)) * $c;
+  $x: sqrt(($c * $c) - ($y * $y));
+
+  @if $num < 6 {
+    .btn-#{$num} {
+      transform: translate(-$x#{vh}, $y#{vh});
+    }
+  } @else {
+    .btn-#{$num} {
+      transform: translate($x#{vh}, $y#{vh});
+    }
+  }
+}

@@ -1,0 +1,84 @@
+.Game {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+}
+
+.top-btn {
+  width: 95px;
+  height: 95px;
+  border-radius: 50%;
+  border: 5px solid black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 10vh;
+  left: calc(50% - (95px / 2));
+  z-index: 1;
+  pointer-events: none;
+
+  img {
+    width: 70%;
+  }
+}
+
+@for $num from 1 through 9 {
+  $c: 60;
+  $y: sin(22.5deg * ($num - 1)) * $c;
+  $x: sqrt(($c * $c) - ($y * $y));
+
+  @if $num < 6 {
+    @keyframes moving-#{$num} {
+      100% {
+        transform: translate(-$x#{vh}, $y#{vh});
+      }
+    }
+  } @else {
+    @keyframes moving-#{$num} {
+      100% {
+        transform: translate($x#{vh}, $y#{vh});
+      }
+    }
+  }
+}
+
+.testers {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin-right: 5px;
+  margin-top: 5px;
+
+  button {
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-family: 'Poppins', sans-serif;
+  }
+}
+
+.combo {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 900;
+  letter-spacing: 3px;
+  font-size: 1.3rem;
+  align-self: center;
+  position: absolute;
+  top: 30vh;
+}
+
+.lateNote {
+  font-family: 'Orbitron', sans-serif;
+  font-weight: bold;
+  letter-spacing: 3px;
+  align-self: center;
+  position: absolute;
+  top: 35vh;
+  color: rgb(245, 79, 79);
+  transition: all 0.25s ease;
+}

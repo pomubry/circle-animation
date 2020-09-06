@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import imgArr from '../pictures/backgrounds/Backgrounds';
+import musicNote from '../svg/musicNote.svg';
 
 import Buttons from './Buttons';
 import TapSFX from './TapSFX';
@@ -17,8 +19,13 @@ export default class Game extends Component {
       time: 0,
       interval: null,
       fontSize: '0rem',
-      backgroundColor: 'gray',
+      randomImgIndex: 0,
     };
+  }
+
+  componentDidMount() {
+    let randomIndex = Math.floor(Math.random() * imgArr.length);
+    this.setState({ randomImgIndex: randomIndex });
   }
 
   componentDidUpdate() {
@@ -31,8 +38,13 @@ export default class Game extends Component {
       playing,
     } = this.state;
     const { beatmapSrc, speed } = this.props.state;
-    let currentNote = beatmapSrc.song_info[0].notes[index];
+    // let currentNote = beatmapSrc.song_info[0].notes[index];
+    let currentNote = null;
+    if (beatmapSrc !== null) {
+      currentNote = beatmapSrc.song_info[0].notes[index];
+    }
     if (
+      beatmapSrc !== null &&
       currentNote.timing_sec - (0.25 + speed) < time &&
       index < beatmapSrc.song_info[0].notes.length - 1 &&
       playing
@@ -120,17 +132,6 @@ export default class Game extends Component {
   handleTap = (e) => {
     const { combo, time, currentNotes } = this.state;
     let btnPosition = Number(e.target.getAttribute('data-position'));
-    let colorArr = [
-      '#8ec225',
-      '#b44e8f',
-      '#565ea9',
-      '#ffe41c',
-      '#ee879d',
-      '#73c9f3',
-      '#f18f3d',
-      '#e94c53',
-      '#9aa3aa',
-    ].reverse();
 
     if (
       Number(e.target.getAttribute('data-position')) === 0 &&
@@ -173,8 +174,9 @@ export default class Game extends Component {
         : (currentNotesCopy = currentNotesCopy.slice(1));
 
       const { tapVolume, speed } = this.props.state;
-
-      let goodAccuracy = ((300 - 95) * speed) / 300;
+      let vh = window.innerHeight;
+      let distance = 0.6 * vh;
+      let goodAccuracy = ((distance - 95) * speed) / distance;
 
       if (accuracy < (speed - goodAccuracy) / 2) {
         let clone = this.perfectTapSFX.current.cloneNode(true);
@@ -199,7 +201,6 @@ export default class Game extends Component {
         this.setState({ combo: 0, currentNotes: currentNotesCopy });
       }
     }
-    this.setState({ backgroundColor: colorArr[btnPosition - 1] });
   };
 
   handleEnd = (e) => {
@@ -228,14 +229,13 @@ export default class Game extends Component {
     const {
       animationPlayState,
       notesArray,
-      currentTime,
       time,
       combo,
       fontSize,
-      backgroundColor,
+      randomImgIndex,
     } = this.state;
 
-    const { speed, isAutoPlay, musicSrc } = this.props.state;
+    const { speed, isAutoPlay, musicSrc, attribute } = this.props.state;
 
     let tapRefs = [this.perfectTapSFX, this.goodTapSFX, this.badTapSFX];
 
@@ -255,6 +255,19 @@ export default class Game extends Component {
 
     let color = { color: colorArr[Math.floor(combo / 100)] };
 
+    let attrib = '';
+
+    switch (attribute) {
+      case 1:
+        attrib = 'radial-gradient(rgba(255,255,255,0.9), rgba(238,135,157,1))';
+        break;
+      case 2:
+        attrib = 'radial-gradient(rgba(255,255,255,0.9), rgba(142,194,37,1))';
+        break;
+      default:
+        attrib = 'radial-gradient(rgba(255,255,255,0.9), rgba(115,201,243,1))';
+        break;
+    }
     if (notesArray.length > 0) {
       let map = notesArray.map((obj) => {
         return (
@@ -264,12 +277,11 @@ export default class Game extends Component {
             data-position={obj.position}
             style={{
               animation: `moving-${obj.position} ${speed}s linear ${animationPlayState}`,
+              backgroundImage: attrib,
             }}
             onAnimationEnd={this.animationEnd}
             key={obj.position * obj.timing_sec}
-          >
-            {obj.position}
-          </div>
+          ></div>
         );
       });
       notes = notes.concat(map);
@@ -283,7 +295,9 @@ export default class Game extends Component {
         className="Game"
         onTouchStart={this.handleTap}
         onKeyDown={this.handleTap}
-        style={{ backgroundColor }}
+        style={{
+          backgroundImage: `url(${imgArr[randomImgIndex]})`,
+        }}
         tabIndex={-1}
       >
         <audio
@@ -298,7 +312,7 @@ export default class Game extends Component {
         <TapSFX tapRefs={tapRefs} />
 
         <div className="top-btn" style={{}}>
-          ShioComp
+          <img src={musicNote} alt="Music Note Icon" />
         </div>
 
         <div className="notesContainer" ref={this.notesContainer}>
@@ -318,9 +332,6 @@ export default class Game extends Component {
           <button className="play" onClick={this.handlePlayAudio}>
             Play Audio
           </button>
-          <p>{currentTime}</p>
-          <p>{time}</p>
-          <p>{speed}</p>
         </div>
       </div>
     );

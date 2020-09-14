@@ -1,23 +1,23 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "b622d082369fcdf5873e1f64bab32571",
+    "revision": "0384cebcd338c772c5bbe9e2f29ec74e",
     "url": "/circle-animation/index.html"
   },
   {
-    "revision": "7ca3af464dcbf509e1ac",
-    "url": "/circle-animation/static/css/main.ba4fc5ca.chunk.css"
+    "revision": "98326ee7880c9f839134",
+    "url": "/circle-animation/static/css/main.1b2033c4.chunk.css"
   },
   {
-    "revision": "4525e1201a6f8a64dfb9",
-    "url": "/circle-animation/static/js/2.40c99d26.chunk.js"
+    "revision": "535f01ec40e2440fc462",
+    "url": "/circle-animation/static/js/2.950213f7.chunk.js"
   },
   {
     "revision": "e88a3e95b5364d46e95b35ae8c0dc27d",
-    "url": "/circle-animation/static/js/2.40c99d26.chunk.js.LICENSE.txt"
+    "url": "/circle-animation/static/js/2.950213f7.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "7ca3af464dcbf509e1ac",
-    "url": "/circle-animation/static/js/main.7c3c989e.chunk.js"
+    "revision": "98326ee7880c9f839134",
+    "url": "/circle-animation/static/js/main.25592921.chunk.js"
   },
   {
     "revision": "9ce31c75d1bb1232fa1e",
@@ -34,6 +34,10 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
     "revision": "2ced2ebc3242327fb1979b314b4a4163",
     "url": "/circle-animation/static/media/SE_326.2ced2ebc.ogg"
+  },
+  {
+    "revision": "eae7d0071c745d9eb8bc0ed76b5a8e4c",
+    "url": "/circle-animation/static/media/home.eae7d007.svg"
   },
   {
     "revision": "67b3c6f7b98e834e4616b17b81217654",
@@ -92,6 +96,10 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/circle-animation/static/media/m_001_normal.b9690610.rs"
   },
   {
+    "revision": "2f4ed23b880ce4ff26f8832e6954ff7f",
+    "url": "/circle-animation/static/media/m_002.2f4ed23b.ogg"
+  },
+  {
     "revision": "64fb3e7cd02047032521ed5d080b5b37",
     "url": "/circle-animation/static/media/m_002_easy.64fb3e7c.rs"
   },
@@ -102,6 +110,10 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
     "revision": "beedd0fb0ea94ebda074d00ab288c6a0",
     "url": "/circle-animation/static/media/m_002_normal.beedd0fb.rs"
+  },
+  {
+    "revision": "d506d104a031a88fd73b7c907a112fc1",
+    "url": "/circle-animation/static/media/m_003.d506d104.ogg"
   },
   {
     "revision": "b850d98248035fd6216904cd03ec1eb9",
@@ -116,6 +128,10 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/circle-animation/static/media/m_003_normal.a452b82e.rs"
   },
   {
+    "revision": "6a0c7cf6be922701ff44e279db707dcf",
+    "url": "/circle-animation/static/media/m_004.6a0c7cf6.ogg"
+  },
+  {
     "revision": "65717ae866381ddd009f47137b8592d8",
     "url": "/circle-animation/static/media/m_004_easy.65717ae8.rs"
   },
@@ -128,6 +144,10 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/circle-animation/static/media/m_004_normal.aeed0142.rs"
   },
   {
+    "revision": "735f80e394275cc64c697933d93cd59c",
+    "url": "/circle-animation/static/media/m_005.735f80e3.ogg"
+  },
+  {
     "revision": "d5fc3e2b6e1c95a0e3f95932f4b5f311",
     "url": "/circle-animation/static/media/m_005_easy.d5fc3e2b.rs"
   },
@@ -138,6 +158,46 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
     "revision": "e8f3fb5e38fdbd2ff9a756aef3be280f",
     "url": "/circle-animation/static/media/m_005_normal.e8f3fb5e.rs"
+  },
+  {
+    "revision": "1b78b376d354bba85a6e39f41f78c5f5",
+    "url": "/circle-animation/static/media/m_006.1b78b376.ogg"
+  },
+  {
+    "revision": "6c138bc6bd542507cb13772a3fc1d729",
+    "url": "/circle-animation/static/media/m_006_easy.6c138bc6.rs"
+  },
+  {
+    "revision": "7186dfc18644040c5620ec30d0ddd065",
+    "url": "/circle-animation/static/media/m_007.7186dfc1.ogg"
+  },
+  {
+    "revision": "696330381fbad861d77f4ec191b037b3",
+    "url": "/circle-animation/static/media/m_007_easy.69633038.rs"
+  },
+  {
+    "revision": "6d0091f1cf8657d8857c9ab788f82eef",
+    "url": "/circle-animation/static/media/m_008.6d0091f1.ogg"
+  },
+  {
+    "revision": "a8ddb0f9c04813cae483ee6417819533",
+    "url": "/circle-animation/static/media/m_008_easy.a8ddb0f9.rs"
+  },
+  {
+    "revision": "e2cb33a0bfe67eb56e817c8c2fb91e5e",
+    "url": "/circle-animation/static/media/m_009.e2cb33a0.ogg"
+  },
+  {
+    "revision": "da286394acdf03e026719564f9f90171",
+    "url": "/circle-animation/static/media/m_009_easy.da286394.rs"
+  },
+  {
+    "revision": "2cc1fff92f0684497bcf9c195f12c2d9",
+    "url": "/circle-animation/static/media/m_010.2cc1fff9.ogg"
+  },
+  {
+    "revision": "bd5d819d64226dd1f1dcb61285ffa3c6",
+    "url": "/circle-animation/static/media/m_010_easy.bd5d819d.rs"
   },
   {
     "revision": "650ef70645b3e8de9ce28fdeaadd8c64",
@@ -170,6 +230,10 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
     "revision": "bf453adc229eef6bd41bdbec0c6b8f44",
     "url": "/circle-animation/static/media/m_091_normal.bf453adc.rs"
+  },
+  {
+    "revision": "db71cd3c7ffe3bbffbffe9ad354f6f63",
+    "url": "/circle-animation/static/media/m_096.db71cd3c.ogg"
   },
   {
     "revision": "5416310cb384114494b7770790b40cb1",
@@ -296,7 +360,27 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/circle-animation/static/media/m_195_normal.ef2df67e.rs"
   },
   {
+    "revision": "33a494e4ccff9db60beb49078d9d1d34",
+    "url": "/circle-animation/static/media/menuBG.33a494e4.jpg"
+  },
+  {
     "revision": "38d3eea5a7dc52791d23ec37c38853b8",
     "url": "/circle-animation/static/media/musicNote.38d3eea5.svg"
+  },
+  {
+    "revision": "843334cc493accc7326964a8a39ab127",
+    "url": "/circle-animation/static/media/pause.843334cc.svg"
+  },
+  {
+    "revision": "f2077b69f0a95dad3c268a5763456df7",
+    "url": "/circle-animation/static/media/playIcon.f2077b69.svg"
+  },
+  {
+    "revision": "5e8ef5c070ee9c93279280cc1fd3fb49",
+    "url": "/circle-animation/static/media/return.5e8ef5c0.svg"
+  },
+  {
+    "revision": "4d95a11f8222a956ecc4a9f4eac2f2b2",
+    "url": "/circle-animation/static/media/up-arrow.4d95a11f.svg"
   }
 ]);

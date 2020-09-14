@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import imgArr from '../pictures/backgrounds/Backgrounds';
+
 import musicNote from '../svg/musicNote.svg';
 
 import Buttons from './Buttons';
 import TapSFX from './TapSFX';
+import GameButtons from './GameButtons';
 
 export default class Game extends Component {
   constructor(props) {
@@ -20,12 +22,19 @@ export default class Game extends Component {
       interval: null,
       fontSize: '0rem',
       randomImgIndex: 0,
+      isBurgerShown: false,
     };
   }
 
   componentDidMount() {
     let randomIndex = Math.floor(Math.random() * imgArr.length);
     this.setState({ randomImgIndex: randomIndex });
+  }
+
+  componentWillUnmount() {
+    let audio = this.audioRef.current;
+    audio.pause();
+    clearInterval(this.state.interval);
   }
 
   componentDidUpdate() {
@@ -38,13 +47,11 @@ export default class Game extends Component {
       playing,
     } = this.state;
     const { beatmapSrc, speed } = this.props.state;
-    // let currentNote = beatmapSrc.song_info[0].notes[index];
-    let currentNote = null;
-    if (beatmapSrc !== null) {
+    let currentNote = beatmapSrc.song_info[0].notes[index];
+    if (beatmapSrc.song_info[0].notes[index]) {
       currentNote = beatmapSrc.song_info[0].notes[index];
     }
     if (
-      beatmapSrc !== null &&
       currentNote.timing_sec - (0.25 + speed) < time &&
       index < beatmapSrc.song_info[0].notes.length - 1 &&
       playing
@@ -58,7 +65,6 @@ export default class Game extends Component {
 
     if (time - currentTime > 0.3) {
       this.audioRef.current.currentTime = time;
-      console.log('Catchup!');
     }
   }
 
@@ -203,8 +209,13 @@ export default class Game extends Component {
     }
   };
 
+  handleBurger = (e) => {
+    this.setState({ isBurgerShown: !this.state.isBurgerShown });
+  };
+
   handleEnd = (e) => {
     clearInterval(this.state.interval);
+    this.audioRef.current.currentTime = 0;
     this.setState({
       animationPlayState: 'paused',
       notesArray: [],
@@ -216,7 +227,6 @@ export default class Game extends Component {
       time: 0,
       interval: null,
     });
-    console.log('Song ended');
   };
 
   audioRef = React.createRef();
@@ -233,9 +243,11 @@ export default class Game extends Component {
       combo,
       fontSize,
       randomImgIndex,
+      playing,
+      isBurgerShown,
     } = this.state;
 
-    const { speed, isAutoPlay, musicSrc, attribute } = this.props.state;
+    const { speed, isAutoPlay, musicSrc, songAttribute } = this.props.state;
 
     let tapRefs = [this.perfectTapSFX, this.goodTapSFX, this.badTapSFX];
 
@@ -255,29 +267,18 @@ export default class Game extends Component {
 
     let color = { color: colorArr[Math.floor(combo / 100)] };
 
-    let attrib = '';
+    let attribColor =
+      songAttribute === 1 ? 'smile' : songAttribute === 2 ? 'pure' : 'cool';
 
-    switch (attribute) {
-      case 1:
-        attrib = 'radial-gradient(rgba(255,255,255,0.9), rgba(238,135,157,1))';
-        break;
-      case 2:
-        attrib = 'radial-gradient(rgba(255,255,255,0.9), rgba(142,194,37,1))';
-        break;
-      default:
-        attrib = 'radial-gradient(rgba(255,255,255,0.9), rgba(115,201,243,1))';
-        break;
-    }
     if (notesArray.length > 0) {
       let map = notesArray.map((obj) => {
         return (
           <div
-            className="top-btn active-note"
+            className={`top-btn active-note ${attribColor}`}
             data-timing-sec={obj.timing_sec}
             data-position={obj.position}
             style={{
               animation: `moving-${obj.position} ${speed}s linear ${animationPlayState}`,
-              backgroundImage: attrib,
             }}
             onAnimationEnd={this.animationEnd}
             key={obj.position * obj.timing_sec}
@@ -293,7 +294,6 @@ export default class Game extends Component {
     return (
       <div
         className="Game"
-        onTouchStart={this.handleTap}
         onKeyDown={this.handleTap}
         style={{
           backgroundImage: `url(${imgArr[randomImgIndex]})`,
@@ -309,9 +309,10 @@ export default class Game extends Component {
         >
           Audio format is not supported
         </audio>
+
         <TapSFX tapRefs={tapRefs} />
 
-        <div className="top-btn" style={{}}>
+        <div className="top-btn">
           <img src={musicNote} alt="Music Note Icon" />
         </div>
 
@@ -328,11 +329,14 @@ export default class Game extends Component {
 
         <Buttons handleTap={this.handleTap} isAutoPlay={isAutoPlay} />
 
-        <div className="testers">
-          <button className="play" onClick={this.handlePlayAudio}>
-            Play Audio
-          </button>
-        </div>
+        <GameButtons
+          handlePlayAudio={this.handlePlayAudio}
+          handleBurger={this.handleBurger}
+          returnMenu={this.props.returnMenu}
+          handleEnd={this.handleEnd}
+          isBurgerShown={isBurgerShown}
+          playing={playing}
+        />
       </div>
     );
   }

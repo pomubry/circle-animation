@@ -15,10 +15,18 @@ class App extends Component {
     musicVolume: 0.1,
     tapVolume: 0.1,
     group: 'muse',
-    attribute: 1,
-    difficulty: 'easy',
-    onMainMenu: false,
+    songAttribute: 1,
+    attribute: 0,
+    difficulty: 1,
+    onMainMenu: true,
+    beatmapArr: {},
   };
+
+  componentDidMount() {
+    setTimeout(() => {
+      this.setState({ beatmapArr: beatmap });
+    }, 1000);
+  }
 
   fullScreen = (e) => {
     let app = document.querySelector('.App');
@@ -30,7 +38,8 @@ class App extends Component {
   };
 
   toggleAutoPlay = (e) => {
-    this.setState({ isAutoPlay: !this.state.isAutoPlay });
+    let isAutoPlay = e.target.id === 'true';
+    this.setState({ isAutoPlay });
   };
 
   setSpeed = (e) => {
@@ -45,73 +54,49 @@ class App extends Component {
     }
   };
 
-  normalKimikoko = (e) => {
-    let beatmapSrc = beatmap.aqours.normal[0];
-    let attribute = beatmapSrc.song_info[0].notes[0].notes_attribute;
-    this.setState({
-      musicSrc: music[beatmapSrc.code],
-      beatmapSrc,
-      attribute,
-    });
-  };
-
-  normalYume = (e) => {
-    let beatmapSrc = beatmap.nijigasaki.normal[0];
-    let attribute = beatmapSrc.song_info[0].notes[0].notes_attribute;
-    this.setState({
-      musicSrc: music[beatmapSrc.code],
-      beatmapSrc,
-      attribute,
-    });
-  };
-
-  hardKimikoko = (e) => {
-    let beatmapSrc = beatmap.aqours.hard[0];
-    let attribute = beatmapSrc.song_info[0].notes[0].notes_attribute;
-    this.setState({
-      musicSrc: music[beatmapSrc.code],
-      beatmapSrc,
-      attribute,
-    });
-  };
-
-  hardYume = (e) => {
-    let beatmapSrc = beatmap.nijigasaki.hard[4];
-    let attribute = beatmapSrc.song_info[0].notes[0].notes_attribute;
-    this.setState({
-      musicSrc: music[beatmapSrc.code],
-      beatmapSrc,
-      attribute,
-    });
-  };
-
-  changeScreen = (e) => {
+  returnMenu = (e) => {
     this.setState({ onMainMenu: !this.state.onMainMenu });
   };
 
+  handleGroup = (e) => {
+    const { name, value } = e.target;
+    this.setState({
+      [name]: isNaN(Number(value)) ? value : Number(value),
+    });
+  };
+
+  setSong = (e, song) => {
+    e.preventDefault();
+    let beatmapSrc = song;
+    let songAttribute = beatmapSrc.song_info[0].notes[0].notes_attribute;
+    this.setState({
+      musicSrc: music[beatmapSrc.code],
+      beatmapSrc,
+      songAttribute,
+      onMainMenu: !this.state.onMainMenu,
+    });
+  };
+
   checklog = (e) => {
-    let pickedBeatmap = beatmap.nijigasaki.hard[0].code;
-    let pickedSong = music[pickedBeatmap];
-    console.log(pickedSong);
+    console.log(typeof beatmap.aqours.easy[0]);
   };
   render() {
     const { onMainMenu } = this.state;
     return (
       <div className="App" tabIndex={-1}>
-        {onMainMenu ? <MainMenu /> : <Game state={this.state} />}
+        {onMainMenu ? (
+          <MainMenu
+            state={this.state}
+            handleGroup={this.handleGroup}
+            toggleAutoPlay={this.toggleAutoPlay}
+            setSong={this.setSong}
+          />
+        ) : (
+          <Game state={this.state} returnMenu={this.returnMenu} />
+        )}
         <div className="testers2">
           <button onClick={this.checklog}>Check Log</button>
-          <button onClick={this.changeScreen}>Change Screen</button>
           <button onClick={this.fullScreen}>Set Fullscreen</button>
-          <button onClick={this.toggleAutoPlay}>Autoplay</button>
-          <button onClick={this.setSpeed}>+ Speed</button>
-          <button onClick={this.setSpeed}>- Speed</button>
-          <br />
-          <button onClick={this.normalKimikoko}>normalKimikoko</button>
-          <button onClick={this.normalYume}>normalYume</button>
-          <br />
-          <button onClick={this.hardKimikoko}>hardKimikoko</button>
-          <button onClick={this.hardYume}>hardYume</button>
         </div>
       </div>
     );

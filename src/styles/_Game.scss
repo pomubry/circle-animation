@@ -27,6 +27,27 @@
   }
 }
 
+.smile {
+  background-image: radial-gradient(
+    rgba(255, 255, 255, 0.9),
+    rgba(238, 135, 157, 1)
+  );
+}
+
+.pure {
+  background-image: radial-gradient(
+    rgba(255, 255, 255, 0.9),
+    rgba(142, 194, 37, 1)
+  );
+}
+
+.cool {
+  background-image: radial-gradient(
+    rgba(255, 255, 255, 0.9),
+    rgba(115, 201, 243, 1)
+  );
+}
+
 @for $num from 1 through 9 {
   $c: 60;
   $y: sin(22.5deg * ($num - 1)) * $c;
@@ -47,7 +68,7 @@
   }
 }
 
-.testers {
+.GameButtons {
   position: absolute;
   top: 0;
   right: 0;
@@ -59,6 +80,17 @@
     border-radius: 5px;
     cursor: pointer;
     font-family: 'Poppins', sans-serif;
+    background-color: rgba(255, 255, 255, 0.5);
+
+    img {
+      width: 15px;
+      transition: all 0.25s ease;
+      vertical-align: middle;
+    }
+
+    &:hover {
+      background-color: rgba(255, 255, 255, 1);
+    }
   }
 }
 
@@ -81,4 +113,15 @@
   top: 35vh;
   color: rgb(245, 79, 79);
   transition: all 0.25s ease;
+}
+
+.otherBtn {
+  position: absolute;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transform-origin: top;
+  transition: all 0.25s ease;
+  right: 0;
+  width: 100%;
 }

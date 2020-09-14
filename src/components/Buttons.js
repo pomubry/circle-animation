@@ -22,7 +22,6 @@ function Buttons({ handleTap, isAutoPlay }) {
         }}
         key={9 - index}
         data-position={9 - index}
-        onMouseDown={handleTap}
         onTouchStart={handleTap}
         disabled={isAutoPlay}
       ></button>

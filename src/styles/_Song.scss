@@ -1,0 +1,49 @@
+$smile: rgba(238, 135, 157, 1);
+$pure: rgba(142, 194, 37, 1);
+$cool: rgba(115, 201, 243, 1);
+
+.indiv-song {
+  margin: 5px 0;
+  color: white;
+  padding: 5px;
+  display: grid;
+  grid-template-columns: auto 1fr auto auto;
+  align-items: center;
+  border-radius: 20px;
+
+  img {
+    width: 40px;
+  }
+
+  h2 {
+    text-align: center;
+  }
+
+  button {
+    padding: 5px 20px;
+    margin-left: 10px;
+    border-radius: 20px;
+    border: 2px solid #1bb588;
+    cursor: pointer;
+    background-color: #2ae6ad;
+    color: white;
+    font-family: 'Poppins', sans-serif;
+    transition: all 0.25s ease;
+
+    &:hover {
+      background-color: #1bb588;
+    }
+  }
+}
+
+.smileBG {
+  background-color: $smile;
+}
+
+.pureBG {
+  background-color: $pure;
+}
+
+.coolBG {
+  background-color: $cool;
+}

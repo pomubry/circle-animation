@@ -1,10 +1,49 @@
 .MainMenu {
   min-height: 100vh;
-  background-color: lightblue;
+  background-image: url('../pictures/backgrounds/menuBG.jpg');
+  background-position: center;
+  background-size: cover;
   overflow: auto;
 
   h1 {
     text-align: center;
     margin-top: 5vh;
   }
+}
+
+form {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.auto-play-radio {
+  label,
+  input[type='radio'] {
+    cursor: pointer;
+  }
+
+  input[type='radio'] {
+    margin: 0 5px;
+  }
+}
+
+input[type='range'] {
+  cursor: pointer;
+}
+
+.filter-logos {
+  .groupImg {
+    width: 100px;
+  }
+
+  .attrib-logo {
+    width: 50px;
+  }
+}
+
+.song-list {
+  margin: 10px auto;
+  max-width: 70%;
+  padding: 5px 10px;
 }

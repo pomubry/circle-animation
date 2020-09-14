@@ -19,13 +19,104 @@ code {
 
 .MainMenu {
   min-height: 100vh;
-  background-color: lightblue;
+  background-image: url("../pictures/backgrounds/menuBG.jpg");
+  background-position: center;
+  background-size: cover;
   overflow: auto;
 }
 
 .MainMenu h1 {
   text-align: center;
   margin-top: 5vh;
+}
+
+form {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.auto-play-radio label,
+.auto-play-radio input[type='radio'] {
+  cursor: pointer;
+}
+
+.auto-play-radio input[type='radio'] {
+  margin: 0 5px;
+}
+
+input[type='range'] {
+  cursor: pointer;
+}
+
+.filter-logos .groupImg {
+  width: 100px;
+}
+
+.filter-logos .attrib-logo {
+  width: 50px;
+}
+
+.song-list {
+  margin: 10px auto;
+  max-width: 70%;
+  padding: 5px 10px;
+}
+
+.indiv-song {
+  margin: 5px 0;
+  color: white;
+  padding: 5px;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: auto 1fr auto auto;
+      grid-template-columns: auto 1fr auto auto;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  border-radius: 20px;
+}
+
+.indiv-song img {
+  width: 40px;
+}
+
+.indiv-song h2 {
+  text-align: center;
+}
+
+.indiv-song button {
+  padding: 5px 20px;
+  margin-left: 10px;
+  border-radius: 20px;
+  border: 2px solid #1bb588;
+  cursor: pointer;
+  background-color: #2ae6ad;
+  color: white;
+  font-family: 'Poppins', sans-serif;
+  -webkit-transition: all 0.25s ease;
+  transition: all 0.25s ease;
+}
+
+.indiv-song button:hover {
+  background-color: #1bb588;
+}
+
+.smileBG {
+  background-color: #ee879d;
+}
+
+.pureBG {
+  background-color: #8ec225;
+}
+
+.coolBG {
+  background-color: #73c9f3;
 }
 
 .Game {
@@ -67,6 +158,18 @@ code {
 
 .top-btn img {
   width: 70%;
+}
+
+.smile {
+  background-image: radial-gradient(rgba(255, 255, 255, 0.9), #ee879d);
+}
+
+.pure {
+  background-image: radial-gradient(rgba(255, 255, 255, 0.9), #8ec225);
+}
+
+.cool {
+  background-image: radial-gradient(rgba(255, 255, 255, 0.9), #73c9f3);
 }
 
 @-webkit-keyframes moving-1 {
@@ -195,7 +298,7 @@ code {
   }
 }
 
-.testers {
+.GameButtons {
   position: absolute;
   top: 0;
   right: 0;
@@ -203,11 +306,23 @@ code {
   margin-top: 5px;
 }
 
-.testers button {
+.GameButtons button {
   padding: 5px 10px;
   border-radius: 5px;
   cursor: pointer;
   font-family: 'Poppins', sans-serif;
+  background-color: rgba(255, 255, 255, 0.5);
+}
+
+.GameButtons button img {
+  width: 15px;
+  -webkit-transition: all 0.25s ease;
+  transition: all 0.25s ease;
+  vertical-align: middle;
+}
+
+.GameButtons button:hover {
+  background-color: white;
 }
 
 .combo {
@@ -234,6 +349,24 @@ code {
   color: #f54f4f;
   -webkit-transition: all 0.25s ease;
   transition: all 0.25s ease;
+}
+
+.otherBtn {
+  position: absolute;
+  overflow: hidden;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-transform-origin: top;
+          transform-origin: top;
+  -webkit-transition: all 0.25s ease;
+  transition: all 0.25s ease;
+  right: 0;
+  width: 100%;
 }
 
 .indiv-button {

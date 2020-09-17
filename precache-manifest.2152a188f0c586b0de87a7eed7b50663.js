@@ -1,23 +1,23 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "0384cebcd338c772c5bbe9e2f29ec74e",
+    "revision": "4c163c5b6362d8f05c0984b19aa8d88c",
     "url": "/circle-animation/index.html"
   },
   {
-    "revision": "98326ee7880c9f839134",
-    "url": "/circle-animation/static/css/main.1b2033c4.chunk.css"
+    "revision": "75ef5bfd313dfd3cdfd9",
+    "url": "/circle-animation/static/css/main.ce281a4e.chunk.css"
   },
   {
-    "revision": "535f01ec40e2440fc462",
-    "url": "/circle-animation/static/js/2.950213f7.chunk.js"
+    "revision": "b9604edfc9ad6b1fea5e",
+    "url": "/circle-animation/static/js/2.a476c5ce.chunk.js"
   },
   {
     "revision": "e88a3e95b5364d46e95b35ae8c0dc27d",
-    "url": "/circle-animation/static/js/2.950213f7.chunk.js.LICENSE.txt"
+    "url": "/circle-animation/static/js/2.a476c5ce.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "98326ee7880c9f839134",
-    "url": "/circle-animation/static/js/main.25592921.chunk.js"
+    "revision": "75ef5bfd313dfd3cdfd9",
+    "url": "/circle-animation/static/js/main.ff3ba4b6.chunk.js"
   },
   {
     "revision": "9ce31c75d1bb1232fa1e",
@@ -198,6 +198,46 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
     "revision": "bd5d819d64226dd1f1dcb61285ffa3c6",
     "url": "/circle-animation/static/media/m_010_easy.bd5d819d.rs"
+  },
+  {
+    "revision": "b1d7ce5c0698ec3b786f6b034899e0e3",
+    "url": "/circle-animation/static/media/m_011_easy.b1d7ce5c.rs"
+  },
+  {
+    "revision": "d89f5a49b599643314b486177226994f",
+    "url": "/circle-animation/static/media/m_012_easy.d89f5a49.rs"
+  },
+  {
+    "revision": "dd22de6f7686b7bbed77ece8a8df3908",
+    "url": "/circle-animation/static/media/m_013_easy.dd22de6f.rs"
+  },
+  {
+    "revision": "faf1a4ebb38e8a15528e43f0eb264553",
+    "url": "/circle-animation/static/media/m_014_easy.faf1a4eb.rs"
+  },
+  {
+    "revision": "a113d9bfc54ef41b26d7bf682fa70cce",
+    "url": "/circle-animation/static/media/m_015_easy.a113d9bf.rs"
+  },
+  {
+    "revision": "a7a06432b97b33203056f487fb9fd17c",
+    "url": "/circle-animation/static/media/m_016_easy.a7a06432.rs"
+  },
+  {
+    "revision": "aae313afff83e528e03a99a359f8ec93",
+    "url": "/circle-animation/static/media/m_017_easy.aae313af.rs"
+  },
+  {
+    "revision": "9f6fda0d413ba0e610e380fad368b95b",
+    "url": "/circle-animation/static/media/m_018_easy.9f6fda0d.rs"
+  },
+  {
+    "revision": "726f118c0fd2f9a63dfb7b2f9b296aa1",
+    "url": "/circle-animation/static/media/m_019_easy.726f118c.rs"
+  },
+  {
+    "revision": "a92a318d2512fc946e4ff6bb0561e328",
+    "url": "/circle-animation/static/media/m_020_easy.a92a318d.rs"
   },
   {
     "revision": "650ef70645b3e8de9ce28fdeaadd8c64",

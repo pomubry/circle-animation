@@ -1,4 +1,4 @@
-{"song_name":"Oh,Love&Peace!","code":"m_010",
+{"song_name":"Oh,Love&Peace!",
 "difficulty":1,"live_icon":"l_jacket_020.png",
 "rank_info":[
 {"rank":5,"rank_min":0,"rank_max":11186},

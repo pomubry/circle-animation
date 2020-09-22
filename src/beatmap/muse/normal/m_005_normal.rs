@@ -1,4 +1,4 @@
-{"song_name":"Natsuiro Egao de 1,2,Jump!","code":"m_005",
+{"song_name":"Natsuiro Egao de 1,2,Jump!",
 "difficulty":2,"live_icon":"l_jacket_008.png",
 "rank_info":[
 {"rank":5,"rank_min":0,"rank_max":17519},

@@ -1,8 +1,5 @@
 .MainMenu {
   min-height: 100vh;
-  background-image: url('../pictures/backgrounds/menuBG.jpg');
-  background-position: center;
-  background-size: cover;
   overflow: auto;
 
   h1 {
@@ -11,10 +8,52 @@
   }
 }
 
+.MainMenu:before {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  background: url('../pictures/backgrounds/menuBG.jpg');
+  background-position: center;
+  background-size: cover;
+  transform: rotate(180deg);
+}
+
+.fullscreen {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  padding: 5px 20px;
+  border-radius: 20px;
+  border: 2px solid #1bb588;
+  cursor: pointer;
+  background-color: #2ae6ad;
+  color: white;
+  font-family: 'Poppins', sans-serif;
+  transition: all 0.25s ease;
+  outline: none;
+
+  &:hover {
+    background-color: #1bb588;
+  }
+
+  img {
+    width: 10px;
+    margin-right: 5px;
+    transition: all 0.25s ease;
+  }
+}
+
+.speed-tip {
+  font-size: 11px;
+}
+
 form {
   display: flex;
   justify-content: space-around;
   align-items: center;
+  margin-top: 20px;
 }
 
 .auto-play-radio {
@@ -30,20 +69,64 @@ form {
 
 input[type='range'] {
   cursor: pointer;
+  margin-bottom: 5px;
 }
 
-.filter-logos {
-  .groupImg {
-    width: 100px;
-  }
+.select-group,
+.scroll-group,
+.scroll-group-info {
+  display: flex;
+  flex-direction: column;
+}
 
-  .attrib-logo {
-    width: 50px;
-  }
+.scroll-group-info {
+  font-size: 12px;
 }
 
 .song-list {
-  margin: 10px auto;
-  max-width: 70%;
-  padding: 5px 10px;
+  background-color: rgba(144, 238, 144, 0.6);
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+
+  .filter-logos {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+
+    .groupImg {
+      width: 100px;
+    }
+
+    .attrib-logo {
+      width: 50px;
+    }
+
+    button {
+      padding: 5px 20px;
+      border-radius: 20px;
+      border: 2px solid #1bb588;
+      cursor: pointer;
+      background-color: #2ae6ad;
+      color: white;
+      font-family: 'Poppins', sans-serif;
+      transition: all 0.25s ease;
+      outline: none;
+
+      &:hover {
+        background-color: #1bb588;
+      }
+
+      img {
+        width: 10px;
+        margin-right: 5px;
+        transition: all 0.25s ease;
+      }
+    }
+  }
+
+  .song-arr {
+    overflow-y: scroll;
+    transition: all 0.25s ease;
+  }
 }

@@ -1,4 +1,4 @@
-{"song_name":"Yume e no Ippo","code":"m_191",
+{"song_name":"Yume e no Ippo",
 "difficulty":2,"live_icon":"j_nj_0549.png",
 "rank_info":[
 {"rank":5,"rank_min":0,"rank_max":22307},

@@ -1,5 +1,5 @@
 {"song_name":"Step! ZERO to ONE",
-"code":"m_091","difficulty":1,"live_icon":"j_aq_0452.png",
+"difficulty":1,"live_icon":"j_aq_0452.png",
 "rank_info":[
 {"rank":5,"rank_min":0,"rank_max":11199},
 {"rank":4,"rank_min":11200,"rank_max":27999},

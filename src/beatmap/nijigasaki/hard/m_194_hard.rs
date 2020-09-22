@@ -1,4 +1,4 @@
-{"song_name":"Starlight","code":"m_194",
+{"song_name":"Starlight",
 "difficulty":3,"live_icon":"j_nj_0552.png",
 "rank_info":[
 {"rank":5,"rank_min":0,"rank_max":33659},

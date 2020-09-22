@@ -1,4 +1,4 @@
-{"song_name":"Koi ni Naritai AQUARIUM","code":"m_107",
+{"song_name":"Koi ni Naritai AQUARIUM",
 "difficulty":2,"live_icon":"j_aq_0463.png",
 "rank_info":[
 {"rank":5,"rank_min":0,"rank_max":24287},

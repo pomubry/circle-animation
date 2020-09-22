@@ -1,4 +1,4 @@
-{"song_name":"Anata no Risou no Heroine","code":"m_193",
+{"song_name":"Anata no Risou no Heroine",
 "difficulty":2,"live_icon":"j_nj_0551.png",
 "rank_info":[
 {"rank":5,"rank_min":0,"rank_max":19931},

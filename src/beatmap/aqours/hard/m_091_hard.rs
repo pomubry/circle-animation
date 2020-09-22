@@ -1,4 +1,4 @@
-{"song_name":"Step! ZERO to ONE","code":"m_091",
+{"song_name":"Step! ZERO to ONE",
 "difficulty":3,"live_icon":"j_aq_0452.png",
 "rank_info":[
 {"rank":5,"rank_min":0,"rank_max":61029},

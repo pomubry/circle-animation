@@ -1,4 +1,4 @@
-{"song_name":"Diamond","code":"m_192",
+{"song_name":"Diamond",
 "difficulty":3,"live_icon":"j_nj_0550.png",
 "rank_info":[
 {"rank":5,"rank_min":0,"rank_max":46069},

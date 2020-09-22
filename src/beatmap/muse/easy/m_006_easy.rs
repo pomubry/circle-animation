@@ -1,4 +1,4 @@
-{"song_name":"Mermaid festa vol.1","code":"m_006",
+{"song_name":"Mermaid festa vol.1",
 "difficulty":1,"live_icon":"l_jacket_009.png",
 "rank_info":[
 {"rank":5,"rank_min":0,"rank_max":9404},

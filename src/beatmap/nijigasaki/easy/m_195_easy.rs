@@ -1,4 +1,4 @@
-{"song_name":"Meccha Going!!","code":"m_195",
+{"song_name":"Meccha Going!!",
 "difficulty":1,"live_icon":"j_nj_0553.png",
 "rank_info":[
 {"rank":5,"rank_min":0,"rank_max":8799},

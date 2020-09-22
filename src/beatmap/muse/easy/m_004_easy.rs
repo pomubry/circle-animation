@@ -1,4 +1,4 @@
-{"song_name":"baby maybe Koi no Button","code":"m_004",
+{"song_name":"baby maybe Koi no Button",
 "difficulty":1,"live_icon":"l_jacket_004.png",
 "rank_info":[
 {"rank":5,"rank_min":0,"rank_max":9020},

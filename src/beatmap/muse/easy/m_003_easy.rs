@@ -1,4 +1,4 @@
-{"song_name":"Snow halation","code":"m_003",
+{"song_name":"Snow halation",
 "difficulty":1,"live_icon":"l_jacket_003.png",
 "rank_info":[
 {"rank":5,"rank_min":0,"rank_max":7451},

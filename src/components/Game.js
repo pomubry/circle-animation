@@ -182,7 +182,7 @@ export default class Game extends Component {
       const { tapVolume, speed } = this.props.state;
       let vh = window.innerHeight;
       let distance = 0.6 * vh;
-      let goodAccuracy = ((distance - 95) * speed) / distance;
+      let goodAccuracy = ((distance - 70) * speed) / distance;
 
       if (accuracy < (speed - goodAccuracy) / 2) {
         let clone = this.perfectTapSFX.current.cloneNode(true);

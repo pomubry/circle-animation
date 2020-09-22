@@ -1,4 +1,4 @@
-{"song_name":"Aqours☆HEROES","code":"m_096",
+{"song_name":"Aqours☆HEROES",
 "difficulty":3,"live_icon":"j_aq_0456.png",
 "rank_info":[
 {"rank":5,"rank_min":0,"rank_max":51339},

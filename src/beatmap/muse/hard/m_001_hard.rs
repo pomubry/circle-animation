@@ -1,4 +1,4 @@
-{"song_name":"Bokura no LIVE Kimi to no LIFE","code":"m_001",
+{"song_name":"Bokura no LIVE Kimi to no LIFE",
 "difficulty":3,"live_icon":"l_jacket_001.png",
 "rank_info":[
 {"rank":5,"rank_min":0,"rank_max":25339},

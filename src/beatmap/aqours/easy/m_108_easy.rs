@@ -1,4 +1,4 @@
-{"song_name":"Mattete Ai no Uta","code":"m_108",
+{"song_name":"Mattete Ai no Uta",
 "difficulty":1,"live_icon":"j_aq_0467.png",
 "rank_info":[
 {"rank":5,"rank_min":0,"rank_max":9499},

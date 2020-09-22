@@ -1,4 +1,4 @@
-{"song_name":"Wonderful Rush","code":"m_009",
+{"song_name":"Wonderful Rush",
 "difficulty":1,"live_icon":"l_jacket_019.png",
 "rank_info":[
 {"rank":5,"rank_min":0,"rank_max":10877},

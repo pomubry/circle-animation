@@ -8,7 +8,7 @@ import MainMenu from './components/MainMenu';
 
 class App extends Component {
   state = {
-    speed: 1,
+    speed: 1.5,
     isAutoPlay: false,
     musicSrc: null,
     beatmapSrc: null,
@@ -29,6 +29,7 @@ class App extends Component {
   }
 
   fullScreen = (e) => {
+    e.preventDefault();
     let app = document.querySelector('.App');
     if (document.fullscreenElement) {
       document.exitFullscreen();
@@ -78,7 +79,7 @@ class App extends Component {
   };
 
   checklog = (e) => {
-    console.log(typeof beatmap.aqours.easy[0]);
+    console.log(beatmap.muse.normal[19].code);
   };
   render() {
     const { onMainMenu } = this.state;
@@ -90,14 +91,11 @@ class App extends Component {
             handleGroup={this.handleGroup}
             toggleAutoPlay={this.toggleAutoPlay}
             setSong={this.setSong}
+            fullScreen={this.fullScreen}
           />
         ) : (
           <Game state={this.state} returnMenu={this.returnMenu} />
         )}
-        <div className="testers2">
-          <button onClick={this.checklog}>Check Log</button>
-          <button onClick={this.fullScreen}>Set Fullscreen</button>
-        </div>
       </div>
     );
   }

@@ -1,4 +1,4 @@
-{"song_name":"Kimi no Kokoro wa Kagayaiteru kai?","code":"m_087",
+{"song_name":"Kimi no Kokoro wa Kagayaiteru kai?",
 "difficulty":2,"live_icon":"j_aq_0446.png",
 "rank_info":[
 {"rank":5,"rank_min":0,"rank_max":26531},

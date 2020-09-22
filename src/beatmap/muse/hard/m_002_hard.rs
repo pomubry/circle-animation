@@ -1,4 +1,4 @@
-{"song_name":"Yujo no Change","code":"m_002",
+{"song_name":"Yujo no Change",
 "difficulty":3,"live_icon":"l_jacket_002.png",
 "rank_info":[
 {"rank":5,"rank_min":0,"rank_max":29171},

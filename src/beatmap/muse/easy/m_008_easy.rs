@@ -1,4 +1,4 @@
-{"song_name":"Aishiteru Banzai!","code":"m_008",
+{"song_name":"Aishiteru Banzai!",
 "difficulty":1,"live_icon":"l_jacket_014.png",
 "rank_info":[
 {"rank":5,"rank_min":0,"rank_max":8729},

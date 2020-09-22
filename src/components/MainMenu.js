@@ -1,10 +1,14 @@
-import React from 'react';
+import React, { useState } from 'react';
 import groupLogo from '../pictures/group-logo/groupLogo';
 import attributeLogo from '../pictures/attribute/attributeLogo';
+import arrow from '../svg/up-arrow.svg';
+import fullscreenLogo from '../svg/fullscreen.svg';
 
 import Song from './Song';
 
-function MainMenu({ state, handleGroup, toggleAutoPlay, setSong }) {
+function MainMenu({ state, handleGroup, toggleAutoPlay, setSong, fullScreen }) {
+  const [isShown, setIsShown] = useState(false);
+
   const {
     group,
     difficulty,
@@ -55,6 +59,9 @@ function MainMenu({ state, handleGroup, toggleAutoPlay, setSong }) {
   return (
     <div className="MainMenu">
       <h1>Circle Animation!</h1>
+      <button className="fullscreen" onClick={fullScreen}>
+        <img src={fullscreenLogo} alt="fullscreen logo" /> Set Full Screen
+      </button>
       <form action="">
         <div className="select-group">
           <label htmlFor="group">Select a group: </label>
@@ -97,7 +104,7 @@ function MainMenu({ state, handleGroup, toggleAutoPlay, setSong }) {
         <div className="scroll-group">
           <p>Autoplay:</p>
           <div className="auto-play-radio">
-            <label htmlFor="true">True</label>
+            <label htmlFor="true">On</label>
             <input
               type="radio"
               name="autoplay"
@@ -105,7 +112,7 @@ function MainMenu({ state, handleGroup, toggleAutoPlay, setSong }) {
               onChange={toggleAutoPlay}
               checked={isAutoPlay}
             />
-            <label htmlFor="false">False</label>
+            <label htmlFor="false">Off</label>
             <input
               type="radio"
               name="autoplay"
@@ -115,7 +122,10 @@ function MainMenu({ state, handleGroup, toggleAutoPlay, setSong }) {
             />
           </div>
 
-          <label htmlFor="note-speed">Note Speed:</label>
+          <label htmlFor="note-speed">
+            Note Speed <sub className="speed-tip">(Tip: Higher is slower)</sub>{' '}
+            :
+          </label>
           <input
             type="range"
             id="note-speed"
@@ -127,11 +137,10 @@ function MainMenu({ state, handleGroup, toggleAutoPlay, setSong }) {
             onChange={handleGroup}
             className="slider"
           />
-          <span>{speed}</span>
 
-          <p>Set Volume:</p>
+          <p>Set Volume</p>
           <div className="volume">
-            <label htmlFor="music-volume">Music Volume</label>
+            <label htmlFor="music-volume">Music Volume: </label>
             <input
               type="range"
               name="musicVolume"
@@ -143,11 +152,10 @@ function MainMenu({ state, handleGroup, toggleAutoPlay, setSong }) {
               onChange={handleGroup}
               className="slider"
             />
-            <span>{musicVolume}</span>
 
             <br />
 
-            <label htmlFor="tap-volume">Tap Volume</label>
+            <label htmlFor="tap-volume">Tap Volume: </label>
             <input
               type="range"
               name="tapVolume"
@@ -159,12 +167,26 @@ function MainMenu({ state, handleGroup, toggleAutoPlay, setSong }) {
               onChange={handleGroup}
               className="slider"
             />
-            <span>{tapVolume}</span>
           </div>
         </div>
       </form>
-      <div className="song-list">
+      <div
+        className="song-list"
+        style={{
+          opacity: isShown ? '1' : '0.8',
+        }}
+      >
         <div className="filter-logos">
+          <button onClick={() => setIsShown(!isShown)}>
+            <img
+              src={arrow}
+              alt="arrow"
+              style={{
+                transform: isShown ? 'rotate(180deg)' : 'rotate(0deg)',
+              }}
+            />
+            Song List
+          </button>
           <img
             className="groupImg"
             src={groupImgSrcObj[0].logo}
@@ -175,12 +197,20 @@ function MainMenu({ state, handleGroup, toggleAutoPlay, setSong }) {
             src={attributeImgSrcObj[0].logo}
             alt={attributeImgSrcObj[0].name}
           />
+
+          <div className="scroll-group-info">
+            <span>Note Speed: {speed}</span>
+            <span>Music Volume: {musicVolume}</span>
+            <span>Tap Volume: {tapVolume}</span>
+          </div>
         </div>
-        {filteredBeatmaps.length > 0
-          ? filteredBeatmaps[0].map((song) => (
-              <Song song={song} key={song.code} setSong={setSong} />
-            ))
-          : 'Loading'}
+        <div className="song-arr" style={{ height: isShown ? '80vh' : '20vh' }}>
+          {filteredBeatmaps.length > 0
+            ? filteredBeatmaps[0].map((song) => (
+                <Song song={song} key={song.code} setSong={setSong} />
+              ))
+            : 'Loading'}
+        </div>
       </div>
     </div>
   );

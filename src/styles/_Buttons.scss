@@ -1,12 +1,12 @@
 .indiv-button {
-  width: 95px;
-  height: 95px;
+  width: 70px;
+  height: 70px;
   border-radius: 50%;
   border: 5px solid black;
   outline: none;
   position: absolute;
   top: 10vh;
-  left: calc(50% - (95px / 2));
+  left: calc(50% - (70px / 2));
 }
 
 @for $num from 1 through 9 {

@@ -32,8 +32,7 @@ export default class Game extends Component {
   }
 
   componentWillUnmount() {
-    let audio = this.audioRef.current;
-    audio.pause();
+    this.handleEnd();
     clearInterval(this.state.interval);
   }
 
@@ -47,24 +46,26 @@ export default class Game extends Component {
       playing,
     } = this.state;
     const { beatmapSrc, speed } = this.props.state;
-    let currentNote = beatmapSrc.song_info[0].notes[index];
-    if (beatmapSrc.song_info[0].notes[index]) {
-      currentNote = beatmapSrc.song_info[0].notes[index];
-    }
-    if (
-      currentNote.timing_sec - (0.25 + speed) < time &&
-      index < beatmapSrc.song_info[0].notes.length - 1 &&
-      playing
-    ) {
-      this.setState({
-        notesArray: [...notesArray, currentNote],
-        currentNotes: [...currentNotes, currentNote],
-        index: index + 1,
-      });
-    }
 
-    if (time - currentTime > 0.3) {
-      this.audioRef.current.currentTime = time;
+    if (beatmapSrc !== null) {
+      let currentNote = beatmapSrc.song_info[0].notes[index];
+      if (beatmapSrc.song_info[0].notes[index]) {
+        currentNote = beatmapSrc.song_info[0].notes[index];
+      }
+      if (
+        currentNote.timing_sec - (0.25 + speed) < time &&
+        index < beatmapSrc.song_info[0].notes.length - 1 &&
+        playing
+      ) {
+        this.setState({
+          notesArray: [...notesArray, currentNote],
+          currentNotes: [...currentNotes, currentNote],
+          index: index + 1,
+        });
+      }
+      if (time - currentTime > 0.3) {
+        this.audioRef.current.currentTime = time;
+      }
     }
   }
 
@@ -215,6 +216,7 @@ export default class Game extends Component {
 
   handleEnd = (e) => {
     clearInterval(this.state.interval);
+    this.audioRef.current.pause();
     this.audioRef.current.currentTime = 0;
     this.setState({
       animationPlayState: 'paused',
@@ -247,7 +249,13 @@ export default class Game extends Component {
       isBurgerShown,
     } = this.state;
 
-    const { speed, isAutoPlay, musicSrc, songAttribute } = this.props.state;
+    const {
+      speed,
+      isAutoPlay,
+      musicSrc,
+      songAttribute,
+      beatmapSrc,
+    } = this.props.state;
 
     let tapRefs = [this.perfectTapSFX, this.goodTapSFX, this.badTapSFX];
 
@@ -336,6 +344,7 @@ export default class Game extends Component {
           handleEnd={this.handleEnd}
           isBurgerShown={isBurgerShown}
           playing={playing}
+          beatmapSrc={beatmapSrc}
         />
       </div>
     );

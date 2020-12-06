@@ -17,9 +17,132 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
 }
 
+.error-page {
+  background-color: #1d2025;
+  color: white;
+  height: 90vh;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.error-page p {
+  margin: auto;
+}
+
+.app-header {
+  background-color: #262a31;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding: 10px 20px;
+  height: 10vh;
+  color: white;
+}
+
+.app-header a,
+.app-header button {
+  text-decoration: none;
+  list-style: none;
+  color: white;
+}
+
+.app-header button {
+  background-color: rgba(0, 0, 0, 0);
+  border: none;
+  font-size: 100%;
+  font-family: inherit;
+}
+
+.app-header button:hover {
+  cursor: pointer;
+}
+
+.app-header nav ul {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  list-style: none;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+}
+
+.app-header nav ul li {
+  margin: 0 10px;
+}
+
+.homepage {
+  background-color: #1d2025;
+  color: white;
+  height: 90vh;
+}
+
+.user-auth {
+  background-color: #31363f;
+  height: 90vh;
+  color: white;
+}
+
+.user-auth form {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  width: 40%;
+  height: 40%;
+  background-color: #1d2025;
+  position: relative;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+}
+
+.user-auth form button {
+  padding: 2px 10px;
+}
+
+.user-auth input[type='text'] {
+  outline: none;
+}
+
+.error-Auth {
+  color: #f13636;
+  font-size: 12px;
+}
+
+.user-cred {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
 .MainMenu {
-  min-height: 100vh;
+  min-height: 90vh;
   overflow: auto;
+  position: relative;
 }
 
 .MainMenu h1 {
@@ -27,11 +150,23 @@ code {
   margin-top: 5vh;
 }
 
+.MainMenu form {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin-top: 20px;
+}
+
 .MainMenu:before {
   content: '';
   position: absolute;
   width: 100%;
-  height: 100%;
+  height: 90%;
   z-index: -1;
   background: url("../pictures/backgrounds/menuBG.jpg");
   background-position: center;
@@ -69,18 +204,6 @@ code {
 
 .speed-tip {
   font-size: 11px;
-}
-
-form {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -ms-flex-pack: distribute;
-      justify-content: space-around;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  margin-top: 20px;
 }
 
 .auto-play-radio label,
@@ -191,7 +314,8 @@ input[type='range'] {
   text-align: center;
 }
 
-.indiv-song button {
+.indiv-song button,
+.indiv-song a {
   padding: 5px 20px;
   margin-left: 10px;
   border-radius: 20px;
@@ -202,9 +326,11 @@ input[type='range'] {
   font-family: 'Poppins', sans-serif;
   -webkit-transition: all 0.25s ease;
   transition: all 0.25s ease;
+  text-decoration: none;
 }
 
-.indiv-song button:hover {
+.indiv-song button:hover,
+.indiv-song a:hover {
   background-color: #1bb588;
 }
 
@@ -407,22 +533,31 @@ input[type='range'] {
   margin-top: 5px;
 }
 
-.GameButtons button {
+.GameButtons button,
+.GameButtons a {
   padding: 5px 10px;
   border-radius: 5px;
   cursor: pointer;
   font-family: 'Poppins', sans-serif;
   background-color: rgba(255, 255, 255, 0.5);
+  text-decoration: none;
+  color: black;
+  font-size: 13px;
+  text-align: center;
+  -webkit-transition: all 0.25s ease;
+  transition: all 0.25s ease;
 }
 
-.GameButtons button img {
+.GameButtons button img,
+.GameButtons a img {
   width: 15px;
   -webkit-transition: all 0.25s ease;
   transition: all 0.25s ease;
   vertical-align: middle;
 }
 
-.GameButtons button:hover {
+.GameButtons button:hover,
+.GameButtons a:hover {
   background-color: white;
 }
 

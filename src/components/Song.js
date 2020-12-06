@@ -1,4 +1,6 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+
 import attributeLogo from '../pictures/attribute/attributeLogo';
 
 function Song({ song, setSong }) {
@@ -16,7 +18,10 @@ function Song({ song, setSong }) {
         <h5>Difficulty: {diff[song.difficulty]}</h5>
         <h5>Max Combo: {song.song_info[0].notes.length}</h5>
       </div>
-      <button onClick={(e) => setSong(e, song)}>Play!</button>
+      <Link to="/game" onClick={(e) => setSong(e, song)}>
+        Play!
+      </Link>
+      {/* <button onClick={(e) => setSong(e, song)}>Play!</button> */}
     </div>
   );
 }

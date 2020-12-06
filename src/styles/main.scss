@@ -21,6 +21,10 @@ code {
     monospace;
 }
 
+@import 'ErrorPage';
+@import 'Header';
+@import 'Homepage';
+@import 'UserAuth';
 @import 'MainMenu';
 @import 'Song';
 @import 'Game';

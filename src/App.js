@@ -1,10 +1,15 @@
 import React, { Component } from 'react';
+import { Switch, Route, Redirect, withRouter } from 'react-router-dom';
 
 import beatmap from './beatmap/beatmap';
 import music from './music/music';
 
+import Header from './components/Header';
+import Homepage from './components/Homepage';
+import UserAuth from './components/UserAuth';
 import Game from './components/Game';
 import MainMenu from './components/MainMenu';
+import ErrorPage from './components/ErrorPage';
 
 class App extends Component {
   state = {
@@ -20,12 +25,28 @@ class App extends Component {
     difficulty: 1,
     onMainMenu: true,
     beatmapArr: {},
+    username: '',
+    isAuth: false,
   };
 
   componentDidMount() {
-    setTimeout(() => {
-      this.setState({ beatmapArr: beatmap });
-    }, 1000);
+    let state = localStorage.getItem('state');
+    if (state) {
+      this.setState(JSON.parse(state));
+    } else {
+      setTimeout(() => {
+        this.setState({ beatmapArr: beatmap });
+      }, 1000);
+    }
+  }
+
+  componentDidUpdate() {
+    let state = JSON.stringify(this.state);
+    localStorage.setItem('state', state);
+    const { isAuth, username } = this.state;
+    if (!isAuth && !username) {
+      localStorage.removeItem('state');
+    }
   }
 
   fullScreen = (e) => {
@@ -67,7 +88,6 @@ class App extends Component {
   };
 
   setSong = (e, song) => {
-    e.preventDefault();
     let beatmapSrc = song;
     let songAttribute = beatmapSrc.song_info[0].notes[0].notes_attribute;
     this.setState({
@@ -78,27 +98,59 @@ class App extends Component {
     });
   };
 
-  checklog = (e) => {
-    console.log(beatmap.muse.normal[19].code);
+  login = (username) => {
+    this.setState({ username, isAuth: true });
   };
+
+  logout = () => {
+    this.setState({ username: '', isAuth: false });
+  };
+
+  checkAuth = () => {
+    let state = JSON.parse(localStorage.getItem('state'));
+    return state ? state.isAuth : false;
+  };
+
   render() {
-    const { onMainMenu } = this.state;
+    const { isAuth, username } = this.state;
     return (
       <div className="App" tabIndex={-1}>
-        {onMainMenu ? (
-          <MainMenu
-            state={this.state}
-            handleGroup={this.handleGroup}
-            toggleAutoPlay={this.toggleAutoPlay}
-            setSong={this.setSong}
-            fullScreen={this.fullScreen}
-          />
+        {this.props.location.pathname !== '/game' ? (
+          <Header isAuth={isAuth} logout={this.logout} username={username} />
         ) : (
-          <Game state={this.state} returnMenu={this.returnMenu} />
+          <></>
         )}
+        <Switch>
+          <Route exact path="/">
+            <Homepage isAuth={isAuth} />
+          </Route>
+          <Route path="/login">
+            <UserAuth login={this.login} />
+          </Route>
+          <Route path="/register">
+            <UserAuth login={this.login} />
+          </Route>
+          <Route path="/menu">
+            <MainMenu
+              state={this.state}
+              handleGroup={this.handleGroup}
+              toggleAutoPlay={this.toggleAutoPlay}
+              setSong={this.setSong}
+              fullScreen={this.fullScreen}
+            />
+          </Route>
+          <Route path="/game">
+            {this.checkAuth() ? (
+              <Game state={this.state} returnMenu={this.returnMenu} />
+            ) : (
+              <Redirect to="/" />
+            )}
+          </Route>
+          <Route path="*" component={ErrorPage} />
+        </Switch>
       </div>
     );
   }
 }
 
-export default App;
+export default withRouter(App);

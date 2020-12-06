@@ -75,12 +75,18 @@
   margin-right: 5px;
   margin-top: 5px;
 
-  button {
+  button,
+  a {
     padding: 5px 10px;
     border-radius: 5px;
     cursor: pointer;
     font-family: 'Poppins', sans-serif;
     background-color: rgba(255, 255, 255, 0.5);
+    text-decoration: none;
+    color: black;
+    font-size: 13px;
+    text-align: center;
+    transition: all 0.25s ease;
 
     img {
       width: 15px;

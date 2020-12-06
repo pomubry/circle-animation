@@ -1,4 +1,6 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+
 import playIcon from '../svg/playIcon.svg';
 import pauseIcon from '../svg/pause.svg';
 import upArrowIcon from '../svg/up-arrow.svg';
@@ -12,10 +14,15 @@ function GameButtons({
   handleEnd,
   isBurgerShown,
   playing,
+  beatmapSrc,
 }) {
   return (
     <div className="GameButtons">
-      <button className="play" onClick={handlePlayAudio}>
+      <button
+        className="play"
+        onClick={handlePlayAudio}
+        disabled={beatmapSrc === null}
+      >
         {playing ? (
           <>
             <img src={pauseIcon} alt="pause icon" /> Pause
@@ -26,7 +33,7 @@ function GameButtons({
           </>
         )}
       </button>
-      <button onClick={handleBurger}>
+      <button onClick={handleBurger} disabled={beatmapSrc === null}>
         <img
           src={upArrowIcon}
           alt="Arrow svg"
@@ -41,10 +48,10 @@ function GameButtons({
           transform: isBurgerShown ? 'scaleY(1)' : 'scaleY(0)',
         }}
       >
-        <button onClick={returnMenu}>
+        <Link onClick={returnMenu} to="/menu">
           <img src={homeIcon} alt="home" />
           <br /> Main Menu
-        </button>
+        </Link>
         <button onClick={handleEnd}>
           <img src={returnIcon} alt="reset" />
           <br /> Reset

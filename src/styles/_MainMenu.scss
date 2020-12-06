@@ -1,10 +1,18 @@
 .MainMenu {
-  min-height: 100vh;
+  min-height: 90vh;
   overflow: auto;
+  position: relative;
 
   h1 {
     text-align: center;
     margin-top: 5vh;
+  }
+
+  form {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-top: 20px;
   }
 }
 
@@ -12,7 +20,7 @@
   content: '';
   position: absolute;
   width: 100%;
-  height: 100%;
+  height: 90%;
   z-index: -1;
   background: url('../pictures/backgrounds/menuBG.jpg');
   background-position: center;
@@ -47,13 +55,6 @@
 
 .speed-tip {
   font-size: 11px;
-}
-
-form {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  margin-top: 20px;
 }
 
 .auto-play-radio {

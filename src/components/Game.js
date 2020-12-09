@@ -16,6 +16,7 @@ export default class Game extends Component {
       currentNotes: [],
       index: 0,
       combo: 0,
+      highestCombo: 0,
       playing: false,
       currentTime: 0,
       time: 0,
@@ -32,8 +33,11 @@ export default class Game extends Component {
   }
 
   componentWillUnmount() {
-    this.handleEnd();
+    // this.handleEnd();
+    // clearInterval(this.state.interval);
     clearInterval(this.state.interval);
+    this.audioRef.current.pause();
+    this.audioRef.current.currentTime = 0;
   }
 
   componentDidUpdate() {
@@ -44,6 +48,8 @@ export default class Game extends Component {
       notesArray,
       currentNotes,
       playing,
+      combo,
+      highestCombo,
     } = this.state;
     const { beatmapSrc, speed } = this.props.state;
 
@@ -65,6 +71,9 @@ export default class Game extends Component {
       }
       if (time - currentTime > 0.3) {
         this.audioRef.current.currentTime = time;
+      }
+      if (combo > highestCombo) {
+        this.setState({ highestCombo: combo });
       }
     }
   }
@@ -218,6 +227,26 @@ export default class Game extends Component {
     clearInterval(this.state.interval);
     this.audioRef.current.pause();
     this.audioRef.current.currentTime = 0;
+
+    if (e.target.nodeName === 'AUDIO') {
+      let beatmap = this.props.state.beatmapSrc.code;
+      let { highestCombo } = this.state;
+      fetch('/api/update-combo', {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ beatmap, highestCombo }),
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.message) {
+            console.log(data.message);
+          }
+        })
+        .catch((err) => console.log(err));
+    }
+
     this.setState({
       animationPlayState: 'paused',
       notesArray: [],
@@ -335,7 +364,11 @@ export default class Game extends Component {
           Late!
         </p>
 
-        <Buttons handleTap={this.handleTap} isAutoPlay={isAutoPlay} />
+        <Buttons
+          handleTap={this.handleTap}
+          isAutoPlay={isAutoPlay}
+          attribColor={attribColor}
+        />
 
         <GameButtons
           handlePlayAudio={this.handlePlayAudio}

@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 import playIcon from '../svg/playIcon.svg';
 import pauseIcon from '../svg/pause.svg';
-import upArrowIcon from '../svg/up-arrow.svg';
+import { FaArrowCircleUp } from 'react-icons/fa';
 import homeIcon from '../svg/home.svg';
 import returnIcon from '../svg/return.svg';
 
@@ -34,13 +34,7 @@ function GameButtons({
         )}
       </button>
       <button onClick={handleBurger} disabled={beatmapSrc === null}>
-        <img
-          src={upArrowIcon}
-          alt="Arrow svg"
-          style={{
-            transform: isBurgerShown ? 'rotate(180deg)' : 'rotate(0deg)',
-          }}
-        ></img>
+        <FaArrowCircleUp />
       </button>
       <div
         className="otherBtn"

@@ -3,6 +3,7 @@ import { Link, useHistory } from 'react-router-dom';
 
 function Header({ isAuth, logout, username }) {
   const history = useHistory();
+  const { pathname } = history.location;
 
   const usernameUp = () => {
     if (username) {
@@ -46,10 +47,20 @@ function Header({ isAuth, logout, username }) {
     <>
       <ul>
         <li>
-          <Link to="/login">Login</Link>
+          <Link
+            to="/login"
+            className={pathname === '/login' ? 'active-link' : ''}
+          >
+            Login
+          </Link>
         </li>
         <li>
-          <Link to="/register">Register</Link>
+          <Link
+            to="/register"
+            className={pathname === '/register' ? 'active-link' : ''}
+          >
+            Register
+          </Link>
         </li>
       </ul>
     </>

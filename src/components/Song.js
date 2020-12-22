@@ -21,7 +21,6 @@ function Song({ song, setSong }) {
       <Link to="/game" onClick={(e) => setSong(e, song)}>
         Play!
       </Link>
-      {/* <button onClick={(e) => setSong(e, song)}>Play!</button> */}
     </div>
   );
 }

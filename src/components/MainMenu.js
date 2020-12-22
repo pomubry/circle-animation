@@ -1,14 +1,12 @@
-import React, { useState } from 'react';
+import React from 'react';
 import groupLogo from '../pictures/group-logo/groupLogo';
 import attributeLogo from '../pictures/attribute/attributeLogo';
-import arrow from '../svg/up-arrow.svg';
-import fullscreenLogo from '../svg/fullscreen.svg';
+import { BsArrowsFullscreen } from 'react-icons/bs';
+import { RiArrowUpDownFill } from 'react-icons/ri';
 
 import Song from './Song';
 
 function MainMenu({ state, handleGroup, toggleAutoPlay, setSong, fullScreen }) {
-  const [isShown, setIsShown] = useState(false);
-
   const {
     group,
     difficulty,
@@ -60,51 +58,70 @@ function MainMenu({ state, handleGroup, toggleAutoPlay, setSong, fullScreen }) {
     <div className="MainMenu">
       <h1>Circle Animation!</h1>
       <button className="fullscreen" onClick={fullScreen}>
-        <img src={fullscreenLogo} alt="fullscreen logo" /> Set Full Screen
+        <BsArrowsFullscreen /> <span>Set Full Screen</span>
       </button>
       <form action="">
-        <div className="select-group">
-          <label htmlFor="group">Select a group: </label>
-          <select name="group" id="group" value={group} onChange={handleGroup}>
-            <option value="muse">Muse</option>
-            <option value="aqours">Aqours</option>
-            <option value="nijigasaki">Nijigasaki</option>
-          </select>
-
-          <br />
-
-          <label htmlFor="difficulty">Select Difficulty: </label>
-          <select
-            name="difficulty"
-            id="difficulty"
-            value={difficulty}
-            onChange={handleGroup}
-          >
-            <option value={1}>Easy</option>
-            <option value={2}>Normal</option>
-            <option value={3}>Hard</option>
-          </select>
-
-          <br />
-
-          <label htmlFor="attribute">Select an attribute: </label>
-          <select
-            name="attribute"
-            id="attribute"
-            value={attribute}
-            onChange={handleGroup}
-          >
-            <option value={0}>All</option>
-            <option value={1}>Smile</option>
-            <option value={2}>Pure</option>
-            <option value={3}>Cool</option>
-          </select>
+        <div className="group">
+          <div className="indiv-select">
+            <label htmlFor="group">Group: </label>
+            <div className="select-div">
+              <select
+                name="group"
+                id="group"
+                value={group}
+                onChange={handleGroup}
+              >
+                <option value="muse">Muse</option>
+                <option value="aqours">Aqours</option>
+                <option value="nijigasaki">Nijigasaki</option>
+              </select>
+              <RiArrowUpDownFill />
+            </div>
+          </div>
+          <div className="indiv-select">
+            <label htmlFor="difficulty">Difficulty: </label>
+            <div className="select-div">
+              <select
+                name="difficulty"
+                id="difficulty"
+                value={difficulty}
+                onChange={handleGroup}
+              >
+                <option value={1}>Easy</option>
+                <option value={2}>Normal</option>
+                <option value={3}>Hard</option>
+              </select>
+              <RiArrowUpDownFill />
+            </div>
+          </div>
+          <div className="indiv-select">
+            <label htmlFor="attribute">Attribute: </label>
+            <div className="select-div">
+              <select
+                name="attribute"
+                id="attribute"
+                value={attribute}
+                onChange={handleGroup}
+              >
+                <option value={0}>All</option>
+                <option value={1}>Smile</option>
+                <option value={2}>Pure</option>
+                <option value={3}>Cool</option>
+              </select>
+              <RiArrowUpDownFill />
+            </div>
+          </div>
         </div>
 
-        <div className="scroll-group">
+        <div className="group half-group">
           <p>Autoplay:</p>
           <div className="auto-play-radio">
-            <label htmlFor="true">On</label>
+            <label
+              htmlFor="true"
+              className={`radio-label${isAutoPlay ? ' radio-selected' : ''}`}
+            >
+              On
+            </label>
             <input
               type="radio"
               name="autoplay"
@@ -112,7 +129,12 @@ function MainMenu({ state, handleGroup, toggleAutoPlay, setSong, fullScreen }) {
               onChange={toggleAutoPlay}
               checked={isAutoPlay}
             />
-            <label htmlFor="false">Off</label>
+            <label
+              htmlFor="false"
+              className={`radio-label${!isAutoPlay ? ' radio-selected' : ''}`}
+            >
+              Off
+            </label>
             <input
               type="radio"
               name="autoplay"
@@ -121,7 +143,6 @@ function MainMenu({ state, handleGroup, toggleAutoPlay, setSong, fullScreen }) {
               checked={!isAutoPlay}
             />
           </div>
-
           <label htmlFor="note-speed">
             Note Speed <sub className="speed-tip">(Tip: Higher is slower)</sub>{' '}
             :
@@ -137,56 +158,39 @@ function MainMenu({ state, handleGroup, toggleAutoPlay, setSong, fullScreen }) {
             onChange={handleGroup}
             className="slider"
           />
+        </div>
 
+        <div className="group half-group">
           <p>Set Volume</p>
-          <div className="volume">
-            <label htmlFor="music-volume">Music Volume: </label>
-            <input
-              type="range"
-              name="musicVolume"
-              id="music-volume"
-              min="0"
-              max="1"
-              step="0.1"
-              value={`${musicVolume}`}
-              onChange={handleGroup}
-              className="slider"
-            />
+          <label htmlFor="music-volume">Music: </label>
+          <input
+            type="range"
+            name="musicVolume"
+            id="music-volume"
+            min="0"
+            max="1"
+            step="0.1"
+            value={`${musicVolume}`}
+            onChange={handleGroup}
+            className="slider"
+          />
 
-            <br />
-
-            <label htmlFor="tap-volume">Tap Volume: </label>
-            <input
-              type="range"
-              name="tapVolume"
-              id="tap-volume"
-              min="0"
-              max="1"
-              step="0.1"
-              value={`${tapVolume}`}
-              onChange={handleGroup}
-              className="slider"
-            />
-          </div>
+          <label htmlFor="tap-volume">Tap SFX: </label>
+          <input
+            type="range"
+            name="tapVolume"
+            id="tap-volume"
+            min="0"
+            max="1"
+            step="0.1"
+            value={`${tapVolume}`}
+            onChange={handleGroup}
+            className="slider"
+          />
         </div>
       </form>
-      <div
-        className="song-list"
-        style={{
-          opacity: isShown ? '1' : '0.8',
-        }}
-      >
+      <div className="song-list">
         <div className="filter-logos">
-          <button onClick={() => setIsShown(!isShown)}>
-            <img
-              src={arrow}
-              alt="arrow"
-              style={{
-                transform: isShown ? 'rotate(180deg)' : 'rotate(0deg)',
-              }}
-            />
-            Song List
-          </button>
           <img
             className="groupImg"
             src={groupImgSrcObj[0].logo}
@@ -204,7 +208,7 @@ function MainMenu({ state, handleGroup, toggleAutoPlay, setSong, fullScreen }) {
             <span>Tap Volume: {tapVolume}</span>
           </div>
         </div>
-        <div className="song-arr" style={{ height: isShown ? '80vh' : '20vh' }}>
+        <div className="song-arr">
           {filteredBeatmaps.length > 0
             ? filteredBeatmaps[0].map((song) => (
                 <Song song={song} key={song.code} setSong={setSong} />

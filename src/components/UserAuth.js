@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
+import { FiUserCheck, FiUnlock, FiLogIn } from 'react-icons/fi';
+import Loading from './Loading';
 
 function UserAuth({ login }) {
   let history = useHistory();
@@ -9,6 +11,7 @@ function UserAuth({ login }) {
   const [password, setPassword] = useState('');
   const [usernameError, setUsernameError] = useState('');
   const [passwordError, setPasswordError] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     setUsername('');
@@ -19,6 +22,7 @@ function UserAuth({ login }) {
 
   const submitAuth = (e) => {
     e.preventDefault();
+    setIsLoading(true);
     let body = { username, password };
 
     fetch(`/api${location.pathname}`, {
@@ -32,14 +36,19 @@ function UserAuth({ login }) {
       .then((data) => {
         if (data.message) {
           login(data.message);
+          setIsLoading(false);
           history.push('/menu');
         } else {
           const { username, password } = data.error;
+          setIsLoading(false);
           setUsernameError(username);
           setPasswordError(password);
         }
       })
-      .catch((error) => console.log(error));
+      .catch((error) => {
+        setIsLoading(false);
+        console.log('Something went wrong');
+      });
   };
 
   const handleChange = (e) => {
@@ -53,11 +62,13 @@ function UserAuth({ login }) {
 
   return (
     <div className="user-auth">
+      <Loading isLoading={isLoading} />
       <form onSubmit={submitAuth}>
         <p>{location.pathname === '/login' ? 'Login ' : 'Registration '}Form</p>
         <div className="user-cred">
-          <div>
-            <label htmlFor="username">Username: </label>
+          <div className="input-div">
+            <FiUserCheck />
+            <label htmlFor="username">Username:</label>
             <input
               type="text"
               name="username"
@@ -69,8 +80,9 @@ function UserAuth({ login }) {
           <div className="error-Auth">{usernameError}</div>
         </div>
         <div className="user-cred">
-          <div>
-            <label htmlFor="password">Password: </label>
+          <div className="input-div">
+            <FiUnlock />
+            <label htmlFor="password">Password:</label>
             <input
               type="text"
               name="password"
@@ -82,6 +94,7 @@ function UserAuth({ login }) {
           <div className="error-Auth">{passwordError}</div>
         </div>
         <button>
+          <FiLogIn />
           {location.pathname === '/login' ? 'Login ' : 'Register '}
         </button>
       </form>

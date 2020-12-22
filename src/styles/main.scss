@@ -6,6 +6,10 @@
   box-sizing: border-box;
 }
 
+html {
+  height: 100%;
+}
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -16,11 +20,21 @@ body {
   font-family: 'Poppins', sans-serif;
 }
 
+svg {
+  margin-right: 5px;
+  width: 20px;
+  height: 20px;
+}
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+$light-gray: rgb(38, 42, 49);
+$dark-gray: rgb(29, 32, 37);
+$shio: #1bb588;
 
+@import 'Loading';
 @import 'ErrorPage';
 @import 'Header';
 @import 'Homepage';

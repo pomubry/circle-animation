@@ -7,7 +7,7 @@ $cool: rgba(115, 201, 243, 1);
   color: white;
   padding: 5px;
   display: grid;
-  grid-template-columns: auto 1fr auto auto;
+  grid-template-columns: auto 5fr 1fr auto;
   align-items: center;
   border-radius: 20px;
 
@@ -19,21 +19,20 @@ $cool: rgba(115, 201, 243, 1);
     text-align: center;
   }
 
-  button,
   a {
     padding: 5px 20px;
     margin-left: 10px;
     border-radius: 20px;
-    border: 2px solid #1bb588;
+    border: 2px solid $shio;
     cursor: pointer;
-    background-color: #2ae6ad;
+    background-color: $dark-gray;
     color: white;
     font-family: 'Poppins', sans-serif;
     transition: all 0.25s ease;
     text-decoration: none;
 
     &:hover {
-      background-color: #1bb588;
+      background-color: $shio;
     }
   }
 }
@@ -48,4 +47,30 @@ $cool: rgba(115, 201, 243, 1);
 
 .coolBG {
   background-color: $cool;
+}
+
+@media only screen and (max-width: 800px) {
+  .indiv-song {
+    img {
+      grid-area: attrib;
+    }
+
+    h2 {
+      grid-area: title;
+    }
+
+    .small-info {
+      grid-area: info;
+      text-align: center;
+    }
+
+    a {
+      grid-area: play;
+      margin-left: 0px;
+    }
+
+    grid-template-areas:
+      'title title title title'
+      'attrib info info play';
+  }
 }

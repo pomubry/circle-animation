@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
 import imgArr from '../pictures/backgrounds/Backgrounds';
 
 import musicNote from '../svg/musicNote.svg';
@@ -6,8 +7,9 @@ import musicNote from '../svg/musicNote.svg';
 import Buttons from './Buttons';
 import TapSFX from './TapSFX';
 import GameButtons from './GameButtons';
+import Loading from './Loading';
 
-export default class Game extends Component {
+class Game extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -24,6 +26,7 @@ export default class Game extends Component {
       fontSize: '0rem',
       randomImgIndex: 0,
       isBurgerShown: false,
+      isLoading: false,
     };
   }
 
@@ -229,8 +232,10 @@ export default class Game extends Component {
     this.audioRef.current.currentTime = 0;
 
     if (e.target.nodeName === 'AUDIO') {
+      this.setState({ isLoading: true });
       let beatmap = this.props.state.beatmapSrc.code;
       let { highestCombo } = this.state;
+
       fetch('/api/update-combo', {
         method: 'PUT',
         headers: {
@@ -242,9 +247,15 @@ export default class Game extends Component {
         .then((data) => {
           if (data.message) {
             console.log(data.message);
+            this.setState({ isLoading: false }, () =>
+              this.props.history.push('/menu')
+            );
           }
         })
-        .catch((err) => console.log(err));
+        .catch((err) => {
+          this.setState({ isLoading: false });
+          console.log(err);
+        });
     }
 
     this.setState({
@@ -276,6 +287,7 @@ export default class Game extends Component {
       randomImgIndex,
       playing,
       isBurgerShown,
+      isLoading,
     } = this.state;
 
     const {
@@ -337,6 +349,7 @@ export default class Game extends Component {
         }}
         tabIndex={-1}
       >
+        <Loading isLoading={isLoading} />;
         <audio
           src={musicSrc}
           preload="auto"
@@ -346,30 +359,24 @@ export default class Game extends Component {
         >
           Audio format is not supported
         </audio>
-
         <TapSFX tapRefs={tapRefs} />
-
         <div className="top-btn">
           <img src={musicNote} alt="Music Note Icon" />
         </div>
-
         <div className="notesContainer" ref={this.notesContainer}>
           {notes}
         </div>
-
         <p className="combo" style={color}>
           {combo > 0 ? `${combo} COMBO` : ''}
         </p>
         <p className="lateNote" style={{ fontSize }}>
           Late!
         </p>
-
         <Buttons
           handleTap={this.handleTap}
           isAutoPlay={isAutoPlay}
           attribColor={attribColor}
         />
-
         <GameButtons
           handlePlayAudio={this.handlePlayAudio}
           handleBurger={this.handleBurger}
@@ -383,3 +390,5 @@ export default class Game extends Component {
     );
   }
 }
+
+export default withRouter(Game);

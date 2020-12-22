@@ -1,11 +1,15 @@
 .app-header {
-  background-color: rgb(38, 42, 49);
+  background-color: $light-gray;
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 10px 20px;
   height: 10vh;
   color: white;
+
+  .active-link {
+    border-bottom: 3px solid $shio;
+  }
 
   a,
   button {
@@ -33,5 +37,11 @@
     li {
       margin: 0 10px;
     }
+  }
+}
+
+@media only screen and (max-width: 350px) {
+  .app-header {
+    font-size: 12px;
   }
 }

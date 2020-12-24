@@ -1,11 +1,8 @@
-import React from 'react';
 import { Link } from 'react-router-dom';
 
-import playIcon from '../svg/playIcon.svg';
-import pauseIcon from '../svg/pause.svg';
-import { FaArrowCircleUp } from 'react-icons/fa';
-import homeIcon from '../svg/home.svg';
-import returnIcon from '../svg/return.svg';
+import { FaArrowCircleUp, FaHome } from 'react-icons/fa';
+import { AiFillPlayCircle, AiFillPauseCircle } from 'react-icons/ai';
+import { BsArrowRepeat } from 'react-icons/bs';
 
 function GameButtons({
   handlePlayAudio,
@@ -23,18 +20,14 @@ function GameButtons({
         onClick={handlePlayAudio}
         disabled={beatmapSrc === null}
       >
-        {playing ? (
-          <>
-            <img src={pauseIcon} alt="pause icon" /> Pause
-          </>
-        ) : (
-          <>
-            <img src={playIcon} alt="play icon" /> Play
-          </>
-        )}
+        {playing ? <AiFillPauseCircle /> : <AiFillPlayCircle />}
       </button>
       <button onClick={handleBurger} disabled={beatmapSrc === null}>
-        <FaArrowCircleUp />
+        <FaArrowCircleUp
+          style={{
+            transform: `rotate(${isBurgerShown ? '0deg' : '180deg'})`,
+          }}
+        />
       </button>
       <div
         className="otherBtn"
@@ -43,11 +36,11 @@ function GameButtons({
         }}
       >
         <Link onClick={returnMenu} to="/menu">
-          <img src={homeIcon} alt="home" />
+          <FaHome />
           <br /> Main Menu
         </Link>
         <button onClick={handleEnd}>
-          <img src={returnIcon} alt="reset" />
+          <BsArrowRepeat />
           <br /> Reset
         </button>
       </div>

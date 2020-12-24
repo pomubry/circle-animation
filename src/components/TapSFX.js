@@ -1,4 +1,3 @@
-import React from 'react';
 import perfectTapSFX from '../tap-sfx/SE_306.ogg';
 import goodTapSFX from '../tap-sfx/SE_308.ogg';
 import badTapSFX from '../tap-sfx/SE_326.ogg';

@@ -41,6 +41,7 @@ code {
       -ms-flex-align: center;
           align-items: center;
   font-size: 18px;
+  color: white;
 }
 
 .loading-div svg {
@@ -100,6 +101,7 @@ code {
   text-decoration: none;
   list-style: none;
   color: white;
+  outline: none;
 }
 
 .app-header button {
@@ -395,7 +397,21 @@ code {
 input[type='range'] {
   cursor: pointer;
   border-radius: 8px;
-  height: 5px;
+  height: 8px;
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  background-color: #262a31;
+  border: 1px solid #1bb588;
+  outline: none;
+}
+
+input[type='range']::-webkit-slider-thumb {
+  background-color: #1bb588;
+  width: 8px;
+  height: 15px;
+  -webkit-appearance: none;
+          appearance: none;
 }
 
 .speed-tip {
@@ -577,8 +593,10 @@ input[type='range'] {
   pointer-events: none;
 }
 
-.top-btn img {
-  width: 70%;
+.top-btn svg {
+  width: 40px;
+  height: 40px;
+  color: #1d2025;
 }
 
 .smile {
@@ -730,21 +748,23 @@ input[type='range'] {
 .GameButtons button,
 .GameButtons a {
   padding: 5px 10px;
-  border-radius: 5px;
   cursor: pointer;
   font-family: 'Poppins', sans-serif;
-  background-color: rgba(255, 255, 255, 0.5);
+  background-color: #262a31;
+  border: none;
   text-decoration: none;
-  color: black;
+  outline: none;
+  color: white;
   font-size: 13px;
   text-align: center;
   -webkit-transition: all 0.25s ease;
   transition: all 0.25s ease;
 }
 
-.GameButtons button img,
-.GameButtons a img {
-  width: 15px;
+.GameButtons button svg,
+.GameButtons a svg {
+  margin-right: 0px;
+  color: white;
   -webkit-transition: all 0.25s ease;
   transition: all 0.25s ease;
   vertical-align: middle;
@@ -752,7 +772,7 @@ input[type='range'] {
 
 .GameButtons button:hover,
 .GameButtons a:hover {
-  background-color: white;
+  background-color: #262a31;
 }
 
 .combo {

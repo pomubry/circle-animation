@@ -1,4 +1,3 @@
-import React from 'react';
 import groupLogo from '../pictures/group-logo/groupLogo';
 import attributeLogo from '../pictures/attribute/attributeLogo';
 import { BsArrowsFullscreen } from 'react-icons/bs';

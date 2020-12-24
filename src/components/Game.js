@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
+import { Component, createRef } from 'react';
 import { withRouter } from 'react-router-dom';
 import imgArr from '../pictures/backgrounds/Backgrounds';
 
-import musicNote from '../svg/musicNote.svg';
+import { GiMusicalNotes } from 'react-icons/gi';
 
 import Buttons from './Buttons';
 import TapSFX from './TapSFX';
@@ -36,8 +36,6 @@ class Game extends Component {
   }
 
   componentWillUnmount() {
-    // this.handleEnd();
-    // clearInterval(this.state.interval);
     clearInterval(this.state.interval);
     this.audioRef.current.pause();
     this.audioRef.current.currentTime = 0;
@@ -271,11 +269,11 @@ class Game extends Component {
     });
   };
 
-  audioRef = React.createRef();
-  notesContainer = React.createRef();
-  perfectTapSFX = React.createRef();
-  goodTapSFX = React.createRef();
-  badTapSFX = React.createRef();
+  audioRef = createRef();
+  notesContainer = createRef();
+  perfectTapSFX = createRef();
+  goodTapSFX = createRef();
+  badTapSFX = createRef();
 
   render() {
     const {
@@ -360,8 +358,8 @@ class Game extends Component {
           Audio format is not supported
         </audio>
         <TapSFX tapRefs={tapRefs} />
-        <div className="top-btn">
-          <img src={musicNote} alt="Music Note Icon" />
+        <div className={`top-btn ${attribColor}`}>
+          <GiMusicalNotes />
         </div>
         <div className="notesContainer" ref={this.notesContainer}>
           {notes}

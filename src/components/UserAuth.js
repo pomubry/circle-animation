@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
 import { FiUserCheck, FiUnlock, FiLogIn } from 'react-icons/fi';
 import Loading from './Loading';
@@ -47,7 +47,7 @@ function UserAuth({ login }) {
       })
       .catch((error) => {
         setIsLoading(false);
-        console.log('Something went wrong');
+        alert('Cannot connect to the server');
       });
   };
 

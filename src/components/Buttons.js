@@ -1,5 +1,3 @@
-import React from 'react';
-
 function Buttons({ handleTap, isAutoPlay, attribColor }) {
   let color = [
     'radial-gradient(rgba(255,255,255,0.6), rgba(154,163,170,1))',

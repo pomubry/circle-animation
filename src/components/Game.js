@@ -248,6 +248,9 @@ class Game extends Component {
             this.setState({ isLoading: false }, () =>
               this.props.history.push('/menu')
             );
+          } else {
+            console.log('Something went wrong');
+            this.setState({ isLoading: false });
           }
         })
         .catch((err) => {

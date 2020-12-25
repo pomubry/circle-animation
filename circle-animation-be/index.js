@@ -16,14 +16,14 @@ const updateValidate = require('./validation/updateValidate');
 
 dotenv.config();
 
+const port = process.env.PORT || 3000;
+
 mongoose.connect(
   process.env.DB_CONNECT,
   { useNewUrlParser: true, useUnifiedTopology: true },
   () => {
     console.log('Connected to the Database');
-    app.listen(process.env.PORT_BE, () =>
-      console.log(`Listening to port ${process.env.PORT_BE}`)
-    );
+    app.listen(port, () => console.log(`Listening to port ${port}`));
   }
 );
 

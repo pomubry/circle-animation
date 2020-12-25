@@ -17,6 +17,7 @@
   "scripts": {
     "_start": "react-scripts start",
     "start":"node circle-animation-be/index.js",
+    "heroku-postbuild": "npm run build",
     "server": "cd circle-animation-be && npm run start",
     "dev": "concurrently \"npm run server\" \"npm run _start\"",
     "build": "react-scripts build",

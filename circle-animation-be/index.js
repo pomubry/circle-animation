@@ -32,8 +32,6 @@ app.use(cookieParser());
 
 const build = path.join(__dirname, '..', 'build');
 
-app.use(express.static(build));
-
 app.get('/api/users', (req, res) => {
   UserModel.find((error, doc) => {
     if (error) return res.json({ error });
@@ -170,4 +168,9 @@ app.put('/api/update-combo', async (req, res) => {
   } catch (error) {
     res.status(404).json({ error });
   }
+});
+
+app.use(express.static(build));
+app.get('*', (req, res) => {
+  res.sendFile(build);
 });

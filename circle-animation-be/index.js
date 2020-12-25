@@ -30,8 +30,6 @@ mongoose.connect(
 app.use(express.json());
 app.use(cookieParser());
 
-const build = path.join(__dirname, '..', 'build');
-
 app.get('/api/users', (req, res) => {
   UserModel.find((error, doc) => {
     if (error) return res.json({ error });
@@ -170,7 +168,7 @@ app.put('/api/update-combo', async (req, res) => {
   }
 });
 
-app.use(express.static(build));
-app.get('*', (req, res) => {
-  res.sendFile(build);
-});
+// const build = path.join(__dirname, '..', 'build');
+// if (process.env.NODE_ENV === 'production') {
+// app.use(express.static(build));
+// }

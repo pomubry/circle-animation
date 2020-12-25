@@ -5,6 +5,7 @@ const dotenv = require('dotenv');
 const bcrypt = require('bcrypt');
 const cookieParser = require('cookie-parser');
 const jwt = require('jsonwebtoken');
+const path = require('path');
 
 const registerValidate = require('./validation/registerValidate');
 const register = require('./routes/register');
@@ -28,6 +29,10 @@ mongoose.connect(
 
 app.use(express.json());
 app.use(cookieParser());
+
+const build = path.join(__dirname, '..', 'build');
+
+app.use(express.static(build));
 
 app.get('/api/users', (req, res) => {
   UserModel.find((error, doc) => {

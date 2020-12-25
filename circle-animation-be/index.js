@@ -168,7 +168,7 @@ app.put('/api/update-combo', async (req, res) => {
   }
 });
 
-// const build = path.join(__dirname, '..', 'build');
-// if (process.env.NODE_ENV === 'production') {
-// app.use(express.static(build));
-// }
+const build = path.join(__dirname, '..', 'build');
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static(build));
+}

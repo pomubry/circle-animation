@@ -18,7 +18,7 @@
     "_start": "react-scripts start",
     "start":"node circle-animation-be/index.js",
     "server": "cd circle-animation-be && npm run start",
-    "dev": "concurrently \"npm run server\" \"npm run start\"",
+    "dev": "concurrently \"npm run server\" \"npm run _start\"",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",

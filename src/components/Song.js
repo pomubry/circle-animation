@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 
 import attributeLogo from '../pictures/attribute/attributeLogo';
 
-function Song({ song, setSong }) {
+function Song({ song, setSong, userBeatmap }) {
   let attribute = song.song_info[0].notes[0].notes_attribute;
   let logo = attributeLogo.filter((attrib) => attrib.value === attribute);
   let diff = ['Placeholder', 'Easy', 'Normal', 'Hard'];
@@ -16,6 +16,11 @@ function Song({ song, setSong }) {
       <div className="small-info">
         <h5>Difficulty: {diff[song.difficulty]}</h5>
         <h5>Max Combo: {song.song_info[0].notes.length}</h5>
+        {userBeatmap ? (
+          <h5>Highest Combo: {userBeatmap[0].highestCombo}</h5>
+        ) : (
+          ''
+        )}
       </div>
       <Link to="/game" onClick={(e) => setSong(e, song)}>
         Play!

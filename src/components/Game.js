@@ -229,33 +229,38 @@ class Game extends Component {
     this.audioRef.current.pause();
     this.audioRef.current.currentTime = 0;
 
-    if (e.target.nodeName === 'AUDIO') {
+    if (e.target.nodeName === 'AUDIO' && !this.props.state.isAutoPlay) {
       this.setState({ isLoading: true });
-      let beatmap = this.props.state.beatmapSrc.code;
+      let { code, difficulty } = this.props.state.beatmapSrc;
       let { highestCombo } = this.state;
 
-      fetch('/api/update-combo', {
+      fetch('https://circle-animation-be.herokuapp.com/api/combo-update', {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ beatmap, highestCombo }),
+        body: JSON.stringify({
+          code,
+          difficulty,
+          highestCombo,
+        }),
       })
         .then((res) => res.json())
         .then((data) => {
           if (data.message) {
-            console.log(data.message);
-            this.setState({ isLoading: false }, () =>
-              this.props.history.push('/menu')
-            );
+            this.props.updateBeatmap(data.message.beatmap);
+            this.setState({ isLoading: false });
+            this.props.history.push('/menu');
           } else {
             console.log('Something went wrong');
             this.setState({ isLoading: false });
+            this.props.history.push('/menu');
           }
         })
         .catch((err) => {
-          this.setState({ isLoading: false });
           console.log(err);
+          this.setState({ isLoading: false });
+          this.props.history.push('/menu');
         });
     }
 
@@ -344,7 +349,7 @@ class Game extends Component {
     return (
       <div
         className="Game"
-        onKeyDown={this.handleTap}
+        onKeyDown={!isAutoPlay ? this.handleTap : ''}
         style={{
           backgroundImage: `url(${imgArr[randomImgIndex]})`,
         }}

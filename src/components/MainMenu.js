@@ -15,42 +15,85 @@ function MainMenu({ state, handleGroup, toggleAutoPlay, setSong, fullScreen }) {
     musicVolume,
     tapVolume,
     isAutoPlay,
+    beatmap,
   } = state;
+
   let groupImgSrcObj = groupLogo.filter((obj) => obj.name === group);
   let attributeImgSrcObj = attributeLogo.filter(
     (obj) => obj.value === attribute
   );
-  let filteredBeatmaps = [];
-  for (let groupName in beatmapArr) {
-    if (groupName === group) {
-      switch (difficulty) {
-        case 1:
-          filteredBeatmaps = filteredBeatmaps.concat([
-            beatmapArr[groupName].easy,
-          ]);
-          break;
-        case 2:
-          filteredBeatmaps = filteredBeatmaps.concat([
-            beatmapArr[groupName].normal,
-          ]);
-          break;
-        default:
-          filteredBeatmaps = filteredBeatmaps.concat([
-            beatmapArr[groupName].hard,
-          ]);
-          break;
-      }
-    }
 
-    if (filteredBeatmaps.length > 0) {
-      filteredBeatmaps = [
-        filteredBeatmaps[0].filter((obj) => {
-          return attribute !== 0
-            ? obj.song_info[0].notes[0].notes_attribute === attribute
-            : obj;
-        }),
-      ];
+  let filteredBeatmaps = [];
+  let userBeatmap = [];
+
+  if (beatmapArr.easy && beatmap.easy) {
+    switch (difficulty) {
+      case 3:
+        filteredBeatmaps = [...beatmapArr.hard];
+        userBeatmap = [...beatmap.hard];
+        break;
+      case 2:
+        filteredBeatmaps = [...beatmapArr.normal];
+        userBeatmap = [...beatmap.normal];
+        break;
+      default:
+        filteredBeatmaps = [...beatmapArr.easy];
+        userBeatmap = [...beatmap.easy];
+        break;
     }
+  }
+
+  switch (group) {
+    case 'nijigasaki':
+      filteredBeatmaps = [
+        ...filteredBeatmaps.filter(
+          (song) => song.info.song_info[0].member_category === 3
+        ),
+      ];
+      break;
+    case 'aqours':
+      filteredBeatmaps = [
+        ...filteredBeatmaps.filter(
+          (song) => song.info.song_info[0].member_category === 2
+        ),
+      ];
+      break;
+    default:
+      filteredBeatmaps = [
+        ...filteredBeatmaps.filter(
+          (song) => song.info.song_info[0].member_category === 1
+        ),
+      ];
+      break;
+  }
+
+  switch (attribute) {
+    case 3:
+      filteredBeatmaps = [
+        ...filteredBeatmaps.filter(
+          (song) =>
+            song.info.song_info[0].notes[0].notes_attribute === attribute
+        ),
+      ];
+      break;
+    case 2:
+      filteredBeatmaps = [
+        ...filteredBeatmaps.filter(
+          (song) =>
+            song.info.song_info[0].notes[0].notes_attribute === attribute
+        ),
+      ];
+      break;
+    case 1:
+      filteredBeatmaps = [
+        ...filteredBeatmaps.filter(
+          (song) =>
+            song.info.song_info[0].notes[0].notes_attribute === attribute
+        ),
+      ];
+      break;
+    default:
+      break;
   }
 
   return (
@@ -209,8 +252,15 @@ function MainMenu({ state, handleGroup, toggleAutoPlay, setSong, fullScreen }) {
         </div>
         <div className="song-arr">
           {filteredBeatmaps.length > 0
-            ? filteredBeatmaps[0].map((song) => (
-                <Song song={song} key={song.code} setSong={setSong} />
+            ? filteredBeatmaps.map(({ info }) => (
+                <Song
+                  song={info}
+                  key={info.code}
+                  setSong={setSong}
+                  userBeatmap={userBeatmap.filter(
+                    (obj) => obj.code === info.code
+                  )}
+                />
               ))
             : 'Loading'}
         </div>

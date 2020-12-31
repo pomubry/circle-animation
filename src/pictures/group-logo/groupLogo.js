@@ -1,5 +1,5 @@
 import muse from './muse.png';
-import aqour from './aqour.png';
+import aqours from './aqours.png';
 import nijigasaki from './nijigasaki.png';
 
 let arr = [
@@ -9,7 +9,7 @@ let arr = [
   },
   {
     name: 'aqours',
-    logo: aqour,
+    logo: aqours,
   },
   {
     name: 'nijigasaki',

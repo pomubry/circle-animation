@@ -19,7 +19,7 @@ function Header({ isAuth, logout, username }) {
   const logoutHandler = (e) => {
     e.preventDefault();
     setIsLoading(true);
-    fetch('/api/logout')
+    fetch('https://circle-animation-be.herokuapp.com/api/logout')
       .then((res) => res.json())
       .then((data) => {
         if (data.message) {
@@ -42,7 +42,12 @@ function Header({ isAuth, logout, username }) {
       <ul>
         <li>{usernameUp()}</li>
         <li>
-          <Link to="/menu">Menu</Link>
+          <Link
+            to="/menu"
+            className={pathname === '/menu' ? 'active-link' : ''}
+          >
+            Menu
+          </Link>
         </li>
         <li>
           <button onClick={logoutHandler}>Log out</button>
@@ -74,21 +79,13 @@ function Header({ isAuth, logout, username }) {
     </>
   );
 
-  const sample = (e) => {
-    e.preventDefault();
-    fetch('/api/hello')
-      .then((res) => res.json())
-      .then((data) => console.log(data))
-      .catch((error) => {
-        alert('Cannot connect to the server');
-      });
-  };
   return (
     <>
       <Loading isLoading={isLoading} />
       <header className="app-header">
-        <Link to="/">Circle Animation</Link>
-        <button onClick={sample}>Hello</button>
+        <Link to="/" className={pathname === '/' ? 'active-link' : ''}>
+          Circle Animation
+        </Link>
         <nav>{isAuth ? loggedIn : loggedOut}</nav>
       </header>
     </>

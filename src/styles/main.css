@@ -93,7 +93,7 @@ code {
 }
 
 .app-header .active-link {
-  border-bottom: 3px solid #1bb588;
+  border-bottom: 2px solid #1bb588;
 }
 
 .app-header a,
@@ -139,6 +139,20 @@ code {
   background-color: #1d2025;
   color: white;
   height: 90vh;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.homepage p {
+  margin: auto;
+}
+
+.homepage p a {
+  text-decoration: none;
+  color: white;
+  outline: none;
+  border-bottom: 2px solid #1bb588;
 }
 
 .user-auth {

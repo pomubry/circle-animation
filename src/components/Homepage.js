@@ -1,4 +1,5 @@
 import { Component } from 'react';
+import { Link } from 'react-router-dom';
 
 class Homepage extends Component {
   render() {
@@ -6,7 +7,10 @@ class Homepage extends Component {
     return (
       <div className="homepage">
         {isAuth ? (
-          <p>Welcome to Circle Animation</p>
+          <p>
+            Welcome to Circle Animation! Please go to{' '}
+            <Link to="/menu">Menu</Link> to play the game.
+          </p>
         ) : (
           <p>Please login or register</p>
         )}

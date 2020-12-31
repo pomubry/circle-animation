@@ -2,4 +2,16 @@
   background-color: $dark-gray;
   color: white;
   height: 90vh;
+  display: flex;
+
+  p {
+    margin: auto;
+
+    a {
+      text-decoration: none;
+      color: white;
+      outline: none;
+      border-bottom: 2px solid $shio;
+    }
+  }
 }

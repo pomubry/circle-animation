@@ -25,7 +25,7 @@ function UserAuth({ login }) {
     setIsLoading(true);
     let body = { username, password };
 
-    fetch(`/api${location.pathname}`, {
+    fetch(`https://circle-animation-be.herokuapp.com/api${location.pathname}`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -35,7 +35,8 @@ function UserAuth({ login }) {
       .then((res) => res.json())
       .then((data) => {
         if (data.message) {
-          login(data.message);
+          const { username, beatmap } = data.message;
+          login(username, beatmap);
           setIsLoading(false);
           history.push('/menu');
         } else {

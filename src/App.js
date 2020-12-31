@@ -24,8 +24,8 @@ class App extends Component {
     difficulty: 1,
     onMainMenu: true,
     beatmapArr: {},
-    username: null,
-    beatmap: null,
+    username: '',
+    beatmap: {},
     isAuth: false,
   };
 
@@ -35,7 +35,9 @@ class App extends Component {
       this.setState(JSON.parse(state));
     } else {
       const res = await fetch(
-        'https://circle-animation-be.herokuapp.com/api/beatmaps'
+        `${
+          process.env.NODE_ENV === 'production' ? process.env.REACT_APP_API : ''
+        }/api/beatmaps`
       );
       const dbbeatmap = await res.json();
       this.setState({ beatmapArr: dbbeatmap });
@@ -123,8 +125,8 @@ class App extends Component {
       attribute: 0,
       difficulty: 1,
       onMainMenu: true,
-      username: null,
-      beatmap: null,
+      username: '',
+      beatmap: {},
       isAuth: false,
     });
   };
@@ -153,7 +155,10 @@ class App extends Component {
           <Route exact path="/">
             <Homepage isAuth={isAuth} />
           </Route>
-          <Route path={'/login' || '/register'}>
+          <Route path="/login">
+            <UserAuth login={this.login} />
+          </Route>
+          <Route path="/register">
             <UserAuth login={this.login} />
           </Route>
           <Route path="/menu">

@@ -25,13 +25,18 @@ function UserAuth({ login }) {
     setIsLoading(true);
     let body = { username, password };
 
-    fetch(`https://circle-animation-be.herokuapp.com/api${location.pathname}`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(body),
-    })
+    fetch(
+      `${
+        process.env.NODE_ENV === 'production' ? process.env.REACT_APP_API : ''
+      }/api${location.pathname}`,
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(body),
+      }
+    )
       .then((res) => res.json())
       .then((data) => {
         if (data.message) {

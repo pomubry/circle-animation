@@ -1,6 +1,6 @@
 import { Component } from 'react';
 import { Link } from 'react-router-dom';
-import axios from 'axios';
+
 class Homepage extends Component {
   tryFetch = () => {
     const body = {

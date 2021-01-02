@@ -17,6 +17,7 @@ class Homepage extends Component {
         headers: {
           'Content-Type': 'application/json',
         },
+        credentials: 'include',
         body: JSON.stringify(body),
       }
     )

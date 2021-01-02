@@ -22,7 +22,8 @@ function Header({ isAuth, logout, username }) {
     fetch(
       `${
         process.env.NODE_ENV === 'production' ? process.env.REACT_APP_API : ''
-      }/api/logout`
+      }/api/logout`,
+      { credentials: 'include' }
     )
       .then((res) => res.json())
       .then((data) => {

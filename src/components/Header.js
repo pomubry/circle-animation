@@ -19,11 +19,7 @@ function Header({ isAuth, logout, username }) {
   const logoutHandler = (e) => {
     e.preventDefault();
     setIsLoading(true);
-    fetch(
-      `${
-        process.env.NODE_ENV === 'production' ? process.env.REACT_APP_API : ''
-      }/api/logout`
-    )
+    fetch(`/api/logout`)
       .then((res) => res.json())
       .then((data) => {
         if (data.message) {

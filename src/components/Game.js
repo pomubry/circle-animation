@@ -234,22 +234,17 @@ class Game extends Component {
       let { code, difficulty } = this.props.state.beatmapSrc;
       let { highestCombo } = this.state;
 
-      fetch(
-        `${
-          process.env.NODE_ENV === 'production' ? process.env.REACT_APP_API : ''
-        }/api/combo-update`,
-        {
-          method: 'PUT',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            code,
-            difficulty,
-            highestCombo,
-          }),
-        }
-      )
+      fetch(`/api/combo-update`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          code,
+          difficulty,
+          highestCombo,
+        }),
+      })
         .then((res) => res.json())
         .then((data) => {
           if (data.message) {

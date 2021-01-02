@@ -34,11 +34,7 @@ class App extends Component {
     if (state) {
       this.setState(JSON.parse(state));
     } else {
-      const res = await fetch(
-        `${
-          process.env.NODE_ENV === 'production' ? process.env.REACT_APP_API : ''
-        }/api/beatmaps`
-      );
+      const res = await fetch('/api/beatmaps');
       const dbbeatmap = await res.json();
       this.setState({ beatmapArr: dbbeatmap });
     }
@@ -186,7 +182,7 @@ class App extends Component {
             )}
           </Route>
           <Route path="*" component={ErrorPage} />
-        </Switch>
+        </Switch>{' '}
       </div>
     );
   }

@@ -8,17 +8,20 @@ class Homepage extends Component {
       password: 'uehara',
     };
 
-    axios
-      .post(
-        `${
-          process.env.NODE_ENV === 'production' ? process.env.REACT_APP_API : ''
-        }/api/login`,
-        body,
-        {
-          withCredentials: true,
-        }
-      )
-      .then((res) => console.log(res))
+    fetch(
+      `${
+        process.env.NODE_ENV === 'production' ? process.env.REACT_APP_API : ''
+      }/api/login`,
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(body),
+      }
+    )
+      .then((res) => res.json())
+      .then((data) => console.log(data))
       .catch((e) => console.log(e));
   };
   render() {

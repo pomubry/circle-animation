@@ -24,13 +24,19 @@ function UserAuth({ login }) {
     e.preventDefault();
     setIsLoading(true);
     let body = { username, password };
-    fetch(`/api${location.pathname}`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(body),
-    })
+    fetch(
+      `${
+        process.env.NODE_ENV === 'production' ? process.env.REACT_APP_API : ''
+      }/api${location.pathname}`,
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        credentials: 'include',
+        body: JSON.stringify(body),
+      }
+    )
       .then((res) => res.json())
       .then((data) => {
         if (data.message) {
@@ -48,6 +54,7 @@ function UserAuth({ login }) {
       .catch((error) => {
         setIsLoading(false);
         alert('Cannot connect to the server');
+        console.log(error);
       });
   };
 

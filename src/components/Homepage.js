@@ -9,9 +9,15 @@ class Homepage extends Component {
     };
 
     axios
-      .post(`/api/login`, body, {
-        // withCredentials: true,
-      })
+      .post(
+        `${
+          process.env.NODE_ENV === 'production' ? process.env.REACT_APP_API : ''
+        }/api/login`,
+        body,
+        {
+          // withCredentials: true,
+        }
+      )
       .then((res) => console.log(res))
       .catch((e) => console.log(e));
   };

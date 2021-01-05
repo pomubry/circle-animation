@@ -603,8 +603,11 @@ input[type='range']::-webkit-slider-thumb {
   position: absolute;
   top: 10vh;
   left: calc(50% - (70px / 2));
-  z-index: 1;
   pointer-events: none;
+}
+
+.top-btn:not(.active-note) {
+  z-index: 1;
 }
 
 .top-btn svg {

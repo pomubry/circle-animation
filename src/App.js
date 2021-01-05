@@ -7,6 +7,7 @@ import Header from './components/Header';
 import Homepage from './components/Homepage';
 import UserAuth from './components/UserAuth';
 import Game from './components/Game';
+import GameFunc from './components/GameFunc';
 import MainMenu from './components/MainMenu';
 import ErrorPage from './components/ErrorPage';
 
@@ -14,8 +15,8 @@ class App extends Component {
   state = {
     speed: 1.5,
     isAutoPlay: false,
-    musicSrc: null,
-    beatmapSrc: null,
+    musicSrc: {},
+    beatmapSrc: {},
     musicVolume: 0.1,
     tapVolume: 0.1,
     group: 'muse',
@@ -162,17 +163,17 @@ class App extends Component {
             <UserAuth login={this.login} />
           </Route>
           <Route path="/menu">
-            {this.checkAuth() ? (
-              <MainMenu
-                state={this.state}
-                handleGroup={this.handleGroup}
-                toggleAutoPlay={this.toggleAutoPlay}
-                setSong={this.setSong}
-                fullScreen={this.fullScreen}
-              />
-            ) : (
+            {/* {this.checkAuth() ? ( */}
+            <MainMenu
+              state={this.state}
+              handleGroup={this.handleGroup}
+              toggleAutoPlay={this.toggleAutoPlay}
+              setSong={this.setSong}
+              fullScreen={this.fullScreen}
+            />
+            {/* ) : (
               <Redirect to="/" />
-            )}
+            )} */}
           </Route>
           <Route path="/game">
             {this.checkAuth() ? (
@@ -184,6 +185,13 @@ class App extends Component {
             ) : (
               <Redirect to="/" />
             )}
+          </Route>
+          <Route path="/gameFunc">
+            <GameFunc
+              state={this.state}
+              returnMenu={this.returnMenu}
+              updateBeatmap={this.updateBeatmap}
+            />
           </Route>
           <Route path="*" component={ErrorPage} />
         </Switch>{' '}

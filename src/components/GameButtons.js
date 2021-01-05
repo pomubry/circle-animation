@@ -5,7 +5,7 @@ import { AiFillPlayCircle, AiFillPauseCircle } from 'react-icons/ai';
 import { BsArrowRepeat } from 'react-icons/bs';
 
 function GameButtons({
-  handlePlayAudio,
+  handlePlayGame,
   handleBurger,
   returnMenu,
   handleEnd,
@@ -17,7 +17,7 @@ function GameButtons({
     <div className="GameButtons">
       <button
         className="play"
-        onClick={handlePlayAudio}
+        onClick={handlePlayGame}
         disabled={beatmapSrc === null}
       >
         {playing ? <AiFillPauseCircle /> : <AiFillPlayCircle />}

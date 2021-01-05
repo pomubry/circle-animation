@@ -22,7 +22,7 @@ function Song({ song, setSong, userBeatmap }) {
           ''
         )}
       </div>
-      <Link to="/game" onClick={(e) => setSong(e, song)}>
+      <Link to="/gameFunc" onClick={(e) => setSong(e, song)}>
         Play!
       </Link>
     </div>

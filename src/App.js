@@ -142,7 +142,7 @@ class App extends Component {
 
     return (
       <div className="App" tabIndex={-1}>
-        {this.props.location.pathname !== '/game' ? (
+        {this.props.location.pathname !== '/gameFunc' ? (
           <Header
             isAuth={isAuth}
             logout={this.logout}

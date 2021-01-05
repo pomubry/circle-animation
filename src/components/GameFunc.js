@@ -289,6 +289,11 @@ const GameFunc = ({ state, returnMenu, updateBeatmap }) => {
     notes = notes.filter((note) => !(note.props['data-timing-sec'] + 0 < time));
     // 0 used to be 0.7
   }
+
+  const soundTest = () => {
+    let node = tapRefs[0].current.cloneNode(true);
+    node.play();
+  };
   return (
     <div
       className="Game"
@@ -318,6 +323,7 @@ const GameFunc = ({ state, returnMenu, updateBeatmap }) => {
         <p style={{ background: 'white' }}>{time}</p>
         <p style={{ background: 'white' }}>{currentTime}</p>
         <p style={{ background: 'white' }}>{time - currentTime}</p>
+        <p onTouchStart={soundTest}>Sound Test</p>
       </div>
       <p className="combo" style={color}>
         {combo > 0 ? `${combo} COMBO` : ''}

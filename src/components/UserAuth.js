@@ -79,6 +79,7 @@ function UserAuth({ login }) {
             <input
               type="text"
               name="username"
+              placeholder="Enter your Username"
               value={username}
               onChange={handleChange}
               required
@@ -91,8 +92,9 @@ function UserAuth({ login }) {
             <FiUnlock />
             <label htmlFor="password">Password:</label>
             <input
-              type="text"
+              type="password"
               name="password"
+              placeholder="Enter your Password"
               value={password}
               onChange={handleChange}
               required

@@ -290,7 +290,8 @@ const GameFunc = ({ state, returnMenu, updateBeatmap }) => {
     // 0 used to be 0.7
   }
 
-  const soundTest = () => {
+  const soundTest = (e) => {
+    e.stopPropagation();
     let node = tapRefs[0].current.cloneNode(true);
     node.play();
   };
@@ -323,7 +324,7 @@ const GameFunc = ({ state, returnMenu, updateBeatmap }) => {
         <p style={{ background: 'white' }}>{time}</p>
         <p style={{ background: 'white' }}>{currentTime}</p>
         <p style={{ background: 'white' }}>{time - currentTime}</p>
-        <p onTouchStart={soundTest}>Sound Test</p>
+        <p onTouchStart={soundTest} className="soundtest"></p>
       </div>
       <p className="combo" style={color}>
         {combo > 0 ? `${combo} COMBO` : ''}

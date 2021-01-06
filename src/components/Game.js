@@ -1,4 +1,4 @@
-import { useState, useEffect, createRef, useRef } from 'react';
+import { useEffect, createRef, useRef, useReducer } from 'react';
 import { useHistory } from 'react-router-dom';
 import imgArr from '../pictures/backgrounds/Backgrounds';
 
@@ -8,8 +8,9 @@ import Buttons from './Buttons';
 import TapSFX from './TapSFX';
 import GameButtons from './GameButtons';
 import Loading from './Loading';
+import { gameReducer, gameState } from './gameReducer';
 
-const GameFunc = ({ state, returnMenu, updateBeatmap }) => {
+const Game = ({ state, returnMenu, updateBeatmap }) => {
   const audioRef = createRef();
   const notesContainer = createRef();
   const perfectTapSFX = createRef();
@@ -29,85 +30,100 @@ const GameFunc = ({ state, returnMenu, updateBeatmap }) => {
     tapVolume,
   } = state;
 
-  const [animationPlayState, setAnimationPlayState] = useState('paused');
-  const [notesArray, setNotesArray] = useState([]);
-  const [currentNotes, setCurrentNotes] = useState([]);
-  const [index, setIndex] = useState(0);
-  const [combo, setCombo] = useState(0);
-  const [highestCombo, setHighestCombo] = useState(0);
-  const [playing, setPlaying] = useState(false);
-  const [currentTime, setCurrentTime] = useState(0);
-  const [time, setTime] = useState(0);
-  const [intervalValue, setIntervalValue] = useState(null);
-  const [fontSize, setFontSize] = useState('0rem');
-  const [randomImgIndex, setRandomImgIndex] = useState(0);
-  const [isBurgerShown, setIsBurgerShown] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
+  const [localState, dispatch] = useReducer(gameReducer, gameState);
 
   useEffect(() => {
-    let randomIndex = Math.floor(Math.random() * imgArr.length);
-    setRandomImgIndex(randomIndex);
+    let randomImgIndex = Math.floor(Math.random() * imgArr.length);
+    dispatch({ type: 'RANDOM_IMG_INDEX', payload: { randomImgIndex } });
   }, []);
 
   useEffect(() => {
-    let currentNote = beatmapSrc.song_info[0].notes[index];
+    let currentNote = beatmapSrc.song_info[0].notes[localState.index];
     if (
-      currentNote.timing_sec - (0.2 + speed) < time &&
-      index < beatmapSrc.song_info[0].notes.length - 1 &&
-      playing
+      currentNote.timing_sec - (0.2 + speed) < localState.time &&
+      localState.index < beatmapSrc.song_info[0].notes.length - 1 &&
+      localState.playing
     ) {
       // 0.2 used to be 0.25
-      setNotesArray([...notesArray, currentNote]);
-      setCurrentNotes([...currentNotes, currentNote]);
-      setIndex(index + 1);
+      dispatch({ type: 'NOTES_UPDATE', payload: { currentNote } });
     }
-  }, [beatmapSrc, index, speed, time, playing, notesArray, currentNotes]);
+  }, [
+    beatmapSrc,
+    localState.time,
+    localState.index,
+    localState.playing,
+    speed,
+  ]);
 
   useEffect(() => {
-    if (combo > highestCombo) {
-      setHighestCombo(combo);
+    if (localState.combo > localState.highestCombo) {
+      dispatch({ type: 'HIGHEST_COMBO' });
     }
-  }, [combo, highestCombo]);
+  }, [localState.combo, localState.highestCombo]);
+
+  useEffect(() => {
+    if (localState.isLateShown) {
+      setTimeout(
+        () =>
+          dispatch({
+            type: 'SET_FONT_SIZE',
+            payload: { fontSize: '0rem', isLateShown: false },
+          }),
+        1500
+      );
+    }
+  }, [localState.isLateShown]);
 
   const startGame = () => {
     let audio = audioRef.current;
     audio.volume = musicVolume;
     audio.play();
-    setAnimationPlayState('running');
-    setPlaying(true);
 
     initialTime.current = Date.now();
     const value = setInterval(() => {
       let elapsedTime = Date.now() - initialTime.current;
-      let totalTime = (elapsedTime + time) / 1000;
+      let totalTime = (elapsedTime + localState.time) / 1000;
       let currentAudioTime = document.querySelector('#myaudio').currentTime;
       let diff = totalTime - currentAudioTime;
       if (diff < -0.3) {
-        console.log(`Timer lagged`);
-        setTime(currentAudioTime);
+        dispatch({
+          type: 'TIMER',
+          payload: { time: currentAudioTime, currentTime: currentAudioTime },
+        });
       } else if (diff > 0.3) {
-        console.log(`Timer is ahead`);
-        setTime(totalTime - diff * 0.9);
+        dispatch({
+          type: 'TIMER',
+          payload: {
+            time: totalTime - diff * 0.9,
+            currentTime: currentAudioTime,
+          },
+        });
       } else {
-        console.log('normal');
-        setTime(totalTime);
+        dispatch({
+          type: 'TIMER',
+          payload: {
+            time: totalTime,
+            currentTime: currentAudioTime,
+          },
+        });
       }
     }, 50);
-    setIntervalValue(value);
+
+    dispatch({
+      type: 'START_GAME',
+      payload: {
+        initialTime,
+        intervalValue: value,
+      },
+    });
   };
 
   const pauseGame = () => {
     let audio = audioRef.current;
     audio.volume = musicVolume;
     audio.pause();
-    clearInterval(intervalValue);
-    setAnimationPlayState('paused');
-    setPlaying(false);
-    setIntervalValue(null);
-  };
-
-  const timeUpdate = (e) => {
-    setCurrentTime(e.target.currentTime);
+    clearInterval(localState.intervalValue);
+    dispatch({ type: 'PAUSE_GAME' });
   };
 
   const animationEnd = (e) => {
@@ -120,10 +136,13 @@ const GameFunc = ({ state, returnMenu, updateBeatmap }) => {
       clone.volume = tapVolume;
       clone.play();
     }
-    setCombo(isAutoPlay ? combo + 1 : 0);
-    setCurrentNotes(currentNotes.slice(1));
-    setFontSize(isAutoPlay ? '0rem' : '1.3rem');
-    setTimeout(() => setFontSize('0rem'), 2000);
+    dispatch({ type: 'ANIMATION_END', payload: { isAutoPlay } });
+    if (!localState.isLateShown && !isAutoPlay) {
+      dispatch({
+        type: 'SET_FONT_SIZE',
+        payload: { fontSize: '1.3rem', isLateShown: true },
+      });
+    }
   };
 
   const handleTap = (e) => {
@@ -136,32 +155,35 @@ const GameFunc = ({ state, returnMenu, updateBeatmap }) => {
     }
 
     let isSecondNote =
-      currentNotes.length > 1 &&
-      currentNotes[1].position === btnPosition &&
-      currentNotes[0].timing_sec === currentNotes[1].timing_sec;
+      localState.currentNotes.length > 1 &&
+      localState.currentNotes[1].position === btnPosition &&
+      localState.currentNotes[0].timing_sec ===
+        localState.currentNotes[1].timing_sec;
 
     if (
-      currentNotes.length > 0 &&
-      (currentNotes[0].position === btnPosition || isSecondNote)
+      localState.currentNotes.length > 0 &&
+      (localState.currentNotes[0].position === btnPosition || isSecondNote)
     ) {
       let accuracy = 0;
       let notesArray = [...notesContainer.current.children];
 
       let note = notesArray.filter(
-        (note) => Number(note.dataset.timingSec) === currentNotes[0].timing_sec
+        (note) =>
+          Number(note.dataset.timingSec) ===
+          localState.currentNotes[0].timing_sec
       );
 
       if (note.length > 1) {
         let singledNote = note.filter(
           (note) => Number(note.dataset.position) === btnPosition
         );
-        accuracy = singledNote[0].dataset.timingSec - time - 0.2;
+        accuracy = singledNote[0].dataset.timingSec - localState.time - 0.2;
         singledNote[0].style.display = 'none';
       } else {
-        accuracy = note[0].dataset.timingSec - time - 0.2;
+        accuracy = note[0].dataset.timingSec - localState.time - 0.2;
         note[0].style.display = 'none';
       }
-      let currentNotesCopy = [...currentNotes];
+      let currentNotesCopy = [...localState.currentNotes];
       isSecondNote
         ? currentNotesCopy.splice(1, 1)
         : (currentNotesCopy = currentNotesCopy.slice(1));
@@ -174,35 +196,43 @@ const GameFunc = ({ state, returnMenu, updateBeatmap }) => {
         let clone = perfectTapSFX.current.cloneNode(true);
         clone.volume = tapVolume;
         clone.play();
-        setCombo(combo + 1);
-        setCurrentNotes(currentNotesCopy);
+        dispatch({
+          type: 'HANDLE_TAP',
+          payload: { combo: localState.combo + 1, currentNotesCopy },
+        });
+        // setCombo(combo + 1);
+        // setCurrentNotes(currentNotesCopy);
       } else if (accuracy < speed - goodAccuracy) {
         let clone = goodTapSFX.current.cloneNode(true);
         clone.volume = tapVolume;
         clone.play();
-        setCombo(combo + 1);
-        setCurrentNotes(currentNotesCopy);
+        dispatch({
+          type: 'HANDLE_TAP',
+          payload: { combo: localState.combo + 1, currentNotesCopy },
+        });
       } else {
         let clone = badTapSFX.current.cloneNode(true);
         clone.volume = tapVolume;
         clone.play();
-        setCombo(0);
-        setCurrentNotes(currentNotesCopy);
+        dispatch({
+          type: 'HANDLE_TAP',
+          payload: { combo: 0, currentNotesCopy },
+        });
       }
     }
   };
 
   const handleBurger = (e) => {
-    setIsBurgerShown((prevState) => !prevState);
+    dispatch({ type: 'BURGER' });
   };
 
   const handleEnd = (e) => {
-    clearInterval(intervalValue);
+    clearInterval(localState.intervalValue);
     audioRef.current.pause();
     audioRef.current.currentTime = 0;
 
     if (e.target.nodeName === 'AUDIO' && !isAutoPlay) {
-      setIsLoading(true);
+      dispatch({ type: 'IS_LOADING', payload: { isLoading: true } });
       let { code, difficulty } = beatmapSrc;
 
       fetch(
@@ -218,7 +248,7 @@ const GameFunc = ({ state, returnMenu, updateBeatmap }) => {
           body: JSON.stringify({
             code,
             difficulty,
-            highestCombo,
+            highestCombo: localState.highestCombo,
           }),
         }
       )
@@ -226,30 +256,21 @@ const GameFunc = ({ state, returnMenu, updateBeatmap }) => {
         .then((data) => {
           if (data.message) {
             updateBeatmap(data.message.beatmap);
-            setIsLoading(false);
+            dispatch({ type: 'IS_LOADING', payload: { isLoading: false } });
             history.push('/menu');
           } else {
             console.log('Something went wrong');
-            setIsLoading(false);
+            dispatch({ type: 'IS_LOADING', payload: { isLoading: false } });
             history.push('/menu');
           }
         })
         .catch((err) => {
           console.log(err);
-          setIsLoading(false);
+          dispatch({ type: 'IS_LOADING', payload: { isLoading: false } });
           history.push('/menu');
         });
     }
-
-    setAnimationPlayState('paused');
-    setNotesArray([]);
-    setCurrentNotes([]);
-    setIndex(0);
-    setCombo(0);
-    setPlaying(false);
-    setCurrentTime(0);
-    setTime(0);
-    setIntervalValue(0);
+    dispatch({ type: 'SONG_END' });
   };
 
   let colorArr = [
@@ -264,21 +285,21 @@ const GameFunc = ({ state, returnMenu, updateBeatmap }) => {
     '#ee879d',
   ];
 
-  let color = { color: colorArr[Math.floor(combo / 100)] };
+  let color = { color: colorArr[Math.floor(localState.combo / 100)] };
   let attribColor =
     songAttribute === 1 ? 'smile' : songAttribute === 2 ? 'pure' : 'cool';
 
   let notes = [];
 
-  if (notesArray.length > 0) {
-    let map = notesArray.map((obj) => {
+  if (localState.notesArray.length > 0) {
+    let map = localState.notesArray.map((obj) => {
       return (
         <div
           className={`top-btn active-note ${attribColor}`}
           data-timing-sec={obj.timing_sec}
           data-position={obj.position}
           style={{
-            animation: `moving-${obj.position} ${speed}s linear ${animationPlayState}`,
+            animation: `moving-${obj.position} ${speed}s linear ${localState.animationPlayState}`,
           }}
           onAnimationEnd={animationEnd}
           key={obj.position * obj.timing_sec}
@@ -286,7 +307,9 @@ const GameFunc = ({ state, returnMenu, updateBeatmap }) => {
       );
     });
     notes = notes.concat(map);
-    notes = notes.filter((note) => !(note.props['data-timing-sec'] + 0 < time));
+    notes = notes.filter(
+      (note) => !(note.props['data-timing-sec'] + 0 < localState.time)
+    );
     // 0 used to be 0.7
   }
 
@@ -295,17 +318,16 @@ const GameFunc = ({ state, returnMenu, updateBeatmap }) => {
       className="Game"
       onKeyDown={!isAutoPlay ? handleTap : () => {}}
       style={{
-        backgroundImage: `url(${imgArr[randomImgIndex]})`,
+        backgroundImage: `url(${imgArr[localState.randomImgIndex]})`,
       }}
       tabIndex={-1}
     >
-      <Loading isLoading={isLoading} />
+      <Loading isLoading={localState.isLoading} />
       <audio
         id="myaudio"
         src={musicSrc}
         preload="auto"
         ref={audioRef}
-        onTimeUpdate={timeUpdate}
         onEnded={handleEnd}
       >
         Audio format is not supported
@@ -318,10 +340,10 @@ const GameFunc = ({ state, returnMenu, updateBeatmap }) => {
         {notes}
       </div>
       <p className="combo" style={color}>
-        {combo > 0 ? `${combo} COMBO` : ''}
+        {localState.combo > 0 ? `${localState.combo} COMBO` : ''}
       </p>
-      <p className="lateNote" style={{ fontSize }}>
-        Late!
+      <p className="lateNote" style={{ fontSize: localState.fontSize }}>
+        Bad Timing!
       </p>
       <Buttons
         handleTap={handleTap}
@@ -329,16 +351,16 @@ const GameFunc = ({ state, returnMenu, updateBeatmap }) => {
         attribColor={attribColor}
       />
       <GameButtons
-        handlePlayGame={playing ? pauseGame : startGame}
+        handlePlayGame={localState.playing ? pauseGame : startGame}
         handleBurger={handleBurger}
         returnMenu={returnMenu}
         handleEnd={handleEnd}
-        isBurgerShown={isBurgerShown}
-        playing={playing}
+        isBurgerShown={localState.isBurgerShown}
+        playing={localState.playing}
         beatmapSrc={beatmapSrc}
       />
     </div>
   );
 };
 
-export default GameFunc;
+export default Game;

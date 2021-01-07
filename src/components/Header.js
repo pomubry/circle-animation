@@ -1,12 +1,16 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import { Link, useHistory } from 'react-router-dom';
+import { AppContext } from './Reducers/appReducer';
 
 import Loading from './Loading';
 
-function Header({ isAuth, logout, username }) {
-  const [isLoading, setIsLoading] = useState(false);
+function Header() {
+  const { state, dispatch } = useContext(AppContext);
+  const { isAuth, username, onGame } = state;
   const history = useHistory();
   const { pathname } = history.location;
+
+  const [isLoading, setIsLoading] = useState(false);
 
   const usernameUp = () => {
     if (username) {
@@ -28,7 +32,7 @@ function Header({ isAuth, logout, username }) {
       .then((res) => res.json())
       .then((data) => {
         if (data.message) {
-          logout();
+          dispatch({ type: 'LOGOUT' });
           setIsLoading(false);
           history.push('/');
         } else {
@@ -88,7 +92,7 @@ function Header({ isAuth, logout, username }) {
   return (
     <>
       <Loading isLoading={isLoading} />
-      <header className="app-header">
+      <header className={`app-header ${onGame ? 'on-game' : ''}`}>
         <Link to="/" className={pathname === '/' ? 'active-link' : ''}>
           Circle Animation
         </Link>

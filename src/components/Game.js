@@ -1,5 +1,8 @@
-import { useEffect, createRef, useRef, useReducer } from 'react';
+import { useEffect, createRef, useRef, useReducer, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
+import { gameReducer, gameState } from './Reducers/gameReducer';
+import { AppContext } from './Reducers/appReducer';
+
 import imgArr from '../pictures/backgrounds/Backgrounds';
 
 import { GiMusicalNotes } from 'react-icons/gi';
@@ -8,9 +11,9 @@ import Buttons from './Buttons';
 import TapSFX from './TapSFX';
 import GameButtons from './GameButtons';
 import Loading from './Loading';
-import { gameReducer, gameState } from './gameReducer';
 
-const Game = ({ state, returnMenu, updateBeatmap }) => {
+const Game = () => {
+  const { state, dispatch: appDispatch } = useContext(AppContext);
   const audioRef = createRef();
   const notesContainer = createRef();
   const perfectTapSFX = createRef();
@@ -255,17 +258,23 @@ const Game = ({ state, returnMenu, updateBeatmap }) => {
         .then((res) => res.json())
         .then((data) => {
           if (data.message) {
-            updateBeatmap(data.message.beatmap);
+            appDispatch({
+              type: 'UPDATE_BEATMAP',
+              payload: { beatmap: data.message.beatmap },
+            });
+            appDispatch({ type: 'ON_GAME', payload: { onGame: false } });
             dispatch({ type: 'IS_LOADING', payload: { isLoading: false } });
             history.push('/menu');
           } else {
             console.log('Something went wrong');
+            appDispatch({ type: 'ON_GAME', payload: { onGame: false } });
             dispatch({ type: 'IS_LOADING', payload: { isLoading: false } });
             history.push('/menu');
           }
         })
         .catch((err) => {
           console.log(err);
+          appDispatch({ type: 'ON_GAME', payload: { onGame: false } });
           dispatch({ type: 'IS_LOADING', payload: { isLoading: false } });
           history.push('/menu');
         });
@@ -353,7 +362,6 @@ const Game = ({ state, returnMenu, updateBeatmap }) => {
       <GameButtons
         handlePlayGame={localState.playing ? pauseGame : startGame}
         handleBurger={handleBurger}
-        returnMenu={returnMenu}
         handleEnd={handleEnd}
         isBurgerShown={localState.isBurgerShown}
         playing={localState.playing}

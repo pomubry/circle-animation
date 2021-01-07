@@ -1,9 +1,11 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
 import { FiUserCheck, FiUnlock, FiLogIn } from 'react-icons/fi';
+import { AppContext } from './Reducers/appReducer';
 import Loading from './Loading';
 
-function UserAuth({ login }) {
+function UserAuth() {
+  const { dispatch } = useContext(AppContext);
   let history = useHistory();
   let location = useLocation();
 
@@ -41,7 +43,7 @@ function UserAuth({ login }) {
       .then((data) => {
         if (data.message) {
           const { username, beatmap } = data.message;
-          login(username, beatmap);
+          dispatch({ type: 'LOGIN', payload: { username, beatmap } });
           setIsLoading(false);
           history.push('/menu');
         } else {

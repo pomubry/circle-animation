@@ -1,9 +1,12 @@
+import { useContext } from 'react';
 import { Link } from 'react-router-dom';
+import { AppContext } from './Reducers/appReducer';
 
-const Homepage = ({ isAuth }) => {
+const Homepage = () => {
+  const { state } = useContext(AppContext);
   return (
     <div className="homepage">
-      {isAuth ? (
+      {state.isAuth ? (
         <p>
           Welcome to Circle Animation! Please go to <Link to="/menu">Menu</Link>{' '}
           to play the game.{' '}

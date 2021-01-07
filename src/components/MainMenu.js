@@ -1,11 +1,13 @@
-import groupLogo from '../pictures/group-logo/groupLogo';
-import attributeLogo from '../pictures/attribute/attributeLogo';
-import { BsArrowsFullscreen } from 'react-icons/bs';
-import { RiArrowUpDownFill } from 'react-icons/ri';
+import { useContext } from 'react';
+import { AppContext } from './Reducers/appReducer';
 
 import Song from './Song';
+import groupLogo from '../pictures/group-logo/groupLogo';
+import attributeLogo from '../pictures/attribute/attributeLogo';
+import { RiArrowUpDownFill } from 'react-icons/ri';
 
-function MainMenu({ state, handleGroup, toggleAutoPlay, setSong, fullScreen }) {
+function MainMenu() {
+  const { state, dispatch } = useContext(AppContext);
   const {
     group,
     difficulty,
@@ -96,12 +98,22 @@ function MainMenu({ state, handleGroup, toggleAutoPlay, setSong, fullScreen }) {
       break;
   }
 
+  const handleGroup = (e) => {
+    const { name, value } = e.target;
+    dispatch({
+      type: 'GROUPS',
+      payload: { name, value: isNaN(Number(value)) ? value : Number(value) },
+    });
+  };
+
+  const toggleAutoPlay = (e) => {
+    let isAutoPlay = e.target.id === 'true';
+    dispatch({ type: 'AUTOPLAY_TOGGLE', payload: { isAutoPlay } });
+  };
+
   return (
     <div className="MainMenu">
       <h1>Circle Animation!</h1>
-      <button className="fullscreen" onClick={fullScreen}>
-        <BsArrowsFullscreen /> <span>Set Full Screen</span>
-      </button>
       <form action="">
         <div className="group">
           <div className="indiv-select">
@@ -256,7 +268,6 @@ function MainMenu({ state, handleGroup, toggleAutoPlay, setSong, fullScreen }) {
                 <Song
                   song={info}
                   key={info.code}
-                  setSong={setSong}
                   userBeatmap={userBeatmap.filter(
                     (obj) => obj.code === info.code
                   )}

@@ -16,7 +16,6 @@ const appState = {
   username: '',
   beatmap: {},
   isAuth: false,
-  onGame: false,
 };
 
 const appReducer = (state, action) => {
@@ -54,12 +53,6 @@ const appReducer = (state, action) => {
       return {
         ...state,
         beatmap: action.payload.beatmap,
-      };
-
-    case 'ON_GAME':
-      return {
-        ...state,
-        onGame: action.payload.onGame,
       };
 
     case 'LOGIN':

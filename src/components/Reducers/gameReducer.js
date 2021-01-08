@@ -7,13 +7,13 @@ export const gameState = {
   isLateShown: false,
   highestCombo: 0,
   playing: false,
-  currentTime: 0,
   time: 0,
   intervalValue: null,
   fontSize: '0rem',
   randomImgIndex: 0,
   isBurgerShown: false,
   isLoading: false,
+  vw: null,
 };
 
 export const gameReducer = (state, action) => {
@@ -106,6 +106,12 @@ export const gameReducer = (state, action) => {
         currentTime: 0,
         time: 0,
         intervalValue: 0,
+      };
+
+    case 'VW':
+      return {
+        ...state,
+        vw: action.payload.vw,
       };
 
     default:

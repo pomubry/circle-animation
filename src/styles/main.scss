@@ -4,6 +4,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
 }
 
 html {
@@ -26,10 +27,6 @@ svg {
   height: 20px;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
-}
 $light-gray: rgb(38, 42, 49);
 $dark-gray: rgb(29, 32, 37);
 $shio: rgb(27, 181, 136);
@@ -42,4 +39,5 @@ $shio: rgb(27, 181, 136);
 @import 'MainMenu';
 @import 'Song';
 @import 'Game';
+@import 'SmallScreen';
 @import 'Buttons';

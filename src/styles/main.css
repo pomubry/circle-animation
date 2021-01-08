@@ -3,6 +3,7 @@
   padding: 0;
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
 }
 
 html {
@@ -21,10 +22,6 @@ svg {
   margin-right: 5px;
   width: 20px;
   height: 20px;
-}
-
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
 }
 
 .loading-div {
@@ -848,6 +845,24 @@ input[type='range']::-webkit-slider-thumb {
   width: 50px;
   height: 50px;
   background-color: pink;
+}
+
+.small-screen {
+  background-color: rgba(29, 32, 37, 0.5);
+  color: white;
+  height: 100vh;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  position: absolute;
+  width: 100%;
+  z-index: 2;
+}
+
+.small-screen p {
+  margin: auto;
+  width: 500px;
+  text-align: center;
 }
 
 .indiv-button {

@@ -2,15 +2,16 @@ import { useEffect, createRef, useRef, useReducer, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import { gameReducer, gameState } from './Reducers/gameReducer';
 import { AppContext } from './Reducers/appReducer';
+import { Helmet } from 'react-helmet-async';
 
 import imgArr from '../pictures/backgrounds/Backgrounds';
-
 import { GiMusicalNotes } from 'react-icons/gi';
 
 import Buttons from './Buttons';
 import TapSFX from './TapSFX';
 import GameButtons from './GameButtons';
 import Loading from './Loading';
+import SmallScreen from './SmallScreen';
 
 const Game = () => {
   const { state, dispatch: appDispatch } = useContext(AppContext);
@@ -34,38 +35,50 @@ const Game = () => {
   } = state;
 
   const [localState, dispatch] = useReducer(gameReducer, gameState);
+  const {
+    animationPlayState,
+    notesArray,
+    currentNotes,
+    index,
+    combo,
+    isLateShown,
+    highestCombo,
+    playing,
+    time,
+    intervalValue,
+    fontSize,
+    randomImgIndex,
+    isBurgerShown,
+    isLoading,
+    vw,
+  } = localState;
 
   useEffect(() => {
     let randomImgIndex = Math.floor(Math.random() * imgArr.length);
     dispatch({ type: 'RANDOM_IMG_INDEX', payload: { randomImgIndex } });
+    dispatch({ type: 'VW', payload: { vw: window.innerWidth } });
   }, []);
 
   useEffect(() => {
-    let currentNote = beatmapSrc.song_info[0].notes[localState.index];
+    let currentNote = beatmapSrc.song_info[0].notes[index];
     if (
-      currentNote.timing_sec - (0.2 + speed) < localState.time &&
-      localState.index < beatmapSrc.song_info[0].notes.length - 1 &&
-      localState.playing
+      currentNote.timing_sec - (0.25 + speed) < time &&
+      index < beatmapSrc.song_info[0].notes.length - 1 &&
+      playing
     ) {
       // 0.2 used to be 0.25
       dispatch({ type: 'NOTES_UPDATE', payload: { currentNote } });
     }
-  }, [
-    beatmapSrc,
-    localState.time,
-    localState.index,
-    localState.playing,
-    speed,
-  ]);
+  }, [beatmapSrc, time, index, playing, speed]);
 
   useEffect(() => {
-    if (localState.combo > localState.highestCombo) {
+    if (combo > highestCombo) {
       dispatch({ type: 'HIGHEST_COMBO' });
     }
-  }, [localState.combo, localState.highestCombo]);
+  }, [combo, highestCombo]);
 
   useEffect(() => {
-    if (localState.isLateShown) {
+    if (isLateShown) {
       setTimeout(
         () =>
           dispatch({
@@ -75,7 +88,16 @@ const Game = () => {
         1500
       );
     }
-  }, [localState.isLateShown]);
+  }, [isLateShown]);
+
+  useEffect(() => {
+    function windowResize() {
+      dispatch({ type: 'VW', payload: { vw: window.innerWidth } });
+    }
+    window.addEventListener('resize', windowResize);
+
+    return () => window.removeEventListener('resize', windowResize);
+  });
 
   const startGame = () => {
     let audio = audioRef.current;
@@ -85,7 +107,7 @@ const Game = () => {
     initialTime.current = Date.now();
     const value = setInterval(() => {
       let elapsedTime = Date.now() - initialTime.current;
-      let totalTime = (elapsedTime + localState.time) / 1000;
+      let totalTime = (elapsedTime + time) / 1000;
       let currentAudioTime = document.querySelector('#myaudio').currentTime;
       let diff = totalTime - currentAudioTime;
       if (diff < -0.3) {
@@ -125,7 +147,7 @@ const Game = () => {
     let audio = audioRef.current;
     audio.volume = musicVolume;
     audio.pause();
-    clearInterval(localState.intervalValue);
+    clearInterval(intervalValue);
     dispatch({ type: 'PAUSE_GAME' });
   };
 
@@ -140,7 +162,7 @@ const Game = () => {
       clone.play();
     }
     dispatch({ type: 'ANIMATION_END', payload: { isAutoPlay } });
-    if (!localState.isLateShown && !isAutoPlay) {
+    if (!isLateShown && !isAutoPlay) {
       dispatch({
         type: 'SET_FONT_SIZE',
         payload: { fontSize: '1.3rem', isLateShown: true },
@@ -158,35 +180,32 @@ const Game = () => {
     }
 
     let isSecondNote =
-      localState.currentNotes.length > 1 &&
-      localState.currentNotes[1].position === btnPosition &&
-      localState.currentNotes[0].timing_sec ===
-        localState.currentNotes[1].timing_sec;
+      currentNotes.length > 1 &&
+      currentNotes[1].position === btnPosition &&
+      currentNotes[0].timing_sec === currentNotes[1].timing_sec;
 
     if (
-      localState.currentNotes.length > 0 &&
-      (localState.currentNotes[0].position === btnPosition || isSecondNote)
+      currentNotes.length > 0 &&
+      (currentNotes[0].position === btnPosition || isSecondNote)
     ) {
       let accuracy = 0;
       let notesArray = [...notesContainer.current.children];
 
       let note = notesArray.filter(
-        (note) =>
-          Number(note.dataset.timingSec) ===
-          localState.currentNotes[0].timing_sec
+        (note) => Number(note.dataset.timingSec) === currentNotes[0].timing_sec
       );
 
       if (note.length > 1) {
         let singledNote = note.filter(
           (note) => Number(note.dataset.position) === btnPosition
         );
-        accuracy = singledNote[0].dataset.timingSec - localState.time - 0.2;
+        accuracy = singledNote[0].dataset.timingSec - time - 0.2;
         singledNote[0].style.display = 'none';
       } else {
-        accuracy = note[0].dataset.timingSec - localState.time - 0.2;
+        accuracy = note[0].dataset.timingSec - time - 0.2;
         note[0].style.display = 'none';
       }
-      let currentNotesCopy = [...localState.currentNotes];
+      let currentNotesCopy = [...currentNotes];
       isSecondNote
         ? currentNotesCopy.splice(1, 1)
         : (currentNotesCopy = currentNotesCopy.slice(1));
@@ -201,17 +220,15 @@ const Game = () => {
         clone.play();
         dispatch({
           type: 'HANDLE_TAP',
-          payload: { combo: localState.combo + 1, currentNotesCopy },
+          payload: { combo: combo + 1, currentNotesCopy },
         });
-        // setCombo(combo + 1);
-        // setCurrentNotes(currentNotesCopy);
       } else if (accuracy < speed - goodAccuracy) {
         let clone = goodTapSFX.current.cloneNode(true);
         clone.volume = tapVolume;
         clone.play();
         dispatch({
           type: 'HANDLE_TAP',
-          payload: { combo: localState.combo + 1, currentNotesCopy },
+          payload: { combo: combo + 1, currentNotesCopy },
         });
       } else {
         let clone = badTapSFX.current.cloneNode(true);
@@ -230,7 +247,7 @@ const Game = () => {
   };
 
   const handleEnd = (e) => {
-    clearInterval(localState.intervalValue);
+    clearInterval(intervalValue);
     audioRef.current.pause();
     audioRef.current.currentTime = 0;
 
@@ -251,7 +268,7 @@ const Game = () => {
           body: JSON.stringify({
             code,
             difficulty,
-            highestCombo: localState.highestCombo,
+            highestCombo: highestCombo,
           }),
         }
       )
@@ -262,19 +279,16 @@ const Game = () => {
               type: 'UPDATE_BEATMAP',
               payload: { beatmap: data.message.beatmap },
             });
-            appDispatch({ type: 'ON_GAME', payload: { onGame: false } });
             dispatch({ type: 'IS_LOADING', payload: { isLoading: false } });
             history.push('/menu');
           } else {
             console.log('Something went wrong');
-            appDispatch({ type: 'ON_GAME', payload: { onGame: false } });
             dispatch({ type: 'IS_LOADING', payload: { isLoading: false } });
             history.push('/menu');
           }
         })
         .catch((err) => {
           console.log(err);
-          appDispatch({ type: 'ON_GAME', payload: { onGame: false } });
           dispatch({ type: 'IS_LOADING', payload: { isLoading: false } });
           history.push('/menu');
         });
@@ -294,21 +308,21 @@ const Game = () => {
     '#ee879d',
   ];
 
-  let color = { color: colorArr[Math.floor(localState.combo / 100)] };
+  let color = { color: colorArr[Math.floor(combo / 100)] };
   let attribColor =
     songAttribute === 1 ? 'smile' : songAttribute === 2 ? 'pure' : 'cool';
 
   let notes = [];
 
-  if (localState.notesArray.length > 0) {
-    let map = localState.notesArray.map((obj) => {
+  if (notesArray.length > 0) {
+    let map = notesArray.map((obj) => {
       return (
         <div
           className={`top-btn active-note ${attribColor}`}
           data-timing-sec={obj.timing_sec}
           data-position={obj.position}
           style={{
-            animation: `moving-${obj.position} ${speed}s linear ${localState.animationPlayState}`,
+            animation: `moving-${obj.position} ${speed}s linear ${animationPlayState}`,
           }}
           onAnimationEnd={animationEnd}
           key={obj.position * obj.timing_sec}
@@ -317,7 +331,7 @@ const Game = () => {
     });
     notes = notes.concat(map);
     notes = notes.filter(
-      (note) => !(note.props['data-timing-sec'] + 0 < localState.time)
+      (note) => !(note.props['data-timing-sec'] + 0.7 < time)
     );
     // 0 used to be 0.7
   }
@@ -327,11 +341,15 @@ const Game = () => {
       className="Game"
       onKeyDown={!isAutoPlay ? handleTap : () => {}}
       style={{
-        backgroundImage: `url(${imgArr[localState.randomImgIndex]})`,
+        backgroundImage: `url(${imgArr[randomImgIndex]})`,
       }}
       tabIndex={-1}
     >
-      <Loading isLoading={localState.isLoading} />
+      <Helmet>
+        <title>Circle-Animation | Game</title>
+      </Helmet>
+      {vw > 820 ? '' : <SmallScreen />}
+      <Loading isLoading={isLoading} />
       <audio
         id="myaudio"
         src={musicSrc}
@@ -349,9 +367,9 @@ const Game = () => {
         {notes}
       </div>
       <p className="combo" style={color}>
-        {localState.combo > 0 ? `${localState.combo} COMBO` : ''}
+        {combo > 0 ? `${combo} COMBO` : ''}
       </p>
-      <p className="lateNote" style={{ fontSize: localState.fontSize }}>
+      <p className="lateNote" style={{ fontSize: fontSize }}>
         Bad Timing!
       </p>
       <Buttons
@@ -360,11 +378,11 @@ const Game = () => {
         attribColor={attribColor}
       />
       <GameButtons
-        handlePlayGame={localState.playing ? pauseGame : startGame}
+        handlePlayGame={playing ? pauseGame : startGame}
         handleBurger={handleBurger}
         handleEnd={handleEnd}
-        isBurgerShown={localState.isBurgerShown}
-        playing={localState.playing}
+        isBurgerShown={isBurgerShown}
+        playing={playing}
         beatmapSrc={beatmapSrc}
       />
     </div>

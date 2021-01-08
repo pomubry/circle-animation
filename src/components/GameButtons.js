@@ -1,5 +1,3 @@
-import { useContext } from 'react';
-import { AppContext } from './Reducers/appReducer';
 import { Link } from 'react-router-dom';
 
 import { FaArrowCircleUp, FaHome } from 'react-icons/fa';
@@ -14,7 +12,6 @@ function GameButtons({
   playing,
   beatmapSrc,
 }) {
-  const { dispatch } = useContext(AppContext);
   return (
     <div className="GameButtons">
       <button
@@ -37,12 +34,7 @@ function GameButtons({
           transform: isBurgerShown ? 'scaleY(1)' : 'scaleY(0)',
         }}
       >
-        <Link
-          to="/menu"
-          onClick={() =>
-            dispatch({ type: 'ON_GAME', payload: { onGame: false } })
-          }
-        >
+        <Link to="/menu">
           <FaHome />
           <br /> Main Menu
         </Link>

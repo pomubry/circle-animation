@@ -5,6 +5,7 @@ import Song from './Song';
 import groupLogo from '../pictures/group-logo/groupLogo';
 import attributeLogo from '../pictures/attribute/attributeLogo';
 import { RiArrowUpDownFill } from 'react-icons/ri';
+import { Helmet } from 'react-helmet-async';
 
 function MainMenu() {
   const { state, dispatch } = useContext(AppContext);
@@ -113,6 +114,9 @@ function MainMenu() {
 
   return (
     <div className="MainMenu">
+      <Helmet>
+        <title>Circle-Animation | Menu</title>
+      </Helmet>
       <h1>Circle Animation!</h1>
       <form action="">
         <div className="group">

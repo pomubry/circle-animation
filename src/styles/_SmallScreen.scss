@@ -1,0 +1,15 @@
+.small-screen {
+  background-color: rgba($dark-gray, 0.5);
+  color: white;
+  height: 100vh;
+  display: flex;
+  position: absolute;
+  width: 100%;
+  z-index: 2;
+
+  p {
+    margin: auto;
+    width: 500px;
+    text-align: center;
+  }
+}

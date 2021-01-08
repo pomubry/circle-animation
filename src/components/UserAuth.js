@@ -2,6 +2,8 @@ import { useState, useEffect, useContext } from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
 import { FiUserCheck, FiUnlock, FiLogIn } from 'react-icons/fi';
 import { AppContext } from './Reducers/appReducer';
+import { Helmet } from 'react-helmet-async';
+
 import Loading from './Loading';
 
 function UserAuth() {
@@ -71,6 +73,12 @@ function UserAuth() {
 
   return (
     <div className="user-auth">
+      <Helmet>
+        <title>
+          Circle-Animation |{' '}
+          {location.pathname === '/login' ? 'Login' : 'Register'}
+        </title>
+      </Helmet>
       <Loading isLoading={isLoading} />
       <form onSubmit={submitAuth}>
         <p>{location.pathname === '/login' ? 'Login ' : 'Registration '}Form</p>

@@ -1,6 +1,7 @@
 import { useContext, useEffect } from 'react';
-import { Switch, Route, BrowserRouter } from 'react-router-dom';
+import { Switch, Route, useLocation } from 'react-router-dom';
 import { AppContext } from './components/Reducers/appReducer';
+import { HelmetProvider } from 'react-helmet-async';
 
 import Header from './components/Header';
 import Homepage from './components/Homepage';
@@ -11,6 +12,7 @@ import ErrorPage from './components/ErrorPage';
 
 const App = () => {
   const { state, dispatch } = useContext(AppContext);
+  const location = useLocation();
 
   useEffect(() => {
     let state = localStorage.getItem('state');
@@ -39,9 +41,9 @@ const App = () => {
   });
 
   return (
-    <BrowserRouter>
+    <HelmetProvider>
       <div className="App" tabIndex={-1}>
-        <Header />
+        {location.pathname !== '/game' ? <Header /> : ''}
         <Switch>
           <Route exact path="/">
             <Homepage />
@@ -61,7 +63,7 @@ const App = () => {
           <Route path="*" component={ErrorPage} />
         </Switch>
       </div>
-    </BrowserRouter>
+    </HelmetProvider>
   );
 };
 

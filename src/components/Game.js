@@ -369,6 +369,7 @@ const Game = () => {
       <p className="combo" style={color}>
         {combo > 0 ? `${combo} COMBO` : ''}
       </p>
+      <p>Width: {vw}</p>
       <p className="lateNote" style={{ fontSize: fontSize }}>
         Bad Timing!
       </p>

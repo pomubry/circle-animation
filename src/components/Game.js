@@ -50,7 +50,6 @@ const Game = () => {
     randomImgIndex,
     isBurgerShown,
     isLoading,
-    vw,
   } = localState;
 
   useEffect(() => {
@@ -336,6 +335,16 @@ const Game = () => {
     // 0 used to be 0.7
   }
 
+  const isSmallWidth = () => {
+    if (document.querySelector('.btn-1')) {
+      let btn1 = document.querySelector('.btn-1').getBoundingClientRect();
+      let btn9 = document.querySelector('.btn-9').getBoundingClientRect();
+      let game = document.querySelector('.Game').getBoundingClientRect();
+      let btnWidthTotal = btn9.right - btn1.x;
+      return game.width < btnWidthTotal;
+    }
+  };
+
   return (
     <div
       className="Game"
@@ -348,7 +357,7 @@ const Game = () => {
       <Helmet>
         <title>Circle-Animation | Game</title>
       </Helmet>
-      {vw > 820 ? '' : <SmallScreen />}
+      {isSmallWidth() ? <SmallScreen /> : ''}
       <Loading isLoading={isLoading} />
       <audio
         id="myaudio"
@@ -369,7 +378,6 @@ const Game = () => {
       <p className="combo" style={color}>
         {combo > 0 ? `${combo} COMBO` : ''}
       </p>
-      <p>Width: {vw}</p>
       <p className="lateNote" style={{ fontSize: fontSize }}>
         Bad Timing!
       </p>

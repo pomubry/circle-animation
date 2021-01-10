@@ -29,9 +29,10 @@
     }
   }
 
-  input[type='text'] {
+  input[type='text'],
+  input[type='password'] {
     outline: none;
-    margin-left: 3px;
+    margin-left: 10px;
   }
 }
 

@@ -64,7 +64,10 @@ const appReducer = (state, action) => {
       };
 
     case 'LOGOUT':
-      return appState;
+      return {
+        ...appState,
+        beatmapArr: state.beatmapArr,
+      };
 
     default:
       return state;

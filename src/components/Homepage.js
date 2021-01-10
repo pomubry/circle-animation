@@ -1,7 +1,7 @@
 import { useContext } from 'react';
-import { Link } from 'react-router-dom';
 import { AppContext } from './Reducers/appReducer';
 import { Helmet } from 'react-helmet-async';
+import HowToPlay from './HowToPlay';
 
 const Homepage = () => {
   const { state } = useContext(AppContext);
@@ -12,12 +12,11 @@ const Homepage = () => {
         <title>Circle-Animation | Home</title>
       </Helmet>
       {state.isAuth ? (
-        <p>
-          Welcome to Circle Animation! Please go to <Link to="/menu">Menu</Link>{' '}
-          to play the game.{' '}
-        </p>
+        <>
+          <HowToPlay />
+        </>
       ) : (
-        <div style={{ margin: 'auto' }}>
+        <div className="logged-out" style={{ margin: 'auto' }}>
           <p>Please login or register.</p>
         </div>
       )}

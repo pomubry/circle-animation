@@ -1,5 +1,5 @@
 import { useContext, useEffect } from 'react';
-import { Switch, Route, useLocation } from 'react-router-dom';
+import { Switch, Route, useLocation, Redirect } from 'react-router-dom';
 import { AppContext } from './components/Reducers/appReducer';
 import { HelmetProvider } from 'react-helmet-async';
 
@@ -27,7 +27,8 @@ const App = () => {
         .then((res) => res.json())
         .then((beatmapArr) =>
           dispatch({ type: 'FETCH_BEATMAP', payload: { beatmapArr } })
-        );
+        )
+        .catch((e) => console.log(e));
     }
   }, [dispatch]);
 
@@ -55,10 +56,10 @@ const App = () => {
             <UserAuth />
           </Route>
           <Route path="/menu">
-            <MainMenu />
+            {state.isAuth ? <MainMenu /> : <Redirect to="/login" />}
           </Route>
           <Route path="/game">
-            <Game />
+            {state.isAuth ? <Game /> : <Redirect to="/login" />}
           </Route>
           <Route path="*" component={ErrorPage} />
         </Switch>

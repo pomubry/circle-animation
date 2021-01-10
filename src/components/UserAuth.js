@@ -47,7 +47,7 @@ function UserAuth() {
           const { username, beatmap } = data.message;
           dispatch({ type: 'LOGIN', payload: { username, beatmap } });
           setIsLoading(false);
-          history.push('/menu');
+          history.push('/');
         } else {
           const { username, password } = data.error;
           setIsLoading(false);

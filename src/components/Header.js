@@ -1,6 +1,7 @@
 import { useState, useContext } from 'react';
 import { Link, useHistory, useLocation } from 'react-router-dom';
 import { AppContext } from './Reducers/appReducer';
+import { FaRegUser } from 'react-icons/fa';
 
 import Loading from './Loading';
 
@@ -50,7 +51,10 @@ function Header() {
   let loggedIn = (
     <>
       <ul>
-        <li>{usernameUp()}</li>
+        <li>
+          <FaRegUser />
+          {usernameUp()}
+        </li>
         <li>
           <Link
             to="/menu"

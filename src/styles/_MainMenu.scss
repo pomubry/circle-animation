@@ -162,6 +162,12 @@ input[type='range'] {
   }
 }
 
+.loading-bm {
+  background: $shio;
+  text-align: center;
+  padding: 10px 0;
+}
+
 @media only screen and (max-width: 800px) {
   .fullscreen {
     span {

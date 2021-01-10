@@ -267,17 +267,19 @@ function MainMenu() {
           </div>
         </div>
         <div className="song-arr">
-          {filteredBeatmaps.length > 0
-            ? filteredBeatmaps.map(({ info }) => (
-                <Song
-                  song={info}
-                  key={info.code}
-                  userBeatmap={userBeatmap.filter(
-                    (obj) => obj.code === info.code
-                  )}
-                />
-              ))
-            : 'Loading'}
+          {filteredBeatmaps.length > 0 ? (
+            filteredBeatmaps.map(({ info }) => (
+              <Song
+                song={info}
+                key={info.code}
+                userBeatmap={userBeatmap.filter(
+                  (obj) => obj.code === info.code
+                )}
+              />
+            ))
+          ) : (
+            <p className="loading-bm">Loading beatmaps...</p>
+          )}
         </div>
       </div>
     </div>

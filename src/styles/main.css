@@ -572,6 +572,18 @@ input[type='range']::-webkit-slider-thumb {
   padding: 10px 0;
 }
 
+.loading-bm svg {
+  -webkit-animation: loading linear infinite 1.5s;
+          animation: loading linear infinite 1.5s;
+}
+
+@keyframes loading {
+  100% {
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+  }
+}
+
 @media only screen and (max-width: 800px) {
   .fullscreen span {
     display: none;
@@ -691,6 +703,7 @@ input[type='range']::-webkit-slider-thumb {
   background-size: cover;
   background-position: center;
   position: relative;
+  overflow: hidden;
 }
 
 .top-btn {
@@ -980,6 +993,17 @@ input[type='range']::-webkit-slider-thumb {
   position: absolute;
   top: 10vh;
   left: calc(50% - (70px / 2));
+  font-size: 1.2rem;
+  font-weight: bolder;
+  color: black;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+}
+
+.indiv-button:disabled {
+  opacity: 0.5;
 }
 
 .btn-1 {

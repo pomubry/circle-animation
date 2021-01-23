@@ -166,6 +166,15 @@ input[type='range'] {
   background: $shio;
   text-align: center;
   padding: 10px 0;
+
+  svg {
+    animation: loading linear infinite 1.5s;
+  }
+}
+@keyframes loading {
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 @media only screen and (max-width: 800px) {

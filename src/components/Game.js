@@ -56,7 +56,7 @@ const Game = () => {
     let randomImgIndex = Math.floor(Math.random() * imgArr.length);
     dispatch({ type: 'RANDOM_IMG_INDEX', payload: { randomImgIndex } });
     dispatch({ type: 'VW', payload: { vw: window.innerWidth } });
-  }, []);
+  }, [beatmapSrc]);
 
   useEffect(() => {
     let currentNote = beatmapSrc.song_info[0].notes[index];

@@ -7,6 +7,14 @@
   position: absolute;
   top: 10vh;
   left: calc(50% - (70px / 2));
+  font-size: 1.2rem;
+  font-weight: bolder;
+  color: black;
+  user-select: none;
+
+  &:disabled {
+    opacity: 0.5;
+  }
 }
 
 @for $num from 1 through 9 {

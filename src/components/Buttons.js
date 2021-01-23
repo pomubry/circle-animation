@@ -1,4 +1,9 @@
+import { useContext } from 'react';
+import { AppContext } from './Reducers/appReducer';
+
 function Buttons({ handleTap, isAutoPlay, attribColor }) {
+  const { state } = useContext(AppContext);
+
   let color = [
     'radial-gradient(rgba(255,255,255,0.6), rgba(154,163,170,1))',
     'radial-gradient(rgba(255,255,255,0.6), rgba(233,76,83,1))',
@@ -18,7 +23,9 @@ function Buttons({ handleTap, isAutoPlay, attribColor }) {
         data-position={9 - index}
         onTouchStart={handleTap}
         disabled={isAutoPlay}
-      ></button>
+      >
+        {state.isLabeled && 9 - index}
+      </button>
     );
   });
   arr.reverse();

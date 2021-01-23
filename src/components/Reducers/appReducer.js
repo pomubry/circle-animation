@@ -16,6 +16,7 @@ const appState = {
   username: '',
   beatmap: {},
   isAuth: false,
+  isLabeled: false,
 };
 
 const appReducer = (state, action) => {
@@ -67,6 +68,12 @@ const appReducer = (state, action) => {
       return {
         ...appState,
         beatmapArr: state.beatmapArr,
+      };
+
+    case 'ISLABELED':
+      return {
+        ...state,
+        isLabeled: action.payload.isLabeled,
       };
 
     default:

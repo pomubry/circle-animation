@@ -6,6 +6,7 @@ import groupLogo from '../pictures/group-logo/groupLogo';
 import attributeLogo from '../pictures/attribute/attributeLogo';
 import { RiArrowUpDownFill } from 'react-icons/ri';
 import { Helmet } from 'react-helmet-async';
+import { FiLoader } from 'react-icons/fi';
 
 function MainMenu() {
   const { state, dispatch } = useContext(AppContext);
@@ -19,6 +20,7 @@ function MainMenu() {
     tapVolume,
     isAutoPlay,
     beatmap,
+    isLabeled,
   } = state;
 
   let groupImgSrcObj = groupLogo.filter((obj) => obj.name === group);
@@ -112,6 +114,11 @@ function MainMenu() {
     dispatch({ type: 'AUTOPLAY_TOGGLE', payload: { isAutoPlay } });
   };
 
+  const toggleIsLabeled = (e) => {
+    let isLabeled = e.target.id === 'label-true';
+    dispatch({ type: 'ISLABELED', payload: { isLabeled } });
+  };
+
   return (
     <div className="MainMenu">
       <Helmet>
@@ -201,6 +208,37 @@ function MainMenu() {
               checked={!isAutoPlay}
             />
           </div>
+
+          <p>Notes Label:</p>
+          <div className="auto-play-radio">
+            <label
+              htmlFor="label-true"
+              className={`radio-label${isLabeled ? ' radio-selected' : ''}`}
+            >
+              On
+            </label>
+            <input
+              type="radio"
+              name="autoplay"
+              id="label-true"
+              onChange={toggleIsLabeled}
+              checked={isLabeled}
+            />
+            <label
+              htmlFor="label-false"
+              className={`radio-label${!isLabeled ? ' radio-selected' : ''}`}
+            >
+              Off
+            </label>
+            <input
+              type="radio"
+              name="autoplay"
+              id="label-false"
+              onChange={toggleIsLabeled}
+              checked={!isLabeled}
+            />
+          </div>
+
           <label htmlFor="note-speed">
             Note Speed <sub className="speed-tip">(Tip: Higher is slower)</sub>{' '}
             :
@@ -278,7 +316,9 @@ function MainMenu() {
               />
             ))
           ) : (
-            <p className="loading-bm">Loading beatmaps...</p>
+            <p className="loading-bm">
+              <FiLoader /> Loading beatmaps...
+            </p>
           )}
         </div>
       </div>

@@ -23,7 +23,6 @@ function Song({ song, userBeatmap }) {
         songAttribute,
       },
     });
-    dispatch({ type: 'ON_GAME', payload: { onGame: true } });
   };
 
   return (

@@ -56,10 +56,10 @@ const App = () => {
             <UserAuth />
           </Route>
           <Route path="/menu">
-            {state.isAuth ? <MainMenu /> : <Redirect to="/login" />}
+            {state.isAuth ? <MainMenu /> : <Redirect to="/" />}
           </Route>
           <Route path="/game">
-            {state.isAuth ? <Game /> : <Redirect to="/login" />}
+            {state.isAuth ? <Game /> : <Redirect to="/" />}
           </Route>
           <Route path="*" component={ErrorPage} />
         </Switch>

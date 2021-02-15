@@ -81,7 +81,7 @@ function UserAuth() {
       </Helmet>
       <Loading isLoading={isLoading} />
       <form onSubmit={submitAuth}>
-        <p>{location.pathname === '/login' ? 'Login ' : 'Registration '}Form</p>
+        <p>{location.pathname === '/login' ? 'Login ' : 'Registration '}</p>
         <div className="user-cred">
           <div className="input-div">
             <FiUserCheck />
@@ -112,6 +112,18 @@ function UserAuth() {
           </div>
           <div className="error-Auth">{passwordError}</div>
         </div>
+        {location.pathname === '/login' && (
+          <div className="free">
+            <p>
+              If you don't want to create a new account, you can use a sample
+              account.
+            </p>
+            <p>
+              Just login with 'sample' without the quotes as both its username
+              and password.
+            </p>
+          </div>
+        )}
         <button>
           <FiLogIn />
           {location.pathname === '/login' ? 'Login ' : 'Register '}

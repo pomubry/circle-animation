@@ -9,12 +9,20 @@
     align-items: center;
     justify-content: space-around;
     width: 40%;
-    height: 40%;
+    min-height: 50%;
     background-color: $light-gray;
     position: relative;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+
+    .free {
+      p {
+        font-size: 0.7rem;
+        color: $shio;
+        text-align: center;
+      }
+    }
 
     button {
       font-family: 'Poppins', sans-serif;
@@ -66,6 +74,18 @@
     .input-div {
       display: flex;
       justify-content: center;
+    }
+  }
+}
+
+@media only screen and (max-width: 550px) {
+  .user-auth {
+    form {
+      .free {
+        p {
+          font-size: 0.5rem;
+        }
+      }
     }
   }
 }

@@ -275,13 +275,19 @@ svg {
   -ms-flex-pack: distribute;
       justify-content: space-around;
   width: 40%;
-  height: 40%;
+  min-height: 50%;
   background-color: #262a31;
   position: relative;
   top: 50%;
   left: 50%;
   -webkit-transform: translate(-50%, -50%);
           transform: translate(-50%, -50%);
+}
+
+.user-auth form .free p {
+  font-size: 0.7rem;
+  color: #1bb588;
+  text-align: center;
 }
 
 .user-auth form button {
@@ -348,6 +354,12 @@ svg {
     -webkit-box-pack: center;
         -ms-flex-pack: center;
             justify-content: center;
+  }
+}
+
+@media only screen and (max-width: 550px) {
+  .user-auth form .free p {
+    font-size: 0.5rem;
   }
 }
 

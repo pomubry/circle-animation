@@ -62,13 +62,13 @@
   @if $num < 6 {
     @keyframes moving-#{$num} {
       100% {
-        transform: translate(-$x#{vh}, $y#{vh});
+        transform: translate(-$x * 1vh, $y * 1vh);
       }
     }
   } @else {
     @keyframes moving-#{$num} {
       100% {
-        transform: translate($x#{vh}, $y#{vh});
+        transform: translate($x * 1vh, $y * 1vh);
       }
     }
   }
@@ -85,7 +85,7 @@
   a {
     padding: 5px 10px;
     cursor: pointer;
-    font-family: 'Poppins', sans-serif;
+    font-family: "Poppins", sans-serif;
     background-color: $light-gray;
     border: none;
     text-decoration: none;
@@ -109,7 +109,7 @@
 }
 
 .combo {
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
   font-weight: 900;
   letter-spacing: 3px;
   font-size: 1.3rem;
@@ -119,7 +119,7 @@
 }
 
 .lateNote {
-  font-family: 'Orbitron', sans-serif;
+  font-family: "Orbitron", sans-serif;
   font-weight: bold;
   letter-spacing: 3px;
   align-self: center;

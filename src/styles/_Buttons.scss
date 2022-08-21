@@ -24,11 +24,11 @@
 
   @if $num < 6 {
     .btn-#{$num} {
-      transform: translate(-$x#{vh}, $y#{vh});
+      transform: translate(-$x * 1vh, $y * 1vh);
     }
   } @else {
     .btn-#{$num} {
-      transform: translate($x#{vh}, $y#{vh});
+      transform: translate($x * 1vh, $y * 1vh);
     }
   }
 }

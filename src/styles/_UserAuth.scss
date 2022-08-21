@@ -1,16 +1,23 @@
 .user-auth {
   background-color: $dark-gray;
-  height: 90vh;
+  min-height: 90vh;
   color: white;
+  padding: 20px;
+  display: grid;
+  place-content: center;
+  position: relative;
 
   form {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: space-around;
-    width: 40%;
+    gap: 25px;
+    max-width: 600px;
     min-height: 50%;
     background-color: $light-gray;
+    padding: 20px;
+    border-radius: 10px;
     position: relative;
     top: 50%;
     left: 50%;
@@ -18,14 +25,18 @@
 
     .free {
       p {
-        font-size: 0.7rem;
+        font-size: 0.8rem;
         color: $shio;
         text-align: center;
+      }
+
+      .strong {
+        font-weight: 900;
       }
     }
 
     button {
-      font-family: 'Poppins', sans-serif;
+      font-family: "Poppins", sans-serif;
       font-size: 16px;
       padding: 5px 10px;
       cursor: pointer;
@@ -34,74 +45,27 @@
       background-color: $dark-gray;
       color: #ffffff;
       border-style: none;
+      border-radius: 5px;
     }
   }
 
-  input[type='text'],
-  input[type='password'] {
+  input[type="text"],
+  input[type="password"] {
     outline: none;
-    margin-left: 10px;
+    margin-top: 10px;
+    padding: 5px;
+    border-radius: 5px;
   }
 }
 
 .error-Auth {
   color: rgb(241, 54, 54);
   font-size: 12px;
+  margin-top: 10px;
 }
 
 .user-cred {
   display: flex;
   flex-direction: column;
-  align-items: center;
-
-  .input-div {
-    display: flex;
-    align-items: center;
-  }
-}
-
-@media only screen and (max-width: 350px) {
-  .user-auth {
-    form {
-      width: 80%;
-    }
-
-    input[type='text'] {
-      width: 50%;
-      margin-left: 5px;
-    }
-
-    .input-div {
-      display: flex;
-      justify-content: center;
-    }
-  }
-}
-
-@media only screen and (max-width: 550px) {
-  .user-auth {
-    form {
-      .free {
-        p {
-          font-size: 0.5rem;
-        }
-      }
-    }
-  }
-}
-
-@media only screen and (max-width: 768px) {
-  .user-auth {
-    form {
-      width: 80%;
-    }
-  }
-}
-
-@media only screen and (max-height: 414px) {
-  .user-auth {
-    form {
-      height: 60%;
-    }
-  }
+  align-items: flex-start;
 }

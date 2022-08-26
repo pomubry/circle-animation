@@ -172,10 +172,16 @@ const Game = () => {
   const handleTap = (e) => {
     let btnPosition = Number(e.target.getAttribute("data-position"));
 
-    if (Number(e.target.getAttribute("data-position")) === 0 && !isAutoPlay) {
+    // identify which btn is pressed based on position
+    if (btnPosition === 0 && !isAutoPlay) {
       for (let num = 49, index = 1; num < 58; num++, index++) {
         if (num === e.keyCode) btnPosition = index;
       }
+    }
+
+    // toggle game state when `space` is pressed
+    if (e.keyCode === 32) {
+      playing ? pauseGame() : startGame();
     }
 
     let isSecondNote =
@@ -341,7 +347,6 @@ const Game = () => {
       let btn9 = document.querySelector(".btn-9").getBoundingClientRect();
       let game = document.querySelector(".Game").getBoundingClientRect();
       let btnWidthTotal = btn9.right - btn1.x;
-      console.log(game.width < btnWidthTotal);
       return game.width < btnWidthTotal;
     }
   };

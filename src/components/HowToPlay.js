@@ -1,9 +1,9 @@
-import { BsArrowReturnRight } from 'react-icons/bs';
-import { Link } from 'react-router-dom';
-import filter from '../pictures/filter.PNG';
-import scroll from '../pictures/scroll.PNG';
-import songList from '../pictures/song-list.PNG';
-import game from '../pictures/game.png';
+import { BsArrowReturnRight } from "react-icons/bs";
+import { Link } from "react-router-dom";
+import filter from "../pictures/filter.PNG";
+import scroll from "../pictures/scroll.PNG";
+import songList from "../pictures/song-list.PNG";
+import game from "../pictures/game.png";
 
 const HowToPlay = () => {
   return (
@@ -34,8 +34,8 @@ const HowToPlay = () => {
         <p>
           <BsArrowReturnRight />
           ON KEYBOARD, PRESS THE CORRESPONDING NUMBERS WHERE THE NOTES ARE
-          HEADING AT THE RIGHT MOMENT. IF YOU ARE ON MOBILE, TAPPING THE OUTER
-          CIRCLES WILL ALSO WORK.
+          HEADING ACCORDING TO THE RHYTHM. PRESS THE SPACEBAR TO TOGGLE
+          PLAY/PAUSE. IF YOU ARE ON MOBILE, SIMPLY TAP THE NOTES!
         </p>
       </div>
 

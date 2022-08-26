@@ -3,6 +3,7 @@
   background-color: $dark-gray;
   color: white;
   position: relative;
+  padding: 10px;
 
   h1 {
     text-align: center;
@@ -26,7 +27,7 @@
   cursor: pointer;
   background-color: $light-gray;
   color: white;
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
   transition: all 0.25s ease;
   outline: none;
   display: flex;
@@ -81,7 +82,7 @@
   select {
     background-color: $light-gray;
     color: white;
-    font-family: 'Poppins', sans-serif;
+    font-family: "Poppins", sans-serif;
     cursor: pointer;
     appearance: none;
     padding: 2px 5px;
@@ -108,13 +109,13 @@
   }
 
   label,
-  input[type='radio'] {
+  input[type="radio"] {
     cursor: pointer;
     appearance: none;
   }
 }
 
-input[type='range'] {
+input[type="range"] {
   cursor: pointer;
   border-radius: 8px;
   height: 8px;

@@ -1,7 +1,7 @@
 function ErrorPage() {
   return (
     <div className="error-page">
-      <p>This page doesnt exist.</p>
+      <p>This page doesn't exist.</p>
     </div>
   );
 }

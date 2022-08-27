@@ -50,10 +50,10 @@ const App = () => {
             <Homepage />
           </Route>
           <Route path="/login">
-            <UserAuth />
+            {state.isAuth ? <Redirect to="/" /> : <UserAuth />}
           </Route>
           <Route path="/register">
-            <UserAuth />
+            {state.isAuth ? <Redirect to="/" /> : <UserAuth />}
           </Route>
           <Route path="/menu">
             {state.isAuth ? <MainMenu /> : <Redirect to="/" />}

@@ -23,16 +23,9 @@
     left: 50%;
     transform: translate(-50%, -50%);
 
-    .free {
-      p {
-        font-size: 0.8rem;
-        color: $shio;
-        text-align: center;
-      }
-
-      .strong {
-        font-weight: 900;
-      }
+    .btnContainer {
+      display: flex;
+      gap: 5px;
     }
 
     button {

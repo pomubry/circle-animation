@@ -213,13 +213,9 @@ svg {
   left: 50%;
   transform: translate(-50%, -50%);
 }
-.user-auth form .free p {
-  font-size: 0.8rem;
-  color: rgb(27, 181, 136);
-  text-align: center;
-}
-.user-auth form .free .strong {
-  font-weight: 900;
+.user-auth form .btnContainer {
+  display: flex;
+  gap: 5px;
 }
 .user-auth form button {
   font-family: "Poppins", sans-serif;

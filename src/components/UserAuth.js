@@ -1,10 +1,11 @@
-import { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { useHistory, useLocation } from "react-router-dom";
 import { FiUserCheck, FiUnlock, FiLogIn } from "react-icons/fi";
 import { AppContext } from "./Reducers/appReducer";
 import { Helmet } from "react-helmet-async";
 
 import Loading from "./Loading";
+import { BsPen } from "react-icons/bs";
 
 function UserAuth() {
   const { dispatch } = useContext(AppContext);
@@ -62,6 +63,12 @@ function UserAuth() {
       });
   };
 
+  const fillForm = (e) => {
+    e.preventDefault();
+    setUsername("sample");
+    setPassword("sample");
+  };
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     if (name === "username") {
@@ -117,22 +124,18 @@ function UserAuth() {
             </div>
             <div className="error-Auth">{passwordError}</div>
           </div>
-          {location.pathname === "/login" && (
-            <div className="free">
-              <p>
-                If you don't want to create a new account, you can use a sample
-                account.
-              </p>
-              <p>
-                Just login with <span className="strong">'sample'</span> without
-                the quotes as both its username and password.
-              </p>
-            </div>
-          )}
-          <button>
-            <FiLogIn />
-            {location.pathname === "/login" ? "Login " : "Register "}
-          </button>
+
+          <div className="btnContainer">
+            <button type="submit">
+              <FiLogIn />
+              {location.pathname === "/login" ? "Login " : "Register "}
+            </button>
+            {location.pathname === "/login" && (
+              <button onClick={fillForm}>
+                <BsPen /> Free Account
+              </button>
+            )}
+          </div>
         </form>
       </div>
     </>

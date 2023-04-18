@@ -1,6 +1,6 @@
 # Circle Animation
 
-The frontend for **circle animation** made mostly with React and Sass.
+The frontend for **circle animation** made mostly with Vue and Sass.
 
 Give the application a try [here](https://pomubry.github.io/circle-animation)
 

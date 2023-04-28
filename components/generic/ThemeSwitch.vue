@@ -1,31 +1,31 @@
 <script setup lang="ts">
-import { Switch } from "@headlessui/vue";
-const isDarkMode = ref<boolean | null>(null);
+  import { Switch } from "@headlessui/vue";
+  const isDarkMode = ref<boolean | null>(null);
 
-const toggle = () => {
-  if (getAppTheme() === "dark") {
-    setLightMode();
-    isDarkMode.value = false;
-  } else {
-    setDarkMode();
-    isDarkMode.value = true;
-  }
-};
+  const toggle = () => {
+    if (getAppTheme() === "dark") {
+      setLightMode();
+      isDarkMode.value = false;
+    } else {
+      setDarkMode();
+      isDarkMode.value = true;
+    }
+  };
 
-onMounted(() => {
-  if (getAppTheme() === "dark") {
-    isDarkMode.value = true;
-  } else {
-    isDarkMode.value = false;
-  }
-});
+  onMounted(() => {
+    if (getAppTheme() === "dark") {
+      isDarkMode.value = true;
+    } else {
+      isDarkMode.value = false;
+    }
+  });
 </script>
 
 <template>
   <Switch
     v-if="isDarkMode !== null"
-    @click="toggle"
     class="relative inline-flex h-6 w-11 items-center rounded-full bg-gray-100 dark:bg-gray-900"
+    @click="toggle"
   >
     <span class="sr-only">Change Theme</span>
     <span
@@ -35,14 +35,14 @@ onMounted(() => {
       <Transition name="theme">
         <Icon
           v-if="isDarkMode"
-          name="material-symbols:dark-mode"
           key="darkMode"
+          name="material-symbols:dark-mode"
           class="absolute left-0 h-4 w-4"
         />
         <Icon
           v-else
-          name="material-symbols:light-mode"
           key="lightMode"
+          name="material-symbols:light-mode"
           class="absolute left-0 h-4 w-4"
         />
       </Transition>
@@ -51,13 +51,13 @@ onMounted(() => {
 </template>
 
 <style>
-.theme-enter-active,
-.theme-leave-active {
-  transition: opacity 0.5s ease;
-}
+  .theme-enter-active,
+  .theme-leave-active {
+    transition: opacity 0.5s ease;
+  }
 
-.theme-enter-from,
-.theme-leave-to {
-  opacity: 0;
-}
+  .theme-enter-from,
+  .theme-leave-to {
+    opacity: 0;
+  }
 </style>

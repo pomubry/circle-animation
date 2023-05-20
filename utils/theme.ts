@@ -1,4 +1,4 @@
-export const appThemeKey = "cani-tw-theme";
+export const appThemeKey = "tw-theme";
 
 export const getAppTheme = () => {
   if (

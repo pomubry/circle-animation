@@ -1,35 +1,14 @@
 <script setup lang="ts">
-  import { Toast } from "~/utils/validation";
-
   const userStore = useUserStore();
-  const toastProps = ref<Toast | null>(null);
-  const toastIndex = ref<NodeJS.Timeout>();
-
-  const closeToast = () => {
-    toastProps.value = null;
-    clearTimeout(toastIndex.value);
-    toastIndex.value = undefined;
-  };
+  const { toastProps, closeToast, handleToast } = useToast();
 
   const handleLogout = async () => {
     const payload = await userStore.logout();
 
     if (payload) {
-      toastProps.value = payload;
-      clearTimeout(toastIndex.value);
-      toastIndex.value = undefined;
-
-      const index = setTimeout(() => {
-        toastProps.value = null;
-        toastIndex.value = undefined;
-      }, 3000);
-      toastIndex.value = index;
+      handleToast(payload);
     }
   };
-
-  onUnmounted(() => {
-    clearTimeout(toastIndex.value);
-  });
 </script>
 
 <template>

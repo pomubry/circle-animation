@@ -1,12 +1,12 @@
 <script setup lang="ts">
   const userStore = useUserStore();
-  const { toastProps, closeToast, handleToast } = useToast();
+  const { ToastComponent, setToastProps } = useToast();
 
   const handleLogout = async () => {
     const payload = await userStore.logout();
 
     if (payload) {
-      handleToast(payload);
+      setToastProps(payload);
     }
   };
 </script>
@@ -54,6 +54,7 @@
       </ul>
     </nav>
     <GenericThemeSwitch />
+    <ToastComponent />
   </header>
 
   <slot />
@@ -65,8 +66,6 @@
       </a>
     </p>
   </footer>
-
-  <GenericToast :toast-prop="toastProps" @close-toast="closeToast" />
 </template>
 
 <style lang="postcss" scoped>

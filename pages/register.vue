@@ -3,7 +3,7 @@
     middleware: "auth",
   });
 
-  const { toastProps, closeToast, handleToast } = useToast();
+  const { ToastComponent, setToastProps } = useToast();
 </script>
 
 <template>
@@ -15,7 +15,7 @@
         >mation
       </h1>
     </div>
-    <RegisterForm @toast="handleToast" />
+    <RegisterForm @set-toast-props="setToastProps" />
   </div>
-  <GenericToast :toast-prop="toastProps" @close-toast="closeToast" />
+  <ToastComponent />
 </template>

@@ -1,3 +1,4 @@
+import GenericToast from "~/components/generic/Toast.vue";
 import { Toast } from "~/utils/validation";
 
 export function useToast() {
@@ -10,7 +11,7 @@ export function useToast() {
     toastIndex.value = undefined;
   };
 
-  const handleToast = async (payload: Toast) => {
+  const setToastProps = async (payload: Toast) => {
     toastProps.value = payload;
     clearTimeout(toastIndex.value);
     toastIndex.value = undefined;
@@ -22,13 +23,19 @@ export function useToast() {
     toastIndex.value = index;
   };
 
+  const ToastComponent = () => {
+    return h(GenericToast, {
+      toastProps: toastProps.value,
+      onCloseToast: closeToast,
+    });
+  };
+
   onUnmounted(() => {
     clearTimeout(toastIndex.value);
   });
 
   return {
-    toastProps,
-    closeToast,
-    handleToast,
+    ToastComponent,
+    setToastProps,
   };
 }

@@ -2,7 +2,7 @@
   import { Toast } from "~/utils/validation";
 
   const emit = defineEmits<{
-    (emit: "toast", payload: Toast): void;
+    (emit: "setToastProps", payload: Toast): void;
   }>();
 
   const username = ref("");
@@ -41,7 +41,7 @@
         usernameError.value = res.error.username;
         passwordError.value = res.error.password;
       } else {
-        emit("toast", res);
+        emit("setToastProps", res);
       }
     }
   };

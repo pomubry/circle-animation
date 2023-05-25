@@ -2,7 +2,7 @@
   import { Toast } from "~/utils/validation";
 
   interface PropType {
-    toastProp: Toast | null;
+    toastProps: Toast | null;
   }
   interface EmitType {
     (e: "closeToast"): void;
@@ -16,26 +16,26 @@
   <Teleport to="body">
     <Transition name="modal">
       <div
-        v-if="toastProp !== null"
+        v-if="toastProps !== null"
         class="fixed bottom-5 left-5 flex min-w-[14rem] max-w-[18rem] flex-col gap-5 rounded-lg bg-gray-100 p-3 text-gray-900 transition duration-300 dark:bg-gray-900 dark:text-gray-100"
       >
         <div class="flex justify-between">
           <h2
             class="font-semibold"
             :class="{
-              'text-red-500': toastProp.type === 'ERROR',
-              'dark:text-red-300': toastProp.type === 'ERROR',
-              'text-green-500': toastProp.type === 'SUCCESS',
-              'dark:text-green-300': toastProp.type === 'SUCCESS',
+              'text-red-500': toastProps.type === 'ERROR',
+              'dark:text-red-300': toastProps.type === 'ERROR',
+              'text-green-500': toastProps.type === 'SUCCESS',
+              'dark:text-green-300': toastProps.type === 'SUCCESS',
             }"
           >
-            {{ toastProp.title || "Oops! Please press the close button" }}
+            {{ toastProps.title || "Oops! Please press the close button" }}
           </h2>
           <button class="grid items-center" @click="$emit('closeToast')">
             <Icon class="text-xl" name="mdi:close-box-outline" />
           </button>
         </div>
-        <p class="text-sm md:text-base">{{ toastProp.description }}</p>
+        <p class="text-sm md:text-base">{{ toastProps.description }}</p>
       </div>
     </Transition>
   </Teleport>

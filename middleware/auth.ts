@@ -1,8 +1,9 @@
 export default defineNuxtRouteMiddleware(() => {
+  const userStore = useUserStore();
   const appConfig = useAppConfig();
   const cookie = useCookie(appConfig.authToken);
-  const userStore = useUserStore();
 
+  // Prevent going to /login & /register when already logged in
   if (cookie.value) {
     return navigateTo("/");
   } else {

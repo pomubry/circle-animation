@@ -19,15 +19,22 @@
       <p class="text-2xl hover:underline">
         <NuxtLink href="/">
           C<span class="text-green-500 duration-300 dark:text-green-300"
-            >ani</span
+            >Ani</span
           >
         </NuxtLink>
       </p>
       <ul class="mr-5 flex gap-3">
         <ClientOnly>
           <template v-if="userStore.user">
-            <li class="text-green-500 duration-300 dark:text-green-300">
+            <li class="text-purple-500 duration-300 dark:text-purple-300">
               {{ userStore.user.message.username }}
+            </li>
+            <li class="hover:underline">
+              <NuxtLink
+                href="/beatmaps"
+                exact-active-class="auth-link-exact-active"
+                >Beatmaps</NuxtLink
+              >
             </li>
             <li class="hover:underline">
               <button @click="handleLogout">Logout</button>

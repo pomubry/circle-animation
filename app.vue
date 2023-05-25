@@ -6,5 +6,6 @@
       <NuxtLoadingIndicator />
       <NuxtPage />
     </NuxtLayout>
+    <GenericOrientationModal />
   </div>
 </template>

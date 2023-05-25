@@ -3,7 +3,12 @@
 import { appThemeKey } from "./utils/theme";
 
 export default defineNuxtConfig({
-  modules: ["nuxt-icon", "@pinia/nuxt", "@pinia-plugin-persistedstate/nuxt"],
+  modules: [
+    "@pinia/nuxt",
+    "@pinia-plugin-persistedstate/nuxt",
+    "@vueuse/nuxt",
+    "nuxt-icon",
+  ],
   css: ["~/assets/css/main.css"],
   postcss: {
     plugins: {

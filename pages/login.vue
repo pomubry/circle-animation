@@ -3,6 +3,11 @@
     middleware: "auth",
   });
 
+  useHead({
+    title: "CAni | Login",
+    meta: [{ name: "description", content: "Login to play!" }],
+  });
+
   const { ToastComponent, setToastProps } = useToast();
 </script>
 

@@ -3,6 +3,11 @@
     middleware: "auth",
   });
 
+  useHead({
+    title: "CAni | Register",
+    meta: [{ name: "description", content: "Register to play!" }],
+  });
+
   const { ToastComponent, setToastProps } = useToast();
 </script>
 

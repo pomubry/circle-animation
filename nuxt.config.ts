@@ -13,7 +13,7 @@ export default defineNuxtConfig({
   },
   app: {
     head: {
-      title: "Cani",
+      title: "CAni",
       script: [
         {
           innerHTML: `

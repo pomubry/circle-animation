@@ -1,9 +1,13 @@
 const isAuthenticated = async (): Promise<{ isAuthenticated: boolean }> => {
+  const runtimeConfig = useRuntimeConfig();
   try {
-    const res = await fetch("http://localhost:5000/api/isAuthenticated", {
-      method: "GET",
-      credentials: "include",
-    });
+    const res = await fetch(
+      `${runtimeConfig.public.CANI_BE_URL}/api/isAuthenticated`,
+      {
+        method: "GET",
+        credentials: "include",
+      }
+    );
     const data = await res.json();
     return data;
   } catch (error) {

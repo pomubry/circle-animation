@@ -1,7 +1,7 @@
 export default defineNuxtRouteMiddleware(() => {
+  const runtimeConfig = useRuntimeConfig();
+  const cookie = useCookie(runtimeConfig.public.AUTH_TOKEN);
   const userStore = useUserStore();
-  const appConfig = useAppConfig();
-  const cookie = useCookie(appConfig.authToken);
 
   // Prevent going to /login & /register when already logged in
   if (cookie.value) {

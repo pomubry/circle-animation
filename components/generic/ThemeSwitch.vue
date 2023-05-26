@@ -1,5 +1,6 @@
 <script setup lang="ts">
   import { Switch } from "@headlessui/vue";
+
   const isDarkMode = ref<boolean | null>(null);
 
   const toggle = () => {

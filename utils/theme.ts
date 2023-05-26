@@ -1,9 +1,13 @@
-export const appThemeKey = "tw-theme";
+export const getThemeKey = () => {
+  const runtimeConfig = useRuntimeConfig();
+  return runtimeConfig.public.TW_KEY;
+};
 
 export const getAppTheme = () => {
+  const themeKey = getThemeKey();
   if (
-    localStorage.getItem(appThemeKey) === "dark" ||
-    (!(appThemeKey in localStorage) &&
+    localStorage.getItem(themeKey) === "dark" ||
+    (!(themeKey in localStorage) &&
       window.matchMedia("(prefers-color-scheme: dark)").matches)
   ) {
     return "dark";
@@ -13,11 +17,13 @@ export const getAppTheme = () => {
 };
 
 export const setDarkMode = () => {
-  localStorage.setItem(appThemeKey, "dark");
+  const themeKey = getThemeKey();
+  localStorage.setItem(themeKey, "dark");
   document.documentElement.classList.add("dark");
 };
 
 export const setLightMode = () => {
-  localStorage.setItem(appThemeKey, "light");
+  const themeKey = getThemeKey();
+  localStorage.setItem(themeKey, "light");
   document.documentElement.classList.remove("dark");
 };

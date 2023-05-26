@@ -12,8 +12,9 @@ import {
 export const useUserStore = defineStore(
   "userStore",
   () => {
-    const user = ref<User | null>(null);
+    const runtimeConfig = useRuntimeConfig();
     const router = useRouter();
+    const user = ref<User | null>(null);
 
     async function register(
       body: UserCredentials
@@ -21,14 +22,17 @@ export const useUserStore = defineStore(
       user.value = null;
 
       try {
-        const res = await fetch("http://localhost:5000/api/register", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(body),
-          credentials: "include",
-        });
+        const res = await fetch(
+          `${runtimeConfig.public.CANI_BE_URL}/api/register`,
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(body),
+            credentials: "include",
+          }
+        );
         const data = await res.json();
 
         const userData = userSchema.safeParse(data);
@@ -78,14 +82,17 @@ export const useUserStore = defineStore(
       user.value = null;
 
       try {
-        const res = await fetch("http://localhost:5000/api/login", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(body),
-          credentials: "include",
-        });
+        const res = await fetch(
+          `${runtimeConfig.public.CANI_BE_URL}/api/login`,
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(body),
+            credentials: "include",
+          }
+        );
         const data = await res.json();
 
         const userData = userSchema.safeParse(data);
@@ -131,7 +138,7 @@ export const useUserStore = defineStore(
 
     async function logout(): Promise<Toast | undefined> {
       try {
-        await fetch("http://localhost:5000/api/logout", {
+        await fetch(`${runtimeConfig.public.CANI_BE_URL}/api/logout`, {
           method: "GET",
           credentials: "include",
         });

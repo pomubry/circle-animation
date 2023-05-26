@@ -1,7 +1,5 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 
-import { appThemeKey } from "./utils/theme";
-
 export default defineNuxtConfig({
   modules: [
     "@pinia/nuxt",
@@ -19,22 +17,13 @@ export default defineNuxtConfig({
   app: {
     head: {
       title: "CAni",
-      script: [
-        {
-          innerHTML: `
-      if (
-    localStorage.getItem("${appThemeKey}") === "dark" ||
-    (!("${appThemeKey}" in localStorage) &&
-      window.matchMedia("(prefers-color-scheme: dark)").matches)
-  ) {
-    localStorage.setItem("${appThemeKey}", "dark");
-    document.documentElement.classList.add("dark");
-  } else {
-    localStorage.setItem("${appThemeKey}", "light");
-    document.documentElement.classList.remove("dark");
-  }`,
-        },
-      ],
+    },
+  },
+  runtimeConfig: {
+    public: {
+      TW_KEY: "tw-theme",
+      CANI_BE_URL: "http://localhost:5000",
+      AUTH_TOKEN: "cani-auth",
     },
   },
 });

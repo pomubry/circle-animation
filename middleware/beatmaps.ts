@@ -1,7 +1,7 @@
 export default defineNuxtRouteMiddleware(async () => {
+  const runtimeConfig = useRuntimeConfig();
+  const cookie = useCookie(runtimeConfig.public.AUTH_TOKEN);
   const userStore = useUserStore();
-  const appConfig = useAppConfig();
-  const cookie = useCookie(appConfig.authToken);
 
   if (process.client) {
     // Only fetch on client because cookies won't be included if fetched on server

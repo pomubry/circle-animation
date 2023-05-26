@@ -7,9 +7,10 @@
     title: "CAni | Beatmaps",
     meta: [{ name: "description", content: "Choose the beatmap to play." }],
   });
+  const runtimeConfig = useRuntimeConfig();
   const settingsStore = useSettingsStore();
   const { data, pending, error, refresh } = useFetch(
-    "http://localhost:5000/api/beatmaps",
+    `${runtimeConfig.public.CANI_BE_URL}/api/beatmaps`,
     {
       transform: (res) => beatmapsSchema.safeParse(res),
     }

@@ -62,6 +62,7 @@
         class="input-form"
         type="text"
         name="username"
+        placeholder="Please enter your username"
         required
       />
       <span
@@ -79,6 +80,7 @@
         class="input-form"
         type="password"
         name="password"
+        placeholder="Please enter your password"
         required
         :min="6"
       />

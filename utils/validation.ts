@@ -14,29 +14,34 @@ export const userCredentialsSchema = z.object({
 export type UserCredentials = z.infer<typeof userCredentialsSchema>;
 
 export const authErrorSchema = z.object({
-  error: z.object({
-    username: z.string(),
-    password: z.string(),
+  message: z.string(),
+  details: z.object({
+    username: z.object({ __errors: z.array(z.string()) }).optional(),
+    password: z.object({ __errors: z.array(z.string()) }).optional(),
   }),
 });
 export type AuthError = z.infer<typeof authErrorSchema>;
 
-const beatmapRecordSchema = z.object({
-  highestCombo: z.number(),
-  _id: z.string(),
-  code: z.string(),
-});
 export const userSchema = z.object({
-  message: z.object({
-    username: z.string(),
-    beatmap: z.object({
-      easy: z.array(beatmapRecordSchema),
-      normal: z.array(beatmapRecordSchema),
-      hard: z.array(beatmapRecordSchema),
-    }),
-  }),
+  username: z.string(),
+  notes: z.array(
+    z.object({
+      beatmap_id: z.string(),
+      highest_combo: z.coerce.number(),
+    })
+  ),
 });
 export type User = z.infer<typeof userSchema>;
+
+const noteSchema = z.object({
+  timing_sec: z.coerce.number(),
+  notes_attribute: z.coerce.number().min(1).max(3),
+  notes_level: z.coerce.number(),
+  effect: z.coerce.number(),
+  effect_value: z.coerce.number(),
+  position: z.coerce.number().min(1).max(9),
+});
+export type Note = z.infer<typeof noteSchema>;
 
 const beatmapSchema = z.object({
   _id: z.string(),
@@ -54,16 +59,7 @@ const beatmapSchema = z.object({
       z.object({
         member_category: z.coerce.number(),
         star: z.coerce.number(),
-        notes: z.array(
-          z.object({
-            timing_sec: z.coerce.number(),
-            notes_attribute: z.coerce.number(),
-            notes_level: z.coerce.number(),
-            effect: z.coerce.number(),
-            effect_value: z.coerce.number(),
-            position: z.coerce.number(),
-          })
-        ),
+        notes: z.array(noteSchema),
       })
     ),
     code: z.string(),

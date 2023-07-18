@@ -35,13 +35,15 @@ export const useUserStore = defineStore(
         );
         const data = await res.json();
 
+        // Validate correct user data
         const userData = userSchema.safeParse(data);
         if (userData.success) {
           user.value = userData.data;
-          router.push("/");
+          await router.push("/");
           return;
         }
 
+        // Validate correct form errors
         const authError = authErrorSchema.safeParse(data);
         if (authError.success) {
           return authError.data;
@@ -95,13 +97,15 @@ export const useUserStore = defineStore(
         );
         const data = await res.json();
 
+        // Validate correct user data
         const userData = userSchema.safeParse(data);
         if (userData.success) {
           user.value = userData.data;
-          router.push("/");
+          await router.push("/");
           return;
         }
 
+        // Validate correct form errors
         const authError = authErrorSchema.safeParse(data);
         if (authError.success) {
           return authError.data;

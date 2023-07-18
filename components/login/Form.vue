@@ -37,9 +37,10 @@
     isLoading.value = false;
 
     if (res) {
-      if ("error" in res) {
-        usernameError.value = res.error.username;
-        passwordError.value = res.error.password;
+      if ("details" in res) {
+        console.error(res.message);
+        usernameError.value = res.details?.username?.__errors.join(" ") || "";
+        passwordError.value = res.details?.password?.__errors.join(" ") || "";
       } else {
         emit("setToastProps", res);
       }

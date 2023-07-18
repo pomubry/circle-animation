@@ -9,7 +9,7 @@
   const settingsStore = useSettingsStore();
 
   const beforeContent = computed(() => {
-    const group = props.beatmap.info.song_info[0].member_category;
+    const group = props.beatmap.member_category;
     return {
       "before:bg-red-400": group === 1,
       "before:bg-blue-400": group === 2,
@@ -18,7 +18,7 @@
   });
 
   const afterContent = computed(() => {
-    const attribute = props.beatmap.info.song_info[0].notes[0].notes_attribute;
+    const attribute = props.beatmap.notes_attribute;
     return {
       "bg-red-400": attribute === 1,
       "bg-green-400": attribute === 2,
@@ -27,7 +27,7 @@
   });
 
   const attribImage = computed(() => {
-    const attribute = props.beatmap.info.song_info[0].notes[0].notes_attribute;
+    const attribute = props.beatmap.notes_attribute;
     switch (attribute) {
       case 0:
         return attribImages[0];
@@ -41,7 +41,7 @@
   });
 
   const groupImage = computed(() => {
-    const group = props.beatmap.info.song_info[0].member_category;
+    const group = props.beatmap.member_category;
     switch (group) {
       case 1:
         return groupLogos[1];
@@ -67,33 +67,36 @@
   }));
 
   const highestCombo = computed(() => {
-    const song = userStore.user?.message.beatmap[difficulty.value].find(
-      (beatmap) => {
-        return beatmap.code === props.beatmap.info.code;
-      }
+    const song = userStore.user?.notes.find(
+      (beatmap) => beatmap.beatmap_id === props.beatmap.beatmap_id
     );
-    return song?.highestCombo || "0";
+    return song?.highest_combo || 0;
   });
+
+  const setChosenBeatmap = (beatmap: Beatmap) => {
+    settingsStore.chosenBeatmap = beatmap;
+    return navigateTo("/game");
+  };
 </script>
 
 <template>
   <li
-    :key="beatmap._id"
+    :key="beatmap.beatmap_id"
     class="attrib relative flex justify-between overflow-hidden rounded-lg bg-gray-200 p-3 duration-300 dark:bg-gray-800"
     :class="beforeContent"
   >
     <div class="ml-3">
-      <p class="font-extrabold">{{ beatmap.info.song_name }}</p>
+      <p class="font-extrabold">
+        <button @click="setChosenBeatmap(beatmap)">
+          {{ beatmap.song_name }}
+        </button>
+      </p>
       <p class="text-xs font-semibold" :class="difficultyStyling">
         {{ difficulty[0].toUpperCase() + difficulty.slice(1) }}
       </p>
-      <ClientOnly>
-        <p class="text-xs">
-          Highest Combo: {{ highestCombo }}/{{
-            beatmap.info.song_info[0].notes.length
-          }}
-        </p>
-      </ClientOnly>
+      <p class="text-xs">
+        Highest Combo: {{ highestCombo }}/{{ beatmap.notes.length }}
+      </p>
     </div>
     <div class="relative h-14 p-2">
       <img :src="groupImage" alt="group logo" class="h-full" />

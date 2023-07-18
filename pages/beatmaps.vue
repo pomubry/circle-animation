@@ -7,6 +7,7 @@
     title: "CAni | Beatmaps",
     meta: [{ name: "description", content: "Choose the beatmap to play." }],
   });
+
   const runtimeConfig = useRuntimeConfig();
   const settingsStore = useSettingsStore();
   const { data, pending, error, refresh } = useFetch(
@@ -18,22 +19,16 @@
 
   const beatmaps = computed(() => {
     if (data.value?.success) {
-      const difficulty =
-        settingsStore.difficulty === 1
-          ? "easy"
-          : settingsStore.difficulty === 2
-          ? "normal"
-          : "hard";
-
-      let filteredBeatmaps = data.value.data[difficulty].filter((beatmap) => {
-        const songInfo = beatmap.info.song_info[0];
-        const isGroupMatched = songInfo.member_category === settingsStore.group;
+      let filteredBeatmaps = data.value.data.filter((beatmap) => {
+        const isDifficultyMatched =
+          beatmap.difficulty === settingsStore.difficulty;
+        const isGroupMatched = beatmap.member_category === settingsStore.group;
         const isAttributeMatched =
           settingsStore.attribute === 0
             ? true
-            : songInfo.notes[0].notes_attribute === settingsStore.attribute;
+            : beatmap.notes_attribute === settingsStore.attribute;
 
-        return isGroupMatched && isAttributeMatched;
+        return isDifficultyMatched && isGroupMatched && isAttributeMatched;
       });
 
       return filteredBeatmaps;
@@ -74,7 +69,7 @@
       <ul v-else-if="beatmaps" class="grid gap-3">
         <BeatmapsItem
           v-for="beatmap in beatmaps"
-          :key="beatmap._id"
+          :key="beatmap.beatmap_id"
           :beatmap="beatmap"
         />
       </ul>

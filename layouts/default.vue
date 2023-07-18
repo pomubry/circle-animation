@@ -27,7 +27,7 @@
         <ClientOnly>
           <template v-if="userStore.user">
             <li class="text-purple-500 duration-300 dark:text-purple-300">
-              {{ userStore.user.message.username }}
+              {{ userStore.user.username }}
             </li>
             <li class="hover:underline">
               <NuxtLink

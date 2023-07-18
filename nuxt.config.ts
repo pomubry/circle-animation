@@ -26,4 +26,12 @@ export default defineNuxtConfig({
       AUTH_TOKEN: "cani-auth",
     },
   },
+  routeRules: {
+    "/beatmaps": {
+      ssr: false,
+    },
+    "/game": {
+      ssr: false,
+    },
+  },
 });

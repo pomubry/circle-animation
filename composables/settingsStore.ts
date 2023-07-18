@@ -1,20 +1,21 @@
 import { acceptHMRUpdate, defineStore } from "pinia";
+import { Beatmap } from "~/utils/validation";
 
 type Group = 1 | 2 | 3;
 type Difficulty = 1 | 2 | 3;
 type Attribute = 0 | 1 | 2 | 3;
 
 export const speedValue = {
-  1: 2.2,
-  2: 2,
-  3: 1.8,
-  4: 1.6,
-  5: 1.4,
-  6: 1.2,
-  7: 1,
+  1: 1.5,
+  2: 1.4,
+  3: 1.3,
+  4: 1.2,
+  5: 1.1,
+  6: 1,
+  7: 0.9,
   8: 0.8,
-  9: 0.6,
-  10: 0.4,
+  9: 0.7,
+  10: 0.6,
 };
 
 export const useSettingsStore = defineStore(
@@ -25,9 +26,10 @@ export const useSettingsStore = defineStore(
     const attribute = ref<Attribute>(0);
     const isAutoplay = ref(false);
     const isLabeled = ref(false);
-    const speed = ref(4);
+    const speed = ref(9);
     const musicVolume = ref(0.1);
     const tapVolume = ref(0.1);
+    const chosenBeatmap = ref<Beatmap>();
 
     return {
       group,
@@ -38,10 +40,14 @@ export const useSettingsStore = defineStore(
       speed,
       musicVolume,
       tapVolume,
+      chosenBeatmap,
     };
   },
   {
-    persist: true,
+    persist: {
+      debug: true,
+      storage: persistedState.localStorage,
+    },
   }
 );
 

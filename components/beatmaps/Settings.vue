@@ -80,7 +80,8 @@
           </li>
           <li class="flex flex-col">
             <label for="musicVolume" class="flex justify-between"
-              >Music Volume: <span>{{ settingsStore.musicVolume }}</span></label
+              >Music Volume:
+              <span>{{ settingsStore.musicVolume * 10 }}</span></label
             >
             <input
               id="musicVolume"
@@ -94,7 +95,8 @@
           </li>
           <li class="flex flex-col">
             <label for="tapVolume" class="flex justify-between"
-              >Tap Volume: <span>{{ settingsStore.tapVolume }}</span></label
+              >Tap Volume:
+              <span>{{ settingsStore.tapVolume * 10 }}</span></label
             >
             <input
               id="tapVolume"

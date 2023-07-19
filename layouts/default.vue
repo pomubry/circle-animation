@@ -1,10 +1,11 @@
 <script setup lang="ts">
   const userStore = useUserStore();
+  const settingsStore = useSettingsStore();
   const { ToastComponent, setToastProps } = useToast();
 
   const handleLogout = async () => {
     const payload = await userStore.logout();
-
+    settingsStore.resetSettings();
     if (payload) {
       setToastProps(payload);
     }

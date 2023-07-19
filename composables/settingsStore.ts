@@ -31,6 +31,18 @@ export const useSettingsStore = defineStore(
     const tapVolume = ref(0.1);
     const chosenBeatmap = ref<Beatmap>();
 
+    function resetSettings() {
+      group.value = 3;
+      difficulty.value = 3;
+      attribute.value = 0;
+      isAutoplay.value = false;
+      isLabeled.value = false;
+      speed.value = 9;
+      musicVolume.value = 0.1;
+      tapVolume.value = 0.1;
+      chosenBeatmap.value = undefined;
+    }
+
     return {
       group,
       difficulty,
@@ -41,6 +53,7 @@ export const useSettingsStore = defineStore(
       musicVolume,
       tapVolume,
       chosenBeatmap,
+      resetSettings,
     };
   },
   {

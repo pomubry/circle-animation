@@ -42,6 +42,7 @@ export type Note = z.infer<typeof noteSchema>;
 
 const beatmapSchema = z.object({
   beatmap_id: z.string(),
+  code: z.string(),
   song_name: z.string(),
   difficulty: z.coerce.number(),
   notes_attribute: z.coerce.number().min(1).max(3),

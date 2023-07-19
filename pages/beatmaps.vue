@@ -1,6 +1,6 @@
 <script setup lang="ts">
   definePageMeta({
-    middleware: "beatmaps",
+    middleware: "request-auth",
   });
 
   useHead({

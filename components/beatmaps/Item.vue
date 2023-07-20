@@ -87,11 +87,15 @@
   >
     <div class="ml-3">
       <p class="font-extrabold">
-        <button @click="setChosenBeatmap(beatmap)">
-          {{ beatmap.song_name }}
+        {{ beatmap.song_name }}
+        <button
+          class="ml-2 rounded-lg bg-gray-300 px-3 text-sm duration-300 dark:bg-gray-900"
+          @click="setChosenBeatmap(beatmap)"
+        >
+          &lt; Play &gt;
         </button>
       </p>
-      <p class="text-xs font-semibold" :class="difficultyStyling">
+      <p class="text-xs font-semibold duration-300" :class="difficultyStyling">
         {{ difficulty[0].toUpperCase() + difficulty.slice(1) }}
       </p>
       <p class="text-xs">

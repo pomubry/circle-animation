@@ -8,7 +8,7 @@ export default defineNuxtRouteMiddleware(async () => {
   if (cookie.value) {
     return navigateTo("/");
   } else {
-    userStore.user = null;
+    userStore.user = undefined;
     settingsStore.resetSettings();
   }
 });

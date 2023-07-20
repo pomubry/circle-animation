@@ -14,12 +14,12 @@ export const useUserStore = defineStore(
   () => {
     const runtimeConfig = useRuntimeConfig();
     const router = useRouter();
-    const user = ref<User | null>(null);
+    const user = ref<User>();
 
     async function register(
       body: UserCredentials
     ): Promise<AuthError | Toast | undefined> {
-      user.value = null;
+      user.value = undefined;
 
       try {
         const res = await fetch(
@@ -81,7 +81,7 @@ export const useUserStore = defineStore(
     async function login(
       body: UserCredentials
     ): Promise<AuthError | Toast | undefined> {
-      user.value = null;
+      user.value = undefined;
 
       try {
         const res = await fetch(
@@ -147,7 +147,7 @@ export const useUserStore = defineStore(
           credentials: "include",
         });
 
-        user.value = null;
+        user.value = undefined;
         router.push("/");
       } catch (error) {
         console.error(error);

@@ -2,6 +2,9 @@
   import { getThemeKey } from "~/utils/theme";
 
   useHead({
+    htmlAttrs: {
+      lang: "en",
+    },
     script: [
       {
         innerHTML: `

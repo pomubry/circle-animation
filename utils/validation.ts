@@ -40,6 +40,14 @@ const noteSchema = z.object({
 });
 export type Note = z.infer<typeof noteSchema>;
 
+const comboSchema = z.object({
+  combo_id: z.string(),
+  combo: z.coerce.number().int().min(1),
+  combo_min: z.coerce.number().int().min(0),
+  combo_max: z.coerce.number().int().min(0),
+});
+export type Combo = z.infer<typeof comboSchema>;
+
 const beatmapSchema = z.object({
   beatmap_id: z.string(),
   code: z.string(),
@@ -48,6 +56,7 @@ const beatmapSchema = z.object({
   notes_attribute: z.coerce.number().min(1).max(3),
   member_category: z.coerce.number(),
   notes: z.array(noteSchema),
+  combos: z.array(comboSchema),
 });
 export type Beatmap = z.infer<typeof beatmapSchema>;
 

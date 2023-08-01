@@ -1,4 +1,9 @@
 <script setup lang="ts">
+  interface Props {
+    isOverlap?: boolean;
+  }
+
+  defineProps<Props>();
   const isLandscape = useMediaQuery("(orientation: landscape)");
 </script>
 
@@ -6,8 +11,8 @@
   <ClientOnly>
     <Teleport to="body">
       <div
-        v-if="!isLandscape"
-        class="fixed left-0 top-0 grid h-full w-full place-content-center bg-gray-900/80 p-5 text-gray-800 dark:text-gray-100"
+        v-if="!isLandscape || isOverlap"
+        class="fixed left-0 top-0 z-[1] grid h-full w-full place-content-center bg-gray-900/80 p-5 text-gray-800 dark:text-gray-100"
       >
         <div
           class="container rounded-lg bg-gray-100 p-5 text-center dark:bg-gray-950"

@@ -1,6 +1,6 @@
 export default defineNuxtRouteMiddleware(async () => {
   const config = useRuntimeConfig();
-  const cookie = useCookie(config.public.AUTH_TOKEN);
+  const cookie = useCookie(config.public.COOKIE_NAME);
   const userStore = useUserStore();
   const settingsStore = useSettingsStore();
 
@@ -8,7 +8,7 @@ export default defineNuxtRouteMiddleware(async () => {
   if (cookie.value) {
     return navigateTo("/");
   } else {
-    userStore.user = undefined;
+    userStore.user = null;
     settingsStore.resetSettings();
   }
 });

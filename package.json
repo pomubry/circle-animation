@@ -36,7 +36,9 @@
   "dependencies": {
     "@headlessui/vue": "^1.7.13",
     "@pinia/nuxt": "^0.4.9",
+    "@pixi/sound": "^5.2.0",
     "pinia": "^2.0.35",
+    "pixi.js": "^7.2.4",
     "zod": "^3.21.4"
   },
   "overrides": {

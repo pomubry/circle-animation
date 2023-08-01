@@ -1,7 +1,7 @@
 <script setup lang="ts">
   import attribImages from "~/assets/pictures/attribute/attributes";
   import groupLogos from "~/assets/pictures/group-logo/groupLogo";
-  import { Beatmap } from "~/utils/validation";
+  import type { Beatmap } from "~/utils/types";
 
   const props = defineProps<{ beatmap: Beatmap }>();
 
@@ -52,18 +52,24 @@
     }
   });
 
-  const difficulty = computed(() =>
-    settingsStore.difficulty === 1
-      ? "easy"
-      : settingsStore.difficulty === 2
-      ? "normal"
-      : "hard"
-  );
+  const difficulty = computed(() => {
+    switch (settingsStore.difficulty) {
+      case 1:
+        return "Easy";
+      case 2:
+        return "Normal";
+      case 3:
+        return "Hard";
+      default:
+        return "Expert";
+    }
+  });
 
   const difficultyStyling = computed(() => ({
-    "text-green-500 dark:text-green-300": difficulty.value === "easy",
-    "text-yellow-500 dark:text-yellow-300": difficulty.value === "normal",
-    "text-red-500 dark:text-red-300": difficulty.value === "hard",
+    "text-green-500 dark:text-green-300": difficulty.value === "Easy",
+    "text-yellow-500 dark:text-yellow-300": difficulty.value === "Normal",
+    "text-orange-500 dark:text-orange-300": difficulty.value === "Hard",
+    "text-red-500 dark:text-red-300": difficulty.value === "Expert",
   }));
 
   const highestCombo = computed(() => {
@@ -96,7 +102,7 @@
         </button>
       </p>
       <p class="text-xs font-semibold duration-300" :class="difficultyStyling">
-        {{ difficulty[0].toUpperCase() + difficulty.slice(1) }}
+        {{ difficulty }}
       </p>
       <p class="text-xs">
         Highest Combo: {{ highestCombo }}/{{ beatmap.notes.length }}

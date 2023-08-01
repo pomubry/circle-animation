@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import { Toast } from "~/utils/validation";
+  import type { Toast } from "~/utils/types";
 
   interface PropType {
     toastProps: Toast | null;

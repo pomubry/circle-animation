@@ -5,7 +5,7 @@ export default defineNuxtRouteMiddleware(async (to) => {
   try {
     const user = await isAuthenticated();
     if (!user.isAuthenticated) {
-      userStore.user = undefined;
+      userStore.user = null;
       settingsStore.resetSettings();
       return navigateTo("/");
     }

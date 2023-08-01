@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import { Toast } from "~/utils/validation";
+  import type { Toast } from "~/utils/types";
 
   const emit = defineEmits<{
     (emit: "setToastProps", payload: Toast): void;
@@ -33,7 +33,7 @@
     }
 
     isLoading.value = true;
-    const res = await userStore.register(body.value);
+    const res = await userStore.signup(body.value);
     isLoading.value = false;
 
     if (res) {
@@ -53,7 +53,7 @@
     class="flex flex-1 flex-col gap-10 rounded-lg bg-gray-100 p-5 duration-300 dark:bg-gray-900 md:flex-[2]"
     @submit="handleRegister"
   >
-    <p class="text-xl font-extrabold">Register</p>
+    <p class="text-xl font-extrabold">Sign Up</p>
 
     <div class="flex flex-col gap-2">
       <label class="font-bold" for="username">Username:</label>

@@ -1,5 +1,5 @@
 import GenericToast from "~/components/generic/Toast.vue";
-import { Toast } from "~/utils/validation";
+import type { Toast } from "~/utils/types";
 
 export function useToast() {
   const toastProps = ref<Toast | null>(null);

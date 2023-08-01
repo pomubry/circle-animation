@@ -24,7 +24,7 @@
           >
         </NuxtLink>
       </p>
-      <ul class="mr-5 flex gap-3">
+      <ul class="mr-5 flex gap-5">
         <ClientOnly>
           <template v-if="userStore.user">
             <li class="text-purple-500 duration-300 dark:text-purple-300">
@@ -52,9 +52,9 @@
             </li>
             <li class="hover:underline">
               <NuxtLink
-                href="/register"
+                href="/signup"
                 exact-active-class="auth-link-exact-active"
-                >Register</NuxtLink
+                >Sign Up</NuxtLink
               >
             </li>
           </template>

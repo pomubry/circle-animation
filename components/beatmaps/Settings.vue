@@ -32,6 +32,7 @@
               <option :value="1">Easy</option>
               <option :value="2">Normal</option>
               <option :value="3">Hard</option>
+              <option :value="4">Expert</option>
             </select>
           </li>
           <li class="flex items-center justify-between">

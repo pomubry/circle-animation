@@ -1,29 +1,22 @@
 import { acceptHMRUpdate, defineStore } from "pinia";
-import {
-  AuthError,
-  Toast,
-  User,
-  UserCredentials,
-  authErrorSchema,
-  toastSchema,
-  userSchema,
-} from "~/utils/validation";
+import { authErrorSchema, toastSchema, userSchema } from "~/utils/validation";
+import type { AuthError, Toast, User, UserCredentials } from "~/utils/types";
 
 export const useUserStore = defineStore(
   "userStore",
   () => {
     const runtimeConfig = useRuntimeConfig();
     const router = useRouter();
-    const user = ref<User>();
+    const user = ref<User | null>(null);
 
-    async function register(
+    const signup = async (
       body: UserCredentials
-    ): Promise<AuthError | Toast | undefined> {
-      user.value = undefined;
+    ): Promise<AuthError | Toast | undefined> => {
+      user.value = null;
 
       try {
         const res = await fetch(
-          `${runtimeConfig.public.CANI_BE_URL}/api/register`,
+          `${runtimeConfig.public.CANI_BE_URL}/api/signup`,
           {
             method: "POST",
             headers: {
@@ -76,12 +69,12 @@ export const useUserStore = defineStore(
           }
         }
       }
-    }
+    };
 
-    async function login(
+    const login = async (
       body: UserCredentials
-    ): Promise<AuthError | Toast | undefined> {
-      user.value = undefined;
+    ): Promise<AuthError | Toast | undefined> => {
+      user.value = null;
 
       try {
         const res = await fetch(
@@ -138,16 +131,16 @@ export const useUserStore = defineStore(
           }
         }
       }
-    }
+    };
 
-    async function logout(): Promise<Toast | undefined> {
+    const logout = async (): Promise<Toast | undefined> => {
       try {
         await fetch(`${runtimeConfig.public.CANI_BE_URL}/api/logout`, {
           method: "GET",
           credentials: "include",
         });
 
-        user.value = undefined;
+        user.value = null;
         router.push("/");
       } catch (error) {
         console.error(error);
@@ -165,11 +158,11 @@ export const useUserStore = defineStore(
           };
         }
       }
-    }
+    };
 
     return {
       user,
-      register,
+      signup,
       login,
       logout,
     };

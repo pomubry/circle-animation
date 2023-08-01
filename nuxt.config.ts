@@ -21,9 +21,9 @@ export default defineNuxtConfig({
   },
   runtimeConfig: {
     public: {
-      TW_KEY: "tw-theme",
-      CANI_BE_URL: "http://localhost:5000",
-      AUTH_TOKEN: "cani-auth",
+      TW_KEY: process.env.TW_KEY,
+      COOKIE_NAME: process.env.COOKIE_NAME,
+      CANI_BE_URL: process.env.CANI_BE_URL,
     },
   },
   routeRules: {

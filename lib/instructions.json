@@ -1,0 +1,33 @@
+[
+  {
+    "serialID": 1,
+    "imgSrc": "/instructions/settings.webp",
+    "alt": "settings",
+    "title": "Settings",
+    "descriptions": [
+      "Filter the beatmaps you want to play by group, attribute, or difficulty.",
+      "You could also adjust various toggles and sliders according to your needs."
+    ]
+  },
+  {
+    "serialID": 2,
+    "imgSrc": "/instructions/beatmaps.webp",
+    "alt": "beatmaps",
+    "title": "Beatmaps",
+    "descriptions": [
+      "Pick any of the beatmaps that you want to play.",
+      "Aside from the group, attribute, and difficulty; You could also view your highest records with a particular beatmap. Do your best to achieve a higher record!"
+    ]
+  },
+  {
+    "serialID": 3,
+    "imgSrc": "/instructions/game.webp",
+    "alt": "game",
+    "title": "Game",
+    "descriptions": [
+      "During the actual game, your goal is to hit the outer notes at the same time the moving notes overlap with it. You can control this action by tapping the the outer notes when playing with your mobile devices, or by pressing the keys 1~9 from your keyboard when playing with your desktop/laptop.",
+      "You can replay as much as you want by pressing the pause button then pressing \"Reset\".",
+      "Tip: Try playing in full screen mode if you have trouble following the notes. You can do this by pressing the pause button then pressing \"Fullscreen\"."
+    ]
+  }
+]

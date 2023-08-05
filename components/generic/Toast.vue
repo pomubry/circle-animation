@@ -17,7 +17,7 @@
     <Transition name="modal">
       <div
         v-if="toastProps !== null"
-        class="fixed bottom-5 left-5 flex min-w-[14rem] max-w-[18rem] flex-col gap-5 rounded-lg bg-gray-100 p-3 text-gray-900 transition duration-300 dark:bg-gray-900 dark:text-gray-100"
+        class="fixed bottom-5 left-5 z-10 flex min-w-[14rem] max-w-[18rem] flex-col gap-5 rounded-lg bg-gray-100 p-3 text-gray-900 transition duration-300 dark:bg-gray-900 dark:text-gray-100"
       >
         <div class="flex justify-between">
           <h2

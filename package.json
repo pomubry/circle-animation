@@ -1,5 +1,5 @@
 {
-  "name": "cani-vue",
+  "name": "circle-animation",
   "private": true,
   "scripts": {
     "build": "nuxt build",

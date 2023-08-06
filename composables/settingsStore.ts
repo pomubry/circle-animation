@@ -61,7 +61,7 @@ export const useSettingsStore = defineStore(
       debug: true,
       storage: persistedState.localStorage,
     },
-  }
+  },
 );
 
 // Hot Module Replacement

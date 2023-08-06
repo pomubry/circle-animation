@@ -14,7 +14,7 @@
     `${runtimeConfig.public.CANI_BE_URL}/api/beatmaps`,
     {
       transform: (res) => beatmapsSchema.safeParse(res),
-    }
+    },
   );
 
   const beatmaps = computed(() => {

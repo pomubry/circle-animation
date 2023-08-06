@@ -10,7 +10,7 @@ export const useUserStore = defineStore(
     const user = ref<User | null>(null);
 
     const signup = async (
-      body: UserCredentials
+      body: UserCredentials,
     ): Promise<AuthError | Toast | undefined> => {
       user.value = null;
 
@@ -24,7 +24,7 @@ export const useUserStore = defineStore(
             },
             body: JSON.stringify(body),
             credentials: "include",
-          }
+          },
         );
         const data = await res.json();
 
@@ -72,7 +72,7 @@ export const useUserStore = defineStore(
     };
 
     const login = async (
-      body: UserCredentials
+      body: UserCredentials,
     ): Promise<AuthError | Toast | undefined> => {
       user.value = null;
 
@@ -86,7 +86,7 @@ export const useUserStore = defineStore(
             },
             body: JSON.stringify(body),
             credentials: "include",
-          }
+          },
         );
         const data = await res.json();
 
@@ -172,7 +172,7 @@ export const useUserStore = defineStore(
       debug: true,
       storage: persistedState.localStorage,
     },
-  }
+  },
 );
 
 // Hot Module Replacement

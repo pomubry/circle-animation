@@ -230,7 +230,7 @@
         const activeNote = generateActiveNote(
           note,
           { mainRadius, xOrigin, yOrigin },
-          noteTexture
+          noteTexture,
         );
         app.stage.addChild(activeNote.sprite);
         activeNotes.push(activeNote);
@@ -288,7 +288,7 @@
 
         const outerNote = createNoteSprite(outerNotePosition, noteTexture);
         outerNote.on("pointerdown", () =>
-          handlePointer((num + 1) as OneToNine)
+          handlePointer((num + 1) as OneToNine),
         );
         outerNote.eventMode = "static";
         outerNote.hitArea = new PIXI.Circle(0, 0, rad2);
@@ -323,7 +323,7 @@
       view.addEventListener("keydown", handleKeyboard);
     } else {
       console.error(
-        "Cannot properly initialize the app. Either PIXI app or canvasParent is undefined"
+        "Cannot properly initialize the app. Either PIXI app or canvasParent is undefined",
       );
       console.error("PIXI app:", app);
       console.error("canvasParent:", canvasParent.value);
@@ -348,7 +348,7 @@
       const activeNote = generateActiveNote(
         rest,
         { mainRadius, xOrigin, yOrigin },
-        noteTexture
+        noteTexture,
       );
       app.stage.addChild(activeNote.sprite);
       return activeNote;

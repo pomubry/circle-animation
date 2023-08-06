@@ -30,7 +30,7 @@ for (let i = 0; i < 9; i++) {
 export const createNoteCanvas = (
   rad1: number,
   rad2: number,
-  attribute: number
+  attribute: number,
 ) => {
   const canvas = document.createElement("canvas");
   canvas.width = rad2 * 2;
@@ -46,7 +46,7 @@ export const createNoteCanvas = (
       rad1,
       rad2,
       rad2,
-      rad2
+      rad2,
     );
     gradient.addColorStop(0, "transparent");
     gradient.addColorStop(0.9, color);
@@ -60,7 +60,7 @@ export const createNoteCanvas = (
 
 export const createNoteSprite = (
   props: SpriteProps,
-  noteTexture: PIXI.Texture<PIXI.Resource>
+  noteTexture: PIXI.Texture<PIXI.Resource>,
 ) => {
   const sprite = PIXI.Sprite.from(noteTexture);
   sprite.eventMode = "none";
@@ -73,7 +73,7 @@ export const createNoteSprite = (
 export const generateActiveNote = (
   note: Note,
   { mainRadius, xOrigin, yOrigin }: ActiveNoteProps,
-  noteTexture: PIXI.Texture<PIXI.Resource>
+  noteTexture: PIXI.Texture<PIXI.Resource>,
 ) => {
   const position = getNotePosition({
     num: (note.position - 1) as ZeroToEight,

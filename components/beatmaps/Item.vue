@@ -74,7 +74,7 @@
 
   const highestCombo = computed(() => {
     const song = userStore.user?.notes.find(
-      (beatmap) => beatmap.beatmap_id === props.beatmap.beatmap_id
+      (beatmap) => beatmap.beatmap_id === props.beatmap.beatmap_id,
     );
     return song?.highest_combo || 0;
   });

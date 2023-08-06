@@ -6,7 +6,7 @@ const isAuthenticated = async (): Promise<{ isAuthenticated: boolean }> => {
       {
         method: "GET",
         credentials: "include",
-      }
+      },
     );
     const data = await res.json();
     return data;

@@ -64,8 +64,8 @@
     }
   });
 
-  const record = computed(() =>
-    userStore.user?.notes.find((n) => n.beatmap_id === props.beatmapId)
+  const record = computed(
+    () => userStore.user?.notes.find((n) => n.beatmap_id === props.beatmapId),
   );
 
   const isNewRecord = computed(() => {

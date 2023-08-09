@@ -2,6 +2,7 @@
   definePageMeta({
     middleware: "request-auth",
     layout: "game",
+    pageTransition: false,
   });
 
   import * as PIXI from "pixi.js";

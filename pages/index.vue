@@ -30,54 +30,56 @@
 </script>
 
 <template>
-  <header
-    class="grid place-content-center gap-5 bg-gray-100 p-14 duration-300 dark:bg-gray-900"
-  >
-    <div class="mx-auto flex items-center gap-5">
-      <GenericAppTitle />
-      <div class="header-ring"></div>
-    </div>
-    <p class="text-xl font-bold">
-      Just a bootleg rhythm game I ported to the web
-    </p>
-
-    <ClientOnly>
-      <div
-        v-if="!userStore.user"
-        class="mt-5 flex justify-center gap-5 font-bold"
-      >
-        <button
-          class="rounded-lg bg-green-500 p-3 text-gray-900 duration-300 hover:bg-green-600 dark:bg-green-300 hover:dark:bg-green-400"
-          :disabled="isLoading"
-          @click="handleLogin"
-        >
-          Demo
-        </button>
-        <NuxtLink
-          href="/signup"
-          class="rounded-lg bg-gray-300 p-3 duration-300 hover:bg-gray-400 dark:bg-gray-800 hover:dark:bg-gray-950"
-          >Sign Up</NuxtLink
-        >
+  <div>
+    <header
+      class="grid place-content-center gap-5 bg-gray-100 p-14 duration-300 dark:bg-gray-900"
+    >
+      <div class="mx-auto flex items-center gap-5">
+        <GenericAppTitle />
+        <div class="header-ring"></div>
       </div>
-    </ClientOnly>
-  </header>
+      <p class="text-xl font-bold">
+        Just a bootleg rhythm game I ported to the web
+      </p>
 
-  <section class="container mx-auto my-20">
-    <h2 class="text-3xl font-bold">How to play</h2>
-    <div>
-      <HomeInstruction
-        v-for="instruction in instructions"
-        :key="instruction.serialID"
-        :serial-id="instruction.serialID"
-        :img-src="instruction.imgSrc"
-        :alt="instruction.alt"
-        :title="instruction.title"
-        :descriptions="instruction.descriptions"
-      />
-    </div>
-  </section>
+      <ClientOnly>
+        <div
+          v-if="!userStore.user"
+          class="mt-5 flex justify-center gap-5 font-bold"
+        >
+          <button
+            class="rounded-lg bg-green-500 p-3 text-gray-900 duration-300 hover:bg-green-600 dark:bg-green-300 hover:dark:bg-green-400"
+            :disabled="isLoading"
+            @click="handleLogin"
+          >
+            Demo
+          </button>
+          <NuxtLink
+            href="/signup"
+            class="rounded-lg bg-gray-300 p-3 duration-300 hover:bg-gray-400 dark:bg-gray-800 hover:dark:bg-gray-950"
+            >Sign Up</NuxtLink
+          >
+        </div>
+      </ClientOnly>
+    </header>
 
-  <ToastComponent />
+    <section class="container mx-auto my-20">
+      <h2 class="text-3xl font-bold">How to play</h2>
+      <div>
+        <HomeInstruction
+          v-for="instruction in instructions"
+          :key="instruction.serialID"
+          :serial-id="instruction.serialID"
+          :img-src="instruction.imgSrc"
+          :alt="instruction.alt"
+          :title="instruction.title"
+          :descriptions="instruction.descriptions"
+        />
+      </div>
+    </section>
+
+    <ToastComponent />
+  </div>
 </template>
 
 <style scoped>

@@ -17,6 +17,6 @@
       <GenericAppTitle />
     </div>
     <SignupForm @set-toast-props="setToastProps" />
+    <ToastComponent />
   </div>
-  <ToastComponent />
 </template>

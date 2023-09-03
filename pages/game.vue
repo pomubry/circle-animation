@@ -431,7 +431,13 @@
 </script>
 
 <template>
-  <div ref="canvasParent" class="z-[1]"></div>
+  <div
+    ref="canvasParent"
+    :class="{
+      'z-[1]': !isGameDone,
+      'z-[0]': isGameDone,
+    }"
+  ></div>
   <div
     class="absolute left-0 top-0 h-full w-full"
     :style="{
@@ -459,6 +465,9 @@
       :combos="beatmap.combos"
       :beatmap-id="beatmap.beatmap_id"
       :is-autoplay="settingsStore.isAutoplay"
+      @toggle-menu="togglePlay"
+      @toggle-fullscreen="toggle"
+      @reset="reset"
     />
     <Icon
       name="fluent:music-note-2-24-regular"

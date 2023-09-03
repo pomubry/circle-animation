@@ -15,7 +15,13 @@
 </script>
 
 <template>
-  <div class="absolute right-5 top-10 z-[2] flex flex-col items-end">
+  <div
+    class="absolute right-5 top-10 flex flex-col items-end"
+    :class="{
+      'z-[2]': !isGameDone,
+      'z-[0]': isGameDone,
+    }"
+  >
     <button
       class="grid place-items-center rounded-md bg-gray-950 p-2 text-gray-50"
       :class="{ 'opacity-50': !isLandscape }"

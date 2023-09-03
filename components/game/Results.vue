@@ -1,4 +1,5 @@
 <script setup lang="ts">
+  import { DialogPanel, DialogTitle } from "@headlessui/vue";
   import type { Stats, Combo, ScoreData } from "~/utils/types";
 
   interface Props {
@@ -11,6 +12,12 @@
   }
 
   const props = defineProps<Props>();
+
+  defineEmits<{
+    (e: "toggleMenu"): void;
+    (e: "toggleFullscreen"): void;
+    (e: "reset"): void;
+  }>();
 
   const config = useRuntimeConfig();
   const userStore = useUserStore();
@@ -63,6 +70,11 @@
         return "S";
     }
   });
+
+  const linkStyle =
+    "flex items-center gap-2 text-sm font-semibold rounded-md p-3 duration-300 hover:text-purple-600 dark:hover:text-purple-300 bg-gray-100 dark:bg-gray-950";
+
+  const iconStyle = "text-green-600 dark:text-green-300";
 
   const record = computed(
     () => userStore.user?.notes.find((n) => n.beatmap_id === props.beatmapId),
@@ -159,85 +171,112 @@
 </script>
 
 <template>
-  <Transition name="modal">
-    <div
-      v-if="isGameDone"
-      class="absolute left-0 top-0 grid h-screen w-screen place-items-center"
+  <GenericBaseModal :show="isGameDone">
+    <DialogPanel
+      class="min-w-[80vw] rounded-lg bg-gray-300 p-5 text-gray-900 dark:bg-gray-900 dark:text-gray-100 lg:min-w-[60vw]"
     >
-      <div
-        class="z-10 min-w-[60%] rounded-lg bg-gray-300 p-5 dark:bg-gray-900"
-        _class="absolute left-[50%] top-[50%] z-10 min-w-[60%] -translate-x-[50%] -translate-y-[50%] rounded-2xl bg-gray-100 p-5 dark:bg-gray-900"
+      <DialogTitle
+        class="text-2xl font-extrabold text-green-500 dark:text-green-300"
       >
-        <p class="text-xl font-extrabold text-green-500 dark:text-green-300">
-          Results:
-        </p>
-        <div class="grid grid-cols-2 gap-3">
-          <div>
-            <div class="mt-3 flex justify-between">
-              <p class="font-bold">Highest Combo:</p>
-              <em class="font-extrabold">{{ highestCombo }}</em>
-            </div>
-            <div
-              v-for="(val, key) in filteredStats"
-              :key="key"
-              class="mt-3 flex justify-between"
-            >
-              <p
-                class="bg-clip-text text-2xl font-extrabold text-transparent"
-                :class="{
-                  rankS: key === 'PERFECT',
-                  rankA: key === 'GREAT',
-                  rankB: key === 'GOOD',
-                  rankC: key === 'BAD',
-                  rankD: key === 'EARLY' || key === 'LATE',
-                }"
-              >
-                {{ key }}
-              </p>
-              <em class="font-extrabold">{{ val }}</em>
-            </div>
+        Results:
+      </DialogTitle>
+
+      <div class="grid grid-cols-[1fr_2fr] gap-10">
+        <div>
+          <div class="mt-3 flex justify-between">
+            <p class="font-bold">Highest Combo:</p>
+            <em class="font-extrabold">{{ highestCombo }}</em>
           </div>
-          <div class="mt-3 flex flex-col text-center">
-            <div class="flex-1">
-              <p class="text-xl font-bold">Rank</p>
-              <p
-                class="bg-clip-text text-9xl font-extrabold text-transparent"
-                :class="{
-                  rankS: highestRank === 'S',
-                  rankA: highestRank === 'A',
-                  rankB: highestRank === 'B',
-                  rankC: highestRank === 'C',
-                  rankD: highestRank === 'D',
-                }"
-              >
-                {{ highestRank }}
-              </p>
-            </div>
-            <div class="flex justify-center">
-              <button
-                class="flex items-center gap-3 rounded-lg bg-gray-100 p-3 dark:bg-gray-950"
-                :class="{
-                  'opacity-50': isDisabled,
-                  'cursor-not-allowed': isDisabled,
-                }"
-                :disabled="isDisabled"
-                @click="submit"
-              >
-                <template v-if="isSending">
-                  <Icon name="mingcute:loading-fill" class="animate-spin" />
-                  Loading...
-                </template>
-                <template v-else>
-                  <Icon name="material-symbols:send" />
-                  Send
-                </template>
-              </button>
-            </div>
+          <div
+            v-for="(val, key) in filteredStats"
+            :key="key"
+            class="mt-3 flex justify-between"
+          >
+            <p
+              class="bg-clip-text text-xl font-extrabold text-transparent"
+              :class="{
+                rankS: key === 'PERFECT',
+                rankA: key === 'GREAT',
+                rankB: key === 'GOOD',
+                rankC: key === 'BAD',
+                rankD: key === 'EARLY' || key === 'LATE',
+              }"
+            >
+              {{ key }}
+            </p>
+            <em class="font-extrabold">{{ val }}</em>
           </div>
         </div>
+        <div class="mt-3 flex flex-col text-center">
+          <div class="flex-1">
+            <p class="text-2xl font-bold">Rank:</p>
+            <p
+              class="bg-clip-text text-9xl font-extrabold text-transparent"
+              :class="{
+                rankS: highestRank === 'S',
+                rankA: highestRank === 'A',
+                rankB: highestRank === 'B',
+                rankC: highestRank === 'C',
+                rankD: highestRank === 'D',
+              }"
+            >
+              {{ highestRank }}
+            </p>
+          </div>
+          <div class="flex justify-center">
+            <button
+              :class="[
+                linkStyle,
+                {
+                  'opacity-50': isDisabled,
+                  'cursor-not-allowed': isDisabled,
+                },
+              ]"
+              :disabled="isDisabled"
+              @click="submit"
+            >
+              <template v-if="isSending">
+                <Icon
+                  name="mingcute:loading-fill"
+                  class="animate-spin"
+                  :class="iconStyle"
+                />
+                Loading...
+              </template>
+              <template v-else>
+                <Icon name="material-symbols:send" :class="iconStyle" />
+                Send
+              </template>
+            </button>
+          </div>
+
+          <ul
+            class="flex justify-center gap-3 rounded-md p-2 text-gray-900 dark:text-gray-100"
+          >
+            <li>
+              <NuxtLink href="/beatmaps" :class="linkStyle">
+                <Icon name="gg:list" :class="iconStyle" />Beatmaps</NuxtLink
+              >
+            </li>
+            <li>
+              <button :class="linkStyle" @click="$emit('toggleFullscreen')">
+                <Icon name="ic:round-fit-screen" :class="iconStyle" />Toggle
+                Fullscreen
+              </button>
+            </li>
+            <li>
+              <button :class="linkStyle" @click="$emit('reset')">
+                <Icon
+                  name="icon-park-outline:replay-music"
+                  :class="iconStyle"
+                />Reset
+              </button>
+            </li>
+          </ul>
+        </div>
       </div>
-    </div>
-  </Transition>
+    </DialogPanel>
+  </GenericBaseModal>
   <ToastComponent />
 </template>
 
@@ -256,16 +295,5 @@
   }
   .rankD {
     background-image: linear-gradient(to right, #343636, #b5bbba);
-  }
-
-  .modal-enter-active,
-  .modal-leave-active {
-    transition: all 0.25s ease;
-  }
-
-  .modal-enter-from,
-  .modal-leave-to {
-    opacity: 0;
-    transform: translateX(-10px);
   }
 </style>

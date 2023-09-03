@@ -64,7 +64,7 @@
     </header>
 
     <section class="container mx-auto my-20">
-      <h2 class="text-3xl font-bold">How to play</h2>
+      <h2 class="text-3xl font-extrabold">How to play</h2>
       <div>
         <HomeInstruction
           v-for="instruction in instructions"

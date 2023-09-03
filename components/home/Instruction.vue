@@ -1,10 +1,5 @@
 <script setup lang="ts">
-  import {
-    Dialog,
-    DialogPanel,
-    TransitionRoot,
-    TransitionChild,
-  } from "@headlessui/vue";
+  import { DialogPanel } from "@headlessui/vue";
 
   interface Props {
     serialId: number;
@@ -45,58 +40,20 @@
       </div>
     </div>
     <div>
-      <ClientOnly>
-        <TransitionRoot appear :show="isOpen" as="template">
-          <Dialog class="relative" @close="setIsOpen">
-            <TransitionChild
-              enter="duration-300"
-              enter-from="opacity-0"
-              enter-to="opacity-100"
-              leave="duration-300"
-              leave-from="opacity-100"
-              leave-to="opacity-0"
-            >
-              <div class="fixed inset-0 bg-black/90 transition" />
-            </TransitionChild>
-
-            <div class="fixed inset-0 grid place-content-center p-5">
-              <TransitionChild
-                enter="duration-300"
-                enter-from="opacity-0 scale-0"
-                enter-to="opacity-100 scale-100"
-                leave="duration-300"
-                leave-from="opacity-100 scale-100"
-                leave-to="opacity-0 scale-0"
-              >
-                <DialogPanel
-                  class="relative overflow-hidden rounded-lg text-gray-100 transition"
-                >
-                  <button
-                    class="absolute right-2 top-2 text-3xl"
-                    :aria-label="`Close modal for ${title}`"
-                    @click="setIsOpen(false)"
-                  >
-                    <Icon name="mdi:close-box" />
-                  </button>
-                  <img :src="imgSrc" :alt="alt" class="max-h-[80vh]" />
-                </DialogPanel>
-              </TransitionChild>
-            </div>
-          </Dialog>
-        </TransitionRoot>
-      </ClientOnly>
+      <GenericBaseModal :show="isOpen" :on-dialog-close="setIsOpen">
+        <DialogPanel
+          class="relative overflow-hidden rounded-lg text-gray-100 transition"
+        >
+          <button
+            class="absolute right-2 top-2 text-3xl"
+            :aria-label="`Close modal for ${title}`"
+            @click="setIsOpen(false)"
+          >
+            <Icon name="mdi:close-box" />
+          </button>
+          <img :src="imgSrc" :alt="alt" class="max-h-[80vh]" />
+        </DialogPanel>
+      </GenericBaseModal>
     </div>
   </div>
 </template>
-
-<style>
-  .theme-enter-active,
-  .theme-leave-active {
-    transition: opacity 0.5s ease;
-  }
-
-  .theme-enter-from,
-  .theme-leave-to {
-    opacity: 0;
-  }
-</style>

@@ -63,6 +63,13 @@
   const { TimingToastComponent, setTimingToastProps } = useTimingToast();
   const { toggle } = useFullscreen();
 
+  const pause = async () => {
+    await bgmInstance.context.audioContext.suspend();
+    bgmInstance.pause();
+    isPlaying.value = false;
+    app.ticker.stop();
+  };
+
   const resume = async () => {
     if (isBGMPlayed) {
       await bgmInstance.context.audioContext.resume();
@@ -82,13 +89,6 @@
     isPlaying.value = true;
     app.ticker.start();
     (app.view as HTMLCanvasElement).focus();
-  };
-
-  const pause = async () => {
-    await bgmInstance.context.audioContext.suspend();
-    bgmInstance.pause();
-    isPlaying.value = false;
-    app.ticker.stop();
   };
 
   const togglePlay = async () => {
@@ -333,6 +333,7 @@
 
   const resize = async () => {
     await pause();
+
     // Reset relevant canvas variables
     app.stage.removeChildren();
     noteTexture.destroy();
@@ -371,6 +372,8 @@
     } else {
       isOverlap.value = false;
     }
+
+    app.render();
   };
 
   const reset = async () => {
@@ -397,6 +400,11 @@
         isFullyLoaded.value = true;
       }
     }
+  };
+
+  const toggleFullscreen = async () => {
+    await toggle();
+    await resize();
   };
 
   onMounted(() => {
@@ -466,7 +474,7 @@
       :beatmap-id="beatmap.beatmap_id"
       :is-autoplay="settingsStore.isAutoplay"
       @toggle-menu="togglePlay"
-      @toggle-fullscreen="toggle"
+      @toggle-fullscreen="toggleFullscreen"
       @reset="reset"
     />
     <Icon

@@ -445,9 +445,9 @@
       'z-[1]': !isGameDone,
       'z-[0]': isGameDone,
     }"
-  ></div>
+  />
   <div
-    class="absolute left-0 top-0 h-full w-full"
+    class="absolute inset-0 min-h-[100dvh] w-full"
     :style="{
       backgroundImage: `linear-gradient(
     to bottom,
@@ -483,5 +483,6 @@
       class="absolute left-[50%] top-[20%] -translate-x-[50%] -translate-y-[50%] text-gray-100"
     />
   </div>
+
   <GenericOrientationModal :is-overlap="isOverlap" />
 </template>

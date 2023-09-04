@@ -17,7 +17,31 @@ export default defineNuxtConfig({
   app: {
     pageTransition: { name: "page", mode: "out-in" },
     head: {
-      title: "CAni",
+      htmlAttrs: {
+        lang: "en",
+      },
+      meta: [
+        {
+          name: "author",
+          content: "pomubry",
+        },
+      ],
+      script: [
+        {
+          innerHTML: `
+      if (
+    localStorage.getItem("${process.env.TW_KEY}") === "dark" ||
+    (!("${process.env.TW_KEY}" in localStorage) &&
+      window.matchMedia("(prefers-color-scheme: dark)").matches)
+  ) {
+    localStorage.setItem("${process.env.TW_KEY}", "dark");
+    document.documentElement.classList.add("dark");
+  } else {
+    localStorage.setItem("${process.env.TW_KEY}", "light");
+    document.documentElement.classList.remove("dark");
+  }`,
+        },
+      ],
     },
   },
   runtimeConfig: {

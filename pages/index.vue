@@ -1,6 +1,17 @@
 <script setup lang="ts">
   import instructions from "~/lib/instructions.json";
 
+  useHead({
+    title: "CAni",
+    meta: [
+      {
+        name: "description",
+        content:
+          "Circle Animation a.k.a CAni is a rhythm game you can play using a web browser!",
+      },
+    ],
+  });
+
   const isLoading = ref(false);
   const userStore = useUserStore();
   const { ToastComponent, setToastProps } = useToast();

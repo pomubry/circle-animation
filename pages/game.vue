@@ -31,6 +31,16 @@
     Beatmap,
   } from "~/utils/types";
 
+  useHead({
+    title: "CAni | Game",
+    meta: [
+      {
+        name: "description",
+        content: "Play the game and try to reach a full combo!",
+      },
+    ],
+  });
+
   // Store Settings
   const settingsStore = useSettingsStore();
   const beatmap = settingsStore.chosenBeatmap as NonNullable<Beatmap>; // checked by middleware

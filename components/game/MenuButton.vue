@@ -3,6 +3,7 @@
     isPlaying: boolean;
     isFullyLoaded: boolean;
     isGameDone: boolean;
+    isOverlap: boolean;
   }>();
 
   defineEmits<{
@@ -18,8 +19,8 @@
   <div
     class="absolute right-5 top-10 flex flex-col items-end"
     :class="{
-      'z-[2]': !isGameDone,
-      'z-[0]': isGameDone,
+      'z-[2]': !isGameDone && !isOverlap,
+      'z-[0]': isGameDone || isOverlap,
     }"
   >
     <button
@@ -46,7 +47,7 @@
     <Transition>
       <ul
         v-if="!isPlaying"
-        class="popout relative flex translate-y-3 flex-col gap-3 rounded-md bg-gray-950 p-2 text-sm font-semibold text-gray-50"
+        class="popout relative flex translate-y-3 flex-col gap-3 rounded-s-md rounded-br-md bg-gray-950 p-2 text-sm font-semibold text-gray-50"
       >
         <li>
           <NuxtLink
@@ -84,7 +85,7 @@
 <style lang="postcss" scoped>
   .popout::after {
     content: " ";
-    @apply absolute -top-2 right-2 h-4 w-4 rotate-45 rounded-tl-md bg-gray-950;
+    @apply absolute -top-2 right-1 h-4 w-4 rotate-45 bg-gray-950;
   }
 
   .v-enter-active,

@@ -6,7 +6,7 @@
       <NuxtPage />
     </NuxtLayout>
   </div>
-  <GenericOrientationModal />
+  <GenericOrientationModal v-if="$route.path !== '/game'" />
   <NuxtLoadingIndicator />
 </template>
 

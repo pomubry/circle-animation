@@ -316,6 +316,21 @@
 
         outerNotes.push(outerNote);
       });
+
+    const bounds1 = outerNotes[8].getBounds();
+    const bounds2 = outerNotes[7].getBounds();
+
+    const overlap =
+      bounds1.x < bounds2.x + bounds2.width &&
+      bounds1.x + bounds1.width > bounds2.x &&
+      bounds1.y < bounds2.y + bounds2.height &&
+      bounds1.y + bounds1.height > bounds2.y;
+
+    if (overlap) {
+      isOverlap.value = true;
+    } else {
+      isOverlap.value = false;
+    }
   };
 
   const create = () => {
@@ -452,8 +467,8 @@
   <div
     ref="canvasParent"
     :class="{
-      'z-[1]': !isGameDone,
-      'z-[0]': isGameDone,
+      'z-[1]': !isGameDone && !isOverlap,
+      'z-[0]': isGameDone || isOverlap,
     }"
   />
   <div
@@ -470,6 +485,7 @@
       :is-playing="isPlaying"
       :is-fully-loaded="isFullyLoaded"
       :is-game-done="isGameDone"
+      :is-overlap="isOverlap"
       @toggle-menu="togglePlay"
       @toggle-fullscreen="toggle"
       @reset="reset"

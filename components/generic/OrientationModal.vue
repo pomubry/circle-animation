@@ -20,8 +20,10 @@
         Screen width is too small
       </DialogTitle>
       <DialogDescription>
-        Please change the orientation of your device if you are on mobile or
-        switch to a device with a wider screen
+        In order to get the best experience when playing the game, please change
+        the orientation of your device to
+        <strong>landscape</strong> if you are on mobile or switch to a device
+        with a wider screen
       </DialogDescription>
       <div class="mt-5 flex items-center justify-center gap-5">
         <Icon name="bi:phone-landscape" size="10em" class="rot" />

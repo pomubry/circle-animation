@@ -6,7 +6,7 @@
   });
 
   import * as PIXI from "pixi.js";
-  import { LoadedCallback, Sound, sound } from "@pixi/sound";
+  import { type LoadedCallback, Sound, sound } from "@pixi/sound";
 
   import BG from "~/assets/pictures/backgrounds/bg";
   import BGM from "~/assets/music/bgm";

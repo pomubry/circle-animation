@@ -8,6 +8,10 @@ export default defineNuxtConfig({
     "@vueuse/nuxt",
     "nuxt-icon",
   ],
+  // *workaround* https://github.com/prazdevs/pinia-plugin-persistedstate/issues/236
+  build: {
+    transpile: ["pinia-plugin-persistedstate"],
+  },
   css: ["~/assets/css/main.css"],
   postcss: {
     plugins: {
@@ -16,7 +20,8 @@ export default defineNuxtConfig({
     },
   },
   app: {
-    pageTransition: { name: "page", mode: "out-in" },
+    // disabled because of a bug where it shifts <footer/> up
+    // pageTransition: { name: "page", mode: "out-in" },
     head: {
       htmlAttrs: {
         lang: "en",
